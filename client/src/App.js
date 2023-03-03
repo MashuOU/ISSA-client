@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import {
+  createBrowserRouter,
+  RouterProvider, 
+  useLocation
+} from "react-router-dom";
+
+import { useEffect } from "react";
+
+import ScrollToTop from "./components/others/scroll-to-top"; 
+
+import router from "./router"
+import { Provider } from "react-redux"
+import store from "./store"
+
+// import ScrollToTop from "./components/others/scroll-to-top"
+
+
+
+
+export default function App() {
+ 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [pathname]);
+  
+  // const BrowserRouter = createBrowserRouter()
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store} >
+      {/* <BrowserRouter> */}
+        {/* <ScrollToTop /> */} 
+        <RouterProvider router={router} />
+      {/* </BrowserRouter> */}
+    </Provider>
   );
 }
 
-export default App;
+
