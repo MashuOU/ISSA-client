@@ -1,6 +1,9 @@
 export default function NewAdmin(params) {
   return (
     <div className="ml-[20rem] mt-[7rem]">
+      <div className="mb-6">
+        <p className="font-raleway italic font-semibold text-[1.3rem] ">Form New Teacher</p>
+      </div>
       <form>
         <div className="relative z-0 w-full mb-6 group">
           <input
