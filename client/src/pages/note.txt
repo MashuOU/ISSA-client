@@ -1,3 +1,12 @@
+    
+    
+    
+    
+    
+    
+    
+    
+    
     function renderImg() {
       // if (Object.keys(productById).length) {
       // if (productById.Images.length) {

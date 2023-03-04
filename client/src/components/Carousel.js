@@ -2,9 +2,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useNavigate } from 'react-router-dom'; 
 import { useState } from 'react';
- 
-import Kartu from './Kartu';
-
+   
 // Import Swiper styles
 import 'swiper/css';
 

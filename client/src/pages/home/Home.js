@@ -3,22 +3,22 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux"
-import { getProducts } from '../../store/actions/actionCreator';
+import { getProducts } from '../store/actions/actionCreator';
 
 import ScrollReveal from 'scrollreveal';
 import { Button } from "flowbite-react"
 
-import Card from '../../components/Card';
-import Kartu from '../../components/Kartu';
-import Carousel from '../../components/Carousel';
-import CtaButton from '../../components/buttons/cta-button'
-import Footer from '../../components/Footer'; 
-import Top from './components/Top';
-import HeatMap from './components/HeatmapChart'; 
+import Card from '../components/Card';
+import Carousel from '../components/Carousel';
+import CtaButton from '../components/buttons/cta-button'
+import Footer from '../components/Footer';
+import Top from './home/components/Top';
+import HeatMap from './components/HeatmapChart';
 import HeatmapDua from './components/HeatmapChartDua';
 import LineChart from './components/LineChart';
-import BubbleChart from './components/BubbleChart'; 
+import BubbleChart from '../components/BubbleChart';
 import TableDetail from './components/TableDetailNilai';
+import LessonsList from './LessonsList';
 
 
 import BubbleChartDua from './components/BubbleChartDua';
@@ -230,23 +230,40 @@ export default function Home() {
   return (
     <>
 
-      {/* <div class="skeleton"></div>   */} 
-      
-      
-      <Top/>
-      
-      <HeatMap/>
-      
-      <HeatmapDua/>
-      
-      <LineChart/>
-      
-      <BubbleChart/>
-      
-      <BubbleChartDua/>
-      
-      <TableDetail/>
-      
+      {/* <div class="skeleton"></div>   */}
+
+
+      <Top />
+
+      <HeatMap />
+
+      <HeatmapDua />
+
+      <LineChart />
+
+      <BubbleChart />
+
+      <BubbleChartDua />
+
+      <TableDetail />
+
+      <LessonsList />
+
+
+        
+        {/* 
+      ul{
+            width:80%;
+            margin:auto;
+            border:10px solid rgb(73, 55, 107);
+            list-style: none;
+            display:grid;
+            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+            grid-gap:3px;
+        } */} 
+         
+    
+
 
       {/* <div className=" w-[100%]   overflow-hidden box-border ">
         <div className=" h-[100%] ">
@@ -322,36 +339,12 @@ export default function Home() {
 
 
 
-      {/* <div onScroll={() => { alert() }} className=" max-w-screen-xl mx-auto  p-[20px] box-border  grid grid-flow-col grid-cols-[1fr_2fr] ">
-        <div style={{ background: "linear-gradient(354deg, rgba(0,0,0,1) 0%, rgba(93,93,93,1) 100%)" }} className="  h-96 grid border border-white ">
-          <div className='row-start-1 text-white font-bold col-start-1 grid justify-center items-center'>
-            <p className='text-[2em]'>New Arrivals</p>
-          </div>
-        </div> */}
-
-      {/* ul{
-            width:80%;
-            margin:auto;
-            border:10px solid rgb(73, 55, 107);
-            list-style: none;
-            display:grid;
-            grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-            grid-gap:3px;
-        } */}
-
-
-      {/* <div style={{ listStyle: "none", gridTemplateColumns: "repeat(3, 1fr)" }} className=" p-2  border border-white grid gap-4 box-border ">
-          {allProduct.slice(0, 5).map(each => (
-            <Kartu key={each.id} onClick={() => { navigate(`/detail/${each.id}`) }} data={each} />
-          ))} 
-        </div>
-      </div> */}
 
 
 
       <Carousel data={productData} />
 
- 
+
 
     </>
 
