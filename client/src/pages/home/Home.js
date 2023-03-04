@@ -3,18 +3,25 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux"
-import { getProducts } from '../store/actions/actionCreator';
+import { getProducts } from '../../store/actions/actionCreator';
 
 import ScrollReveal from 'scrollreveal';
 import { Button } from "flowbite-react"
 
-import Card from '../components/Card';
-import Kartu from '../components/Kartu';
-import Carousel from '../components/Carousel';
-import CtaButton from '../components/buttons/cta-button'
-import Footer from '../components/Footer';
+import Card from '../../components/Card';
+import Kartu from '../../components/Kartu';
+import Carousel from '../../components/Carousel';
+import CtaButton from '../../components/buttons/cta-button'
+import Footer from '../../components/Footer'; 
+import Top from './components/Top';
+import HeatMap from './components/HeatmapChart'; 
+import HeatmapDua from './components/HeatmapChartDua';
+import LineChart from './components/LineChart';
+import BubbleChart from './components/BubbleChart';
+ 
 
-import "../style/custom.css"
+
+import "../../style/custom.css"
 
 
 
@@ -82,7 +89,7 @@ export default function Home() {
     [
       {
         id: 9,
-        name: "Upright Collar Line Cotton Linen Shirt",
+        Top: "Upright Collar Line Cotton Linen Shirt",
         slug: "upright-collar-line-cotton-linen-shirt",
         description: "Men's Shirt with updated material. It is soft cool, and comfortable to wear. Koko clothes with contemporary fashionable designs",
         price: 499000,
@@ -220,31 +227,25 @@ export default function Home() {
   return (
     <>
 
-      {/* <div class="skeleton"></div>   */}
+      {/* <div class="skeleton"></div>   */} 
+      
+      
+      <Top/>
+      
+      <HeatMap/>
+      
+      <HeatmapDua/>
+      
+      <LineChart/>
+      
+      <BubbleChart/>
+      
+      
+      
 
-
-      <div className=" max-w-screen-xl mx-auto box-border border border-black grid ">
-        <img className='row-start-1 col-start-1' src='https://images.hugoboss.com/is/image/hugobossdm/230213_B_MW_Suit_1920x880?%24large%24&fmt=webp&align=0,-1&fit=crop,1&ts=1676394980832&qlt=80&wid=1440&hei=660 ' />
-
-        <div className='text-white row-start-1  border-white col-start-1 grid items-center justify-end pr-[12%] '>
-          <div className=" reveal_top font-raleway font-bold text-right leading-[1em]  text-7xl tracking-widest">BE BOLD<br /> BE BEAUTIFUL <br /> BE MACLO <br />
-            <div className=" reveal_bottom text-sm mt-5 ">
-              <Link to="/men">
-                <CtaButton />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className=" w-[100%]   overflow-hidden box-border ">
+      {/* <div className=" w-[100%]   overflow-hidden box-border ">
         <div className=" h-[100%] ">
-          <div className=" | grid">
-            {/* <img src="https://im.uniqlo.com/global-cms/spa/resfed4eb3cd117f264d596130a5bf41af5fr.jpg" */}
-            {/* <img src="https://im.uniqlo.com/global-cms/spa/rescac6be572fad281cd44a179a7edb1e0efr.jpg"
-              className=" w-[100%] h-[100vh] row-start-1 col-start-1  " /> */}
-            {/* <video class="dch-video-item__player" data-video-id="6319345330112" data-small-video-id="6319346093112" data-account="1268729919001" data-policy-key="BCpkADawqM1Y866RZKo_d_lZ4BO9M5xFUuhau1_xn-o1cf_aGAKtoqQqehi8CoaMEgTW7OBrgrangdSnSau7mVrQdX377XADeXy_Rv1gTn6IVRadSBXPGBsZLLDNBJtHjELhRuV_VDmeUk7D" preload="metadata" muted autoPlay playsInline loop src="https://house-fastly-signed-eu-west-1-prod.brightcovecdn.com/media/v1/pmp4/static/clear/1268729919001/92bffd6e-10ce-462b-a2ea-b909a784267d/273beb58-f38d-4362-ad64-7e88e76c481c/main.mp4?fastly_token=NjVkNTQxMmJfZDAzZmI2YjZkM2IwNTE4YzA0ZmJlODRjYWNjMDgyMDUwNzAzMGI1ZWJkOGQwNmMyMTA2ZjgyNjAwMGMyMmRiNV8vL2hvdXNlLWZhc3RseS1zaWduZWQtZXUtd2VzdC0xLXByb2QuYnJpZ2h0Y292ZWNkbi5jb20vbWVkaWEvdjEvcG1wNC9zdGF0aWMvY2xlYXIvMTI2ODcyOTkxOTAwMS85MmJmZmQ2ZS0xMGNlLTQ2MmItYTJlYS1iOTA5YTc4NDI2N2QvMjczYmViNTgtZjM4ZC00MzYyLWFkNjQtN2U4OGU3NmM0ODFjL21haW4ubXA0" __idm_id__="15122435" className=" w-[100%] h-[100px] border-4 border-yellow-500 row-start-1 col-start-1  " >
-            </video> */}
+          <div className=" | grid"> 
             <video class="dch-video-item__player" data-video-id="6319345330112" data-small-video-id="6319346093112" data-account="1268729919001" data-policy-key="BCpkADawqM1Y866RZKo_d_lZ4BO9M5xFUuhau1_xn-o1cf_aGAKtoqQqehi8CoaMEgTW7OBrgrangdSnSau7mVrQdX377XADeXy_Rv1gTn6IVRadSBXPGBsZLLDNBJtHjELhRuV_VDmeUk7D" preload="metadata" muted autoPlay playsInline loop className="w-full row-start-1 col-start-1">
               <source src="https://house-fastly-signed-eu-west-1-prod.brightcovecdn.com/media/v1/pmp4/static/clear/1268729919001/92bffd6e-10ce-462b-a2ea-b909a784267d/273beb58-f38d-4362-ad64-7e88e76c481c/main.mp4?fastly_token=NjVkNTQxMmJfZDAzZmI2YjZkM2IwNTE4YzA0ZmJlODRjYWNjMDgyMDUwNzAzMGI1ZWJkOGQwNmMyMTA2ZjgyNjAwMGMyMmRiNV8vL2hvdXNlLWZhc3RseS1zaWduZWQtZXUtd2VzdC0xLXByb2QuYnJpZ2h0Y292ZWNkbi5jb20vbWVkaWEvdjEvcG1wNC9zdGF0aWMvY2xlYXIvMTI2ODcyOTkxOTAwMS85MmJmZmQ2ZS0xMGNlLTQ2MmItYTJlYS1iOTA5YTc4NDI2N2QvMjczYmViNTgtZjM4ZC00MzYyLWFkNjQtN2U4OGU3NmM0ODFjL21haW4ubXA0" type="video/mp4" className='' />
             </video>
@@ -254,9 +255,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className=" max-w-screen-xl mx-auto box-border  border-black grid ">
+      {/* <div className=" max-w-screen-xl mx-auto box-border  border-black grid ">
         <img className='row-start-1 col-start-1' src='https://images.hugoboss.com/is/image/hugobossdm/230213_B_MW_Suit_1920x880?%24large%24&fmt=webp&align=0,-1&fit=crop,1&ts=1676394980832&qlt=80&wid=1440&hei=660 ' />
 
         <div className='text-white row-start-1  border-white col-start-1 grid items-center justify-end pr-[12%] '>
@@ -268,9 +269,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className="mt-20 p-10 max-w-screen-xl mx-auto   box-bordergrid grid-rows-[max-content_1fr] grid-cols-1   ">
+      {/* <div className="mt-20 p-10 max-w-screen-xl mx-auto   box-bordergrid grid-rows-[max-content_1fr] grid-cols-1   ">
         <p className=' font-raleway  text-center font-bold text-xl'>man or kid</p>
         <p className=' font-raleway  text-center font-bold tracking-widest text-3xl'>PICK YOURS</p>
         <div className='grid   gap-5  mt-6  lg:grid-cols-[1fr_1fr] md:grid-cols-none  '>
@@ -299,9 +300,9 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
-      <div className=" max-w-screen-xl mx-auto   box-border border border-black grid ">
+      {/* <div className=" max-w-screen-xl mx-auto   box-border border border-black grid ">
         <img className='row-start-1 col-start-1' src='https://im.uniqlo.com/global-cms/spa/resb4b1555f22e6f1b9116f43bdf115ba5ffr.jpg' />
 
         <div className='text-white row-start-1 border border-white col-start-1 grid items-center pl-[12%] '>
@@ -312,7 +313,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
 
 
@@ -343,17 +344,9 @@ export default function Home() {
 
 
 
-      {/* <Carousel data={allProduct} /> */}
+      <Carousel data={productData} />
 
-
-
-
-
-
-
-
-
-
+ 
 
     </>
 
