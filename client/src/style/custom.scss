@@ -135,7 +135,7 @@ html {
  max-width: 1600px;
  height: 100vh;
  margin: 100px auto;
- overflow: hidden;
+//  overflow: hidden;
 }
 
 .header {
@@ -162,11 +162,11 @@ html {
 
 .detail-area {
  border-left: 1px solid var(--border-color);
- margin-left: auto;
+//  margin-left: auto;
  padding: 30px 30px 0 30px;
  display: flex;
  flex-direction: column;
- overflow: auto;
+//  overflow: auto;
 }
 
 .chat-area {
@@ -248,12 +248,12 @@ html {
 }
 
 .conversation-area {
- border-right: 1px solid var(--border-color);
+//  border-right: 1px solid var(--border-color);
  overflow-y: auto;
  overflow-x: hidden;
  display: flex;
  flex-direction: column;
- position: relative;
+//  position: relative;
 }
 
 .msg-profile {
@@ -366,7 +366,7 @@ html {
 .chat-area {
  display: flex;
  flex-direction: column;
- overflow: auto;
+ overflow: auto; 
  &-header {
   display: flex;
   position: sticky;
