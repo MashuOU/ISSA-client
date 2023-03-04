@@ -17,7 +17,9 @@ import Top from './components/Top';
 import HeatMap from './components/HeatmapChart'; 
 import HeatmapDua from './components/HeatmapChartDua';
 import LineChart from './components/LineChart';
-import BubbleChart from './components/BubbleChart';
+import BubbleChart from './components/BubbleChart'; 
+import TableDetail from './components/TableDetailNilai';
+
 
 import BubbleChartDua from './components/BubbleChartDua';
 
@@ -242,6 +244,8 @@ export default function Home() {
       <BubbleChart/>
       
       <BubbleChartDua/>
+      
+      <TableDetail/>
       
 
       {/* <div className=" w-[100%]   overflow-hidden box-border ">

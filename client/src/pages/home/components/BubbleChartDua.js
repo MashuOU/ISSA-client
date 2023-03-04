@@ -43,7 +43,11 @@ export default function BubbleChart() {
       .filter((d) => !d.children)
       .append("g")
       .attr("class", "node")
-      .attr("transform", (d) => "translate(" + d.x + "," + d.y + ")");
+      .attr("transform", (d) => `translate(${width/2},${height/2})scale(0)`);
+    // Menambahkan transisi pada setiap node
+    node.transition()
+      .duration(2000)
+      .attr("transform", (d) => `translate(${d.x},${d.y})scale(1)`);
   
     node.append("circle")
       .attr("r", (d) => d.r)
