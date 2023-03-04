@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
+import Chat from "../pages/Chat"
 
 import Container from "../pages/Container" 
 import Home from "../pages/Home"  
@@ -13,10 +14,10 @@ const router = createBrowserRouter(
           path: "",
           element: <Home />,
         },
-        // {
-        //   path: "men",
-        //   element: <MenPage />,
-        // },
+        {
+          path: "chat",
+          element: <Chat />,
+        },
         // {
         //   path: "kid",
         //   element: <KidPage />,
