@@ -35,3 +35,8 @@ function generateData(baseval, count, yrange) {
   }
   return series;
 }
+
+console.log(generateData(new Date('11 Feb 2017 GMT').getTime(), 20, {
+  min: 10,
+  max: 60,
+}));

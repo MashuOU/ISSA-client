@@ -18,7 +18,8 @@ import HeatMap from './components/HeatmapChart';
 import HeatmapDua from './components/HeatmapChartDua';
 import LineChart from './components/LineChart';
 import BubbleChart from './components/BubbleChart';
- 
+
+import BubbleChartDua from './components/BubbleChartDua';
 
 
 import "../../style/custom.css"
@@ -240,7 +241,7 @@ export default function Home() {
       
       <BubbleChart/>
       
-      
+      <BubbleChartDua/>
       
 
       {/* <div className=" w-[100%]   overflow-hidden box-border ">
