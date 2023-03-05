@@ -1,10 +1,10 @@
 export default function AddStudent(params) {
   return (
-    <div className="ml-[20rem] mt-[7rem]">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
       <div className="mb-6">
         <p className="font-raleway italic font-semibold text-[1.3rem] ">Form Add Student</p>
       </div>
-      <form>
+      <form className="mr-12">
         <div className="relative z-0 w-full mb-6 group">
           <input
             type="text"
@@ -15,7 +15,7 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             NIM
@@ -31,7 +31,7 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Name
@@ -47,7 +47,7 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             AGE
@@ -63,7 +63,7 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             GENDER
@@ -71,7 +71,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             BIRTH DATE
@@ -95,10 +95,10 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
-            FEEDBACK
+            FEEDBACK (Opsional)
           </label>
         </div>
         <div className="relative z-0 w-full mb-6 group">
@@ -111,7 +111,7 @@ export default function AddStudent(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             IMAGE URL

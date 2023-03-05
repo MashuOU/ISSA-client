@@ -1,10 +1,10 @@
 export default function AddSchedule(params) {
   return (
-    <div className="ml-[20rem] mt-[7rem]">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
       <div className="mb-6">
         <p className="font-raleway italic font-semibold text-[1.3rem] ">Form Schedule</p>
       </div>
-      <form>
+      <form className="mr-12">
         <div className="relative z-0 w-full mb-6 group">
           <input
             type="text"
@@ -15,7 +15,7 @@ export default function AddSchedule(params) {
             required
           />
           <label
-            for="floating_name"
+            htmlFor="floating_name"
             className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6"
           >
             Day
@@ -26,7 +26,7 @@ export default function AddSchedule(params) {
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
-            <option selected>Choose Class</option>
+            <option>Choose Class</option>
             <option value="US">1A</option>
             <option value="CA">2B</option>
           </select>

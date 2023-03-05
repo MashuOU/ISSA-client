@@ -5,6 +5,7 @@ module.exports = {
     extend: {},
     fontFamily: {
       raleway: ["Raleway"],
+      Playfair: ["Playfair Display"],
     },
   },
   daisyui: {
