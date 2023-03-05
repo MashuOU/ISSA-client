@@ -1,9 +1,65 @@
  
-import { useEffect } from 'react'
+import { useEffect , useState} from 'react'
 import '../style/custom.scss'
 
 
 export default function Chat() {
+ 
+ 
+function sendMessage (event) {
+  if (event.key === "Enter") { 
+    const newMessage = {
+      message: event.target.value,
+      time: "Message sent at " + new Date().toLocaleTimeString(),
+      imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
+    };
+    setMessageList(prevMessages => [...prevMessages, newMessage]);
+    event.target.value = ""; 
+    
+    const chatbox = document.getElementById('chatArea');
+    chatbox.scrollTop =  chatbox.scrollHeight;
+    // alert(chatbox.scrollTop)
+    
+  }
+}
+
+
+ 
+ 
+  
+  const [dummyList, setDummyList] = useState(
+    [
+      {
+        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png",
+        name: "Madison Jones",
+        message: "What time was our meet",
+        time: "20m"
+      },
+      {
+        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png",
+        name: "Miguel Cohen",
+        message: "Snackwave craft ",
+        time: "22m"
+      },
+      {
+        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%288%29.png",
+        name: "Sarah Jones",
+        message: "Oyoyoy",
+        time: "40m"
+      }
+    ] 
+  )
+  
+  const [messageList, setMessageList] = useState(
+    [
+      {
+        message: "Luctus et ultrices posuere cubilia curae.",
+        time: "Message seen 1.22pm",
+        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
+      }
+     ]
+  )
+  
   
   useEffect(() => {
     const toggleButton = document.querySelector('.dark-light');
@@ -27,7 +83,7 @@ export default function Chat() {
     
     <>
     
-    <div className="app border border-black   ">
+    <div className="app border border-red-500   ">
       
   <div className="header">
     <div className="logo">
@@ -84,40 +140,34 @@ export default function Chat() {
   
   
  {/* <div className="wrapper border shadow-lg border-black"> */}
+ 
  <div className="border grid  overflow-hidden grid-flow-col shadow-lg border-black">
     
     <div className="conversation-area  border-4  border-black "> 
       
-      <div className="msg online">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Madison Jones</div>
-          <div className="msg-content">
-            <span className="msg-message">What time was our meet</span>
-            <span className="msg-date">20m</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Miguel Cohen</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              Adaptogen taiyaki austin jean shorts brunch
-            </span>
-            <span className="msg-date">20m</span>
-          </div>
-        </div>
-      </div>
+      
+
+      
+      {dummyList.map(each => {
+        return(
+          <div className="msg online">
+            <img
+              className="msg-profile"
+              src={each.imgUrl}
+              alt=""
+            />
+            <div className="msg-detail">
+              <div className="msg-username"> {each.name} </div>
+              <div className="msg-content">
+                <span className="msg-message"> {each.message} </span>
+                <span className="msg-date"> {each.time} </span>
+              </div>
+            </div>
+          </div> 
+        )
+      })}
+    
+      
       <div className="msg active">
         <div className="msg-profile group">
           <svg
@@ -141,132 +191,9 @@ export default function Chat() {
             <span className="msg-date">28m</span>
           </div>
         </div>
-      </div>
-      <div className="msg online">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Lea Debere</div>
-          <div className="msg-content">
-            <span className="msg-message">Shoreditch iPhone jianbing</span>
-            <span className="msg-date">45m</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg online">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29+%281%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Jordan Smith</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              Snackwave craft beer raclette, beard kombucha{" "}
-            </span>
-            <span className="msg-date">2h</span>
-          </div>
-        </div>
-      </div>
+      </div> 
+    
       
-       
-      
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%284%29+%281%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Jared Jackson</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              Tattooed brooklyn typewriter gastropub
-            </span>
-            <span className="msg-date">18m</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg online">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Henry Clark</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              Ethical typewriter williamsburg lo-fi street art
-            </span>
-            <span className="msg-date">2h</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/qs6F3dgm.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Jason Mraz</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              I'm lucky I'm in love with my best friend
-            </span>
-            <span className="msg-date">4h</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%288%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Chiwa Lauren</div>
-          <div className="msg-content">
-            <span className="msg-message">Pabst af 3 wolf moon</span>
-            <span className="msg-date">28m</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%289%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Caroline Orange</div>
-          <div className="msg-content">
-            <span className="msg-message">
-              Bespoke aesthetic lyft woke cornhole
-            </span>
-            <span className="msg-date">35m</span>
-          </div>
-        </div>
-      </div>
-      <div className="msg">
-        <img
-          className="msg-profile"
-          src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%286%29.png"
-          alt=""
-        />
-        <div className="msg-detail">
-          <div className="msg-username">Lina Ashma</div>
-          <div className="msg-content">
-            <span className="msg-message">Migas food truck crucifix vexi</span>
-            <span className="msg-date">42m</span>
-          </div>
-        </div>
-      </div>
       <button className="add" />
       <div className="overlay" />
       
@@ -274,7 +201,11 @@ export default function Chat() {
     </div>
  
     
-    <div className="chat-area"> 
+    
+    
+    
+    <div id="chatArea"  className="chat-area border-4 border-yellow-800"> 
+    
       <div className="chat-area-header">
         <div className="chat-area-title">CodePen Group</div>
         <div className="chat-area-group">
@@ -296,16 +227,21 @@ export default function Chat() {
           <span>+4</span>
         </div>
       </div>
-      <div className="chat-area-main">
+      
+      <div  className="chat-area-main ">
+        
+       
+        
         <div className="chat-msg">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
+              src=""
               alt=""
             />
             <div className="chat-msg-date">Message seen 1.22pm</div>
           </div>
+          
           <div className="chat-msg-content">
             <div className="chat-msg-text">
               Luctus et ultrices posuere cubilia curae.
@@ -318,7 +254,9 @@ export default function Chat() {
               egestas. Pretium lectus quam id leo.
             </div>
           </div>
+          
         </div>
+        
         <div className="chat-msg owner">
           <div className="chat-msg-profile">
             <img
@@ -338,7 +276,31 @@ export default function Chat() {
             </div>
           </div>
         </div>
-        <div className="chat-msg">
+        
+        
+       {messageList.map(each => {
+        return(
+          <div className="chat-msg owner">
+          <div className="chat-msg-profile">
+            <img
+              className="chat-msg-img"
+              src={each.imgUrl}
+              alt=""
+            />
+            <div className="chat-msg-date"> {each.time} </div>
+          </div>
+          <div className="chat-msg-content">
+            <div className="chat-msg-text">
+              {each.message}
+            </div> 
+          </div>
+        </div>
+        )
+       })}
+        
+        
+        
+        {/* <div className="chat-msg">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -357,8 +319,8 @@ export default function Chat() {
               Ut faucibus pulvinar elementum integer enim neque volutpat.
             </div>
           </div>
-        </div>
-        <div className="chat-msg owner">
+        </div> */}
+        {/* <div className="chat-msg owner">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -375,8 +337,8 @@ export default function Chat() {
               Cras mollis nec arcu malesuada tincidunt.
             </div>
           </div>
-        </div>
-        <div className="chat-msg">
+        </div> */}
+        {/* <div className="chat-msg">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -390,8 +352,8 @@ export default function Chat() {
               Egestas tellus rutrum tellus pellentesque
             </div>
           </div>
-        </div>
-        <div className="chat-msg">
+        </div> */}
+        {/* <div className="chat-msg">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -406,8 +368,8 @@ export default function Chat() {
               senectus et.
             </div>
           </div>
-        </div>
-        <div className="chat-msg owner">
+        </div> */}
+        {/* <div className="chat-msg owner">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -419,8 +381,8 @@ export default function Chat() {
           <div className="chat-msg-content">
             <div className="chat-msg-text">Tincidunt arcu non sodales😂</div>
           </div>
-        </div>
-        <div className="chat-msg">
+        </div> */}
+        {/* <div className="chat-msg owner">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"
@@ -435,7 +397,7 @@ export default function Chat() {
               senectus et🥰
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="chat-area-footer">
         <svg
@@ -490,7 +452,14 @@ export default function Chat() {
         >
           <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
         </svg>
-        <input type="text" placeholder="Type something here..." />
+          {/* <input onMouseEnter={() => alert() } type="text" placeholder="Type something here..." />  */}
+          <input
+  type="text"
+  placeholder="Type something here..."
+  onKeyDown={sendMessage}
+/>
+
+          
         <svg
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 24 24"

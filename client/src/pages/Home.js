@@ -228,9 +228,9 @@ export default function Home() {
   return (
     <> 
 
-     <ChatPage/>
+     {/* <ChatPage/> */}
 
-      {/* <Top />
+      <Top />
 
       <HeatMap />
 
@@ -244,7 +244,7 @@ export default function Home() {
 
       <TableDetail />
 
-      <LessonsList /> */}
+      <LessonsList />
 
 
 

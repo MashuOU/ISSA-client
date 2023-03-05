@@ -3,6 +3,8 @@ import Chat from "../pages/Chat"
 
 import Container from "../pages/Container" 
 import Home from "../pages/Home"  
+import LoginPage from "../pages/Login"
+import ReactChat from "../pages/React-chat"
 
 const router = createBrowserRouter(
   [
@@ -18,6 +20,10 @@ const router = createBrowserRouter(
           path: "chat",
           element: <Chat />,
         },
+        {
+          path: "react-chat",
+          element: <ReactChat />,
+        },
         // {
         //   path: "kid",
         //   element: <KidPage />,
@@ -27,6 +33,10 @@ const router = createBrowserRouter(
         //   element: <Detail />
         // }
       ]
+    },
+    {
+      path: "/login",
+      element: <LoginPage />,
     },
   ]
 )
