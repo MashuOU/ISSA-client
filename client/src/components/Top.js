@@ -27,7 +27,7 @@ export default function Name() {
         </div>
 
       </div> */}
-      <div className="grid max-w-screen-xl mt-4 mx-auto border border-red-400 " >
+      <div className="grid max-w-screen-xl mx-auto border border-red-400 " >
 
 
         <section class="bg-white dark:bg-gray-900">

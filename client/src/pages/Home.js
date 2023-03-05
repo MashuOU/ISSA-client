@@ -21,6 +21,9 @@ import TableDetail from '../components/TableDetailNilai';
 import LessonsList from './LessonsList';
 import BubbleChartDua from '../components/BubbleChartDua';
 import ChatPage from './Chat'; 
+import Chat from './Chat-client';
+ 
+
 
 // import "../../style/custom.css"
 
@@ -232,6 +235,8 @@ export default function Home() {
 
       <Top />
 
+      <Chat/>
+
       {/* <HeatMap /> */}
 
       <HeatmapDua />
@@ -246,8 +251,13 @@ export default function Home() {
 
       <LessonsList />
 
+     
+      
+      <Carousel/>
 
-
+      
+      
+      
     </>
 
   );
