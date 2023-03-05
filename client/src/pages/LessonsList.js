@@ -4,7 +4,7 @@ export default function LessonsList() {
   return (
     // <div style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" max-w-screen-xl  p-2  border border-white grid gap-4 box-border ">
           
-    <section style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className="  lg:px-16 py-8 lg:py-16  mx-auto max-w-screen-xl  p-2  border border-white grid gap-10 box-border dark:bg-gray-900">
+    <section style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className="  lg:px-16 py-8 lg:py-16 mt-3  mx-auto max-w-screen-xl  p-2  border border-white grid gap-10 box-border dark:bg-gray-900">
       {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"> */}
 
       <LessonCard innerHTML="MATEMATIKA" />

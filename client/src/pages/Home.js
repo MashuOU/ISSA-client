@@ -232,13 +232,13 @@ export default function Home() {
 
       <Top />
 
-      <HeatMap />
+      {/* <HeatMap /> */}
 
       <HeatmapDua />
 
       <LineChart />
 
-      <BubbleChart />
+      {/* <BubbleChart /> */}
 
       <BubbleChartDua />
 

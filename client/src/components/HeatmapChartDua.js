@@ -2,7 +2,12 @@
 import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
 
 export default function Heatmap() {
-  return <div id="heatmap-chart" className="pointer-events-none border border-black " ></div>;
+  return (
+    <div className="grid mt-4 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
+      <div id="heatmap-chart" className="pointer-events-none w-[100%] border border-black " ></div>
+    </div>
+
+  );
 }
 
 

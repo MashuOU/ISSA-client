@@ -16,7 +16,7 @@ export default function App() {
 
   const columns = React.useMemo(
     () => [
-      { Header: 'Column 1', accessor: 'col1'},
+      { Header: 'Column 1', accessor: 'col1' },
       { Header: 'Column 2', accessor: 'col2' },
       { Header: 'Column 3', accessor: 'col3' },
     ],
@@ -36,7 +36,7 @@ export default function App() {
   const { globalFilter } = state
 
   return (
-    <>
+    <div className='grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400' >
       <input
         value={globalFilter || ''}
         onChange={(e) => setGlobalFilter(e.target.value)}
@@ -99,6 +99,6 @@ export default function App() {
           )}
         </tbody>
       </table>
-    </>
+    </div>
   )
 }

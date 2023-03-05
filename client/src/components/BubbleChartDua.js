@@ -23,45 +23,45 @@ export default function BubbleChart() {
 
   useEffect(() => {
     const svg = d3.select(chartArea.current);
-  
+
     // Tentukan skema warna untuk setiap group data
     const color = d3.scaleOrdinal()
       .domain(data.children.map((d) => d.group))
       .range(d3.schemeCategory10);
-  
+
     const bubble = d3.pack()
       .size([width, height])
       .padding(1.5)
       .radius((d) => d.value);
-  
+
     const nodes = d3.hierarchy(data)
       .sum((d) => d.value);
-  
+
     const node = svg.selectAll(".node")
       .data(bubble(nodes).descendants())
       .enter()
       .filter((d) => !d.children)
       .append("g")
       .attr("class", "node")
-      .attr("transform", (d) => `translate(${width/2},${height/2})scale(0)`);
+      .attr("transform", (d) => `translate(${width / 2},${height / 2})scale(0)`);
     // Menambahkan transisi pada setiap node
     node.transition()
       .duration(2000)
       .attr("transform", (d) => `translate(${d.x},${d.y})scale(1)`);
-  
+
     node.append("circle")
       .attr("r", (d) => d.r)
       .style("fill", (d) => color(d.data.group)); // Gunakan skema warna yang sudah ditentukan
-  
+
     node.append("text")
       .attr("dy", ".3em")
       .style("text-anchor", "middle")
       .text((d) => d.data.name);
   }, []);
-  
-  
+
+
   return (
-    <div>
+    <div className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400" >
       <svg ref={chartArea} width={width} height={height}></svg>
     </div>
   );
