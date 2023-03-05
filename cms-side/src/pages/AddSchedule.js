@@ -2,7 +2,7 @@ export default function AddSchedule(params) {
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
       <div className="mb-6">
-        <p className="font-raleway italic font-semibold text-[1.3rem] ">Form Schedule</p>
+        <p className="font-raleway italic font-semibold text-[1.3rem] dark:text-white">Form Schedule</p>
       </div>
       <form className="mr-12">
         <div className="relative z-0 w-full mb-6 group">
@@ -33,7 +33,7 @@ export default function AddSchedule(params) {
         </div>
 
         <button
-          className="inline-flex items-center text-gray-500 bg-white border border-[#548999] focus:outline-none hover:bg-[#548999] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 "
+          className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 "
           type="button"
         >
           Submit

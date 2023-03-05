@@ -1,12 +1,55 @@
-export default function AddStudent(params) {
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { studentAdd } from "../store/action/ActionCreator";
+
+export default function AddStudent(props) {
+  const dispatch = useDispatch();
+
+  const [form, setForm] = useState({
+    NIM: "",
+    name: "",
+    age: "",
+    gender: "",
+    birthDate: "",
+    feedback: "",
+    ClassId: "",
+  });
+
+  const changeInputHandler = (event) => {
+    const { name, value } = event.target;
+
+    const newForm = {
+      ...form,
+    };
+    newForm[name] = value;
+
+    setForm(newForm);
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+
+    dispatch(studentAdd(form));
+    setForm({
+      NIM: "",
+      name: "",
+      age: "",
+      gender: "",
+      birthDate: "",
+      feedback: "",
+      ClassId: "",
+    });
+  };
+
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
       <div className="mb-6">
-        <p className="font-raleway italic font-semibold text-[1.3rem] ">Form Add Student</p>
+        <p className="dark:text-white font-raleway italic font-semibold text-[1.3rem] ">Form Add Student</p>
       </div>
-      <form className="mr-12">
+      <form onSubmit={submitForm}>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="text"
             name="NIM"
             id="floating_name"
@@ -23,6 +66,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="text"
             name="name"
             id="floating_name"
@@ -39,6 +83,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="number"
             name="age"
             id="floating_name"
@@ -55,6 +100,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="text"
             name="gender"
             id="floating_name"
@@ -77,6 +123,7 @@ export default function AddStudent(params) {
             BIRTH DATE
           </label>
           <input
+            onChange={changeInputHandler}
             type="date"
             name="birthDate"
             id="floating_name"
@@ -87,6 +134,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="text"
             name="feedback"
             id="floating_name"
@@ -103,6 +151,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
             type="text"
             name="imgUrl"
             id="floating_name"
@@ -119,6 +168,7 @@ export default function AddStudent(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <select
+            onChange={changeInputHandler}
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
@@ -129,7 +179,7 @@ export default function AddStudent(params) {
         </div>
 
         <button
-          className="inline-flex items-center text-gray-500 bg-white border border-[#548999] focus:outline-none hover:bg-[#548999] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 "
+          className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 "
           type="button"
         >
           Submit

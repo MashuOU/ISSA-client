@@ -1,15 +1,18 @@
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableStudent from "../components/TableStudents";
 
-export default function Attendance(params) {
+export default function Attendance(props) {
+  const student = useSelector((state) => state.students.student);
+  console.log(student);
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6  mt-[4rem] w-full md:w-full sm:[50%]">
-        <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 mr-6">
+      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 mr-6 ml-6">
           <div>
             <Link to="/addStudent">
               <button
-                className="inline-flex items-center text-gray-500 bg-white border border-[#548999] focus:outline-none hover:bg-[#548999] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+                className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
                 type="button"
               >
                 Add New Murid
@@ -28,12 +31,12 @@ export default function Attendance(params) {
             <input
               type="text"
               id="table-search-users"
-              className="block p-2 pl-10 text-sm text-gray-900 border border-[#548999] rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
+              className="block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
               placeholder="Search for users"
             />
           </div>
         </div>
-        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400  mt-6">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
             <tr>
               <th scope="col" className="p-4">
@@ -65,7 +68,7 @@ export default function Attendance(params) {
               <td className="px-6 py-4">
                 <select
                   id="countries"
-                  className="bg-gray-50 border border-[#548999] text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 >
                   <option>Choose One</option>
                   <option value="US">Hadir</option>
@@ -76,7 +79,7 @@ export default function Attendance(params) {
               </td>
               <td className="px-6 py-4">
                 <button
-                  className="inline-flex items-center text-gray-500 bg-white border border-[#548999] focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
+                  className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
                   type="button"
                 >
                   Edit

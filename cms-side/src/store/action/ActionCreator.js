@@ -67,46 +67,46 @@ export const studentFetchSuccessById = (payload) => {
   };
 };
 
-// export const productAdd = (payload) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/product`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         access_token: localStorage.access_token,
-//       },
-//       body: JSON.stringify(payload),
-//     })
-//       .then(async (response) => {
-//         if (!response.ok) {
-//           const error = await response.json();
-//           console.log(error);
-//           throw new Error(error.message);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // console.log("Success:", data);
-//         Swal.fire({
-//           position: "top-end",
-//           icon: "success",
-//           title: "Add Product Success",
-//           showConfirmButton: false,
-//           timer: 1500,
-//         });
-//         dispatch(productFetch());
-//         redirect("/product");
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//         Swal.fire({
-//           icon: "error",
-//           title: "Oops...",
-//           text: error.message,
-//         });
-//       });
-//   };
-// };
+export const studentAdd = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/students`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(studentsFetch());
+        redirect("/");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
 
 // export const productDelete = (id) => {
 //   return (dispatch, getState) => {

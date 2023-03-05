@@ -6,7 +6,7 @@ export default function Schedule(params) {
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
         <div className="ml-4 mb-10">
-          <p className="font-raleway italic font-semibold text-[1.3rem] ">List Schedules</p>
+          <p className="font-raleway italic font-semibold text-[1.3rem] dark:text-white ">List Schedules</p>
         </div>
         <table className="w-full text-l text-left text-gray-500 dark:text-gray-400 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">

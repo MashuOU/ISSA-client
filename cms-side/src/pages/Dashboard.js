@@ -24,23 +24,33 @@ export default function Dashboard(params) {
   return (
     <>
       {loading ? (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6  mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
-            <ClipLoader color={"#548999"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
+            <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
         </div>
       ) : (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6  mt-[4rem] w-full md:w-full sm:[50%]">
-          <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 mr-6">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
+          <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
             <div>
               <Link to="/addStudent">
                 <button
-                  className="inline-flex items-center text-gray-500 bg-white border border-[#548999] focus:outline-none hover:bg-[#548999] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+                  className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
                   type="button"
                 >
                   Add New Murid
                 </button>
               </Link>
+            </div>
+            <div className="w-[20%]">
+              <select
+                id="countries"
+                className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              >
+                <option selected>Sort By Type</option>
+                <option value="US">Ulangan</option>
+                <option value="CA">Tugas</option>
+              </select>
             </div>
             <label htmlFor="table-search" className="sr-only">
               Search
@@ -54,13 +64,12 @@ export default function Dashboard(params) {
               <input
                 type="text"
                 id="table-search-users"
-                className="block p-2 pl-10 text-sm text-gray-900 border border-[#548999] rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
+                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
                 placeholder="Search for users"
               />
             </div>
           </div>
-
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-6 ">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
                 <th scope="col" className="p-4">
