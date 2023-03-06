@@ -1,25 +1,34 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 
 import TableStudent from "../components/TableStudents";
-import { studentById, studentsFetch } from "../store/action/ActionCreator";
+import { classesFetch, studentById, studentsFetch } from "../store/action/ActionCreator";
 
 export default function Dashboard(params) {
+  const navigate = useNavigation();
   const students = useSelector((state) => state.students.students);
+  // const classes = useSelector((state) => state.classes.classes);
+  // console.log(classes);
   // console.log(students);
 
   const [loading, setLoading] = useState(false);
-
   const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
-    dispatch(studentsFetch());
+    dispatch(studentsFetch(localStorage.ClassId));
+    // dispatch(classesFetch());
   }, []);
+
+  const clearClassId = () => {
+    const temp = localStorage.removeItem("ClassId");
+    console.log(temp);
+  };
 
   return (
     <>
@@ -42,16 +51,21 @@ export default function Dashboard(params) {
                 </button>
               </Link>
             </div>
-            <div className="w-[20%]">
+            {/* <div className="w-[20%]">
               <select
                 id="countries"
                 className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
               >
-                <option selected>Sort By Type</option>
-                <option value="US">Ulangan</option>
-                <option value="CA">Tugas</option>
+                <option selected>Sort By Class</option>
+                {classes?.map((el) => {
+                  return (
+                    <option key={el.id} value="US">
+                      {el.name}
+                    </option>
+                  );
+                })}
               </select>
-            </div>
+            </div> */}
             <label htmlFor="table-search" className="sr-only">
               Search
             </label>

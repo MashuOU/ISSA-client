@@ -94,7 +94,7 @@ const Sidebar = () => {
               `}
           >
             <span className="material-symbols-outlined ">
-              <span class="material-symbols-outlined">radio_button_checked</span>
+              <span className="material-symbols-outlined">radio_button_checked</span>
             </span>
             <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Dark Mode</span>
           </li>

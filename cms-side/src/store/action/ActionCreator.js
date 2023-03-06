@@ -1,13 +1,14 @@
-import { FETCH_STUDENT, FETCH_STUDENT_BYID } from "./ActionTypes";
-import { redirect } from "react-router-dom";
+import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH_SCHEDULE } from "./ActionTypes";
 import axios from "axios";
+import { redirect } from "react-router-dom";
+
 // import Swal from "sweetalert2";
 
 const baseUrl = "http://localhost:3001";
 
 export const studentsFetch = (payload) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/students`, {
+    fetch(`${baseUrl}/students?ClassId=${localStorage.ClassId}`, {
       headers: {
         access_token: localStorage.access_token,
       },
@@ -69,7 +70,7 @@ export const studentFetchSuccessById = (payload) => {
 
 export const studentAdd = (payload) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/students`, {
+    return fetch(`${baseUrl}/students`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,7 +96,7 @@ export const studentAdd = (payload) => {
         //   timer: 1500,
         // });
         dispatch(studentsFetch());
-        redirect("/");
+        console.log("masuk nih");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -105,6 +106,191 @@ export const studentAdd = (payload) => {
         //   text: error.message,
         // });
       });
+  };
+};
+
+export const editStudent = (id, payload) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/students/${id}`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(studentsFetch());
+        redirect("/student");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const studentDelete = (id) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/students/${id}`, {
+      method: "DELETE",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(studentsFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const classesFetch = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/class`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(classesFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const classesFetchSuccess = (payload) => {
+  return {
+    type: FETCH_CLASS,
+    payload: payload,
+  };
+};
+
+export const classById = (id) => {
+  console.log(id);
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/class/${id}`, {
+      method: "GET",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(classFetchSuccessById(data));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const classFetchSuccessById = (payload) => {
+  return {
+    type: FETCH_CLASS_BYID,
+    payload: payload,
+  };
+};
+
+export const addAttendances = (payload) => {
+  console.log(payload);
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/attendances`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(studentsFetch());
+        console.log("masuk nih");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
+
+export const scheduleFetch = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/schedules`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(schedulesFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const schedulesFetchSuccess = (payload) => {
+  return {
+    type: FETCH_SCHEDULE,
+    payload: payload,
   };
 };
 

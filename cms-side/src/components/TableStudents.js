@@ -1,9 +1,10 @@
 import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { studentById } from "../store/action/ActionCreator";
+import { Link, redirect, useParams } from "react-router-dom";
+import { studentById, studentDelete } from "../store/action/ActionCreator";
 
 export default function TableStudent(props) {
   const { data, index } = props;
+  const dispatch = useDispatch();
   const temp = data.Attendances.map((el) => {
     return el.createdAt;
   });
@@ -16,6 +17,14 @@ export default function TableStudent(props) {
   // const handleStudentById = () => {
   //   dispatch(studentById(studentId));
   // };
+
+  const handleStudentById = (id) => {
+    dispatch(studentById(id));
+  };
+
+  const handleDelete = (id) => {
+    dispatch(studentDelete(id));
+  };
 
   return (
     <tbody className="text-center">
@@ -62,13 +71,17 @@ export default function TableStudent(props) {
               Lihat Detail
             </button>
           </Link>
+          <Link to="/addStudent">
+            <button
+              onClick={() => handleStudentById(data.id)}
+              className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
+              type="button"
+            >
+              Edit
+            </button>
+          </Link>
           <button
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
-            type="button"
-          >
-            Edit
-          </button>
-          <button
+            onClick={() => handleDelete(data.id)}
             className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
             type="button"
           >

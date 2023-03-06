@@ -1,7 +1,26 @@
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableSchedule from "../components/TableSchedule";
+import { scheduleFetch } from "../store/action/ActionCreator";
 
-export default function Schedule(params) {
+export default function Schedule(props) {
+  const dispatch = useDispatch();
+  const schedules = useSelector((state) => state.schedules.schedules);
+
+  const result1 = schedules.filter((el) => el.day == "senin");
+  const result2 = schedules.filter((el) => el.day == "selasa");
+  const result3 = schedules.filter((el) => el.day == "rabu");
+  const result4 = schedules.filter((el) => el.day == "kamis");
+  const result5 = schedules.filter((el) => el.day == "jumat");
+  const result6 = schedules.filter((el) => el.day == "sabtu");
+
+  const temp = [result1, result2, result3, result4, result5, result6];
+  // console.log(result1);
+
+  useEffect(() => {
+    dispatch(scheduleFetch());
+  }, []);
   return (
     <>
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
@@ -39,7 +58,7 @@ export default function Schedule(params) {
             </tr>
           </thead>
           <tbody className="text-center">
-            <TableSchedule />
+            <TableSchedule data={schedules} />
           </tbody>
         </table>
       </div>

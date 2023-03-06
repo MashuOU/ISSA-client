@@ -30,6 +30,7 @@ export default function Login(props) {
       headers: {
         "Content-Type": "application/json",
       },
+
       body: JSON.stringify(form),
     })
       .then(async (response) => {
@@ -49,7 +50,8 @@ export default function Login(props) {
         //   timer: 1500,
         // });
         localStorage.setItem("access_token", data.access_token);
-        navigate("/");
+        localStorage.setItem("ClassId", data.ClassId);
+        navigate(`/`);
       })
       .catch((error) => {
         console.error(error.message);
@@ -61,7 +63,7 @@ export default function Login(props) {
       });
   };
   return (
-    <section className="h-screen bg-gradient-to-r from-[#548999] ">
+    <section className="h-screen bg-gradient-to-r from-gray-900 ">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-[5rem]">
@@ -107,7 +109,7 @@ export default function Login(props) {
                     className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-[#242222] checked:border-[#242222] focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
                     id="exampleCheck2"
                   />
-                  <label className="form-check-label inline-block text-gray-800" htmlFor="exampleCheck2">
+                  <label className="form-check-label inline-block text-white" htmlFor="exampleCheck2">
                     Remember me
                   </label>
                 </div>
@@ -115,7 +117,7 @@ export default function Login(props) {
 
               <div className="text-center lg:text-left">
                 <button
-                  className="inline-flex items-center  hover:bg-[#81afbd] border-[#548999] focus:outline-none bg-[#548999] text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 "
+                  className="inline-flex items-center   border-bg-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 "
                   type="submit"
                 >
                   <p className="text-center ">SIGN IN</p>

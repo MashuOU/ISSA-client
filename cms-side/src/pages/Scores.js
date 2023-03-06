@@ -34,21 +34,11 @@ export default function Lessons(props) {
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
           <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 mb-[2rem] ml-6 mr-6">
             <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-              <img className="w-10 h-10 rounded-full" src="https://tse1.mm.bing.net/th?id=OIP.1051xRcNw7Wko_I3zInFhwHaJq&pid=Api&rs=1&c=1&qlt=95&w=95&h=124" alt="Jese image" />
+              <img className="w-10 h-10 rounded-full" src={student.imgUrl} alt="Jese image" />
               <div className="pl-3">
-                <div className="text-base font-semibold">Neil Sims</div>
+                <div className="text-base font-semibold">{student.name}</div>
               </div>
             </th>
-            {/* <div className="w-[20%]">
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected>Sort By Type</option>
-                <option value="US">Ulangan</option>
-                <option value="CA">Tugas</option>
-              </select>
-            </div> */}
             <div>
               <Link to="/attendance">
                 <button
@@ -60,6 +50,7 @@ export default function Lessons(props) {
               </Link>
             </div>
           </div>
+
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
