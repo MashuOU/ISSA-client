@@ -10,18 +10,20 @@ import ScrollReveal from 'scrollreveal';
 import { Button } from "flowbite-react"
 
 import Card from '../components/Card';
-// import Carousel from '../components/Carousel';
+import Carousel from '../components/Carousel';
 import CtaButton from '../components/buttons/cta-button'
 import Footer from '../components/Footer';
 import Top from '../components/Top';
 import HeatMap from '../components/HeatmapChart';
 import HeatmapDua from '../components/HeatmapChartDua';
 import BubbleChart from '../components/BubbleChart';
-import TableDetail from '../components/TableDetailNilai'; 
+import TableDetail from '../components/TableDetailNilai';
 import BubbleChartDua from '../components/BubbleChartDua';
 import ChatPage from './Chat';
 import Chat from './Chat-client';
-
+import ScheduleList from '../components/ScheduleList';
+import CarouselCard from '../components/CarouselCard';
+import TimelineChart from '../components/TimelineChart';
 
 
 // import "../../style/custom.css"
@@ -242,30 +244,41 @@ export default function Home() {
   return (
     <>
 
-      {/* <ChatPage/> */}
+      {/* <ChatPage/> */} 
+      
+
+      
 
       <Top data={productById} />
 
-      <Chat />
+      <TimelineChart/>
+
+
+      <div className="grid mt-4 grid-flow-col gap-2 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
+        <ScheduleList />
+        <ScheduleList />
+        <ScheduleList />
+        <ScheduleList />
+        <ScheduleList /> 
+      </div>
 
       {/* <HeatMap /> */}
 
       <HeatmapDua data={Attendances} />
 
-      
+
 
       {/* <BubbleChart /> */}
 
       <BubbleChartDua />
 
-      
- 
+
+      <Chat />
 
 
+      <Carousel />
 
-      {/* <Carousel/> */}
-
-
+      <CarouselCard/>
 
 
     </>

@@ -7,7 +7,7 @@ import { Button } from "flowbite-react"
 export default function Footer() {
   return (
 
-    <footer className="p-4 bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+    <footer className="p-4 mt-[100vh] bg-white md:p-8 lg:p-10 dark:bg-gray-800">
       <div className="mx-auto max-w-screen-xl text-center">
         <a
           href="#"
@@ -157,11 +157,10 @@ export default function Footer() {
               </linearGradient>
             </defs>
           </svg>
-          Flowbite
+          ISSA
         </a>
         <p className="my-6 text-gray-500 dark:text-gray-400">
-          Open-source library of over 400+ web components and interactive elements
-          built for better web.
+          Open-source Program
         </p>
         <ul className="flex flex-wrap justify-center items-center mb-6 text-gray-900 dark:text-white">
           <li>
@@ -201,11 +200,11 @@ export default function Footer() {
           </li>
         </ul>
         <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-          © 2021-2022{" "}
+          {/* © 2021-2022{" "}
           <a href="#" className="hover:underline">
             Flowbite™
           </a>
-          . All Rights Reserved.
+          . All Rights Reserved. */}
         </span>
       </div>
     </footer>

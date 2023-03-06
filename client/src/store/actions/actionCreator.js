@@ -13,7 +13,9 @@ import {
   WRITE_PRODUCTS_BY_TYPE_FAILED,
 
   WRITE_CATEGORIES,
-  WRITE_CATEGORIES_FAILED
+  WRITE_CATEGORIES_FAILED,
+  
+  WRITE_LESSON
 
 } from "./actionTypes"
 
@@ -44,6 +46,9 @@ export function writeProductFailed(payload) {
   return { type: WRITE_PRODUCT_FAILED, payload }
 }
 
+export function writeTodayLesson(payload) {
+  return { type: WRITE_LESSON, payload }
+}
 
 const baseUrl = "http://localhost:3000"
 // const baseUrl = "https://react-server.macnesa.com"
@@ -82,8 +87,8 @@ export function act_login(data) {
 
       return true
     } catch (error) {
+      console.log(error);
       throw error
-      // console.log(error);
     }
   }
 }
