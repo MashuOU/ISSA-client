@@ -19,7 +19,6 @@ import HeatMap from '../components/HeatmapChart';
 import HeatmapDua from '../components/HeatmapChartDua';
 import BubbleChart from '../components/BubbleChart';
 import TableDetail from '../components/TableDetailNilai';
-import BubbleChartDua from '../components/BubbleChartDua';
 import ChatPage from './Chat';
 import Chat from './Chat-client';
 import ScheduleList from '../components/ScheduleList';
@@ -91,7 +90,7 @@ export default function Home() {
       {
         distance: '20px',
         origin: origin,
-        opacity: 0, 
+        opacity: 0,
         duration: 2000
       }
     );
@@ -270,41 +269,89 @@ export default function Home() {
 
       {/* <ChatPage/> */}
 
+      <div className='w-full h-[50vh] bg-primary2-100  '>
+
+
+      </div>
+
+      <div className='w-full bg-blue-200 rounded-t-xl grid justify-center pb-10 pt-10 gap-6 '>
+
+
+         <div id="toast-notification" class="w-full justify-self-start   mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+
+          <div class="flex items-center">
+            <div class="relative inline-block shrink-0">
+              <img class="w-12 h-12 rounded-full" src="https://i.servimg.com/u/f42/19/69/61/77/201918.jpg" alt="Jese Leos image" />
+              <span class="absolute bottom-0 right-0 inline-flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full">
+                <svg aria-hidden="true" class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
+                <span class="sr-only">Message icon</span>
+              </span>
+            </div>
+            <div class="ml-3 text-sm font-normal">
+              <div class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</div>
+              <div class="text-sm font-normal">I just wanna make it</div>
+              <span class="text-xs font-medium text-blue-600 dark:text-blue-500">a few seconds ago</span>
+            </div>
+          </div>
+        </div>
 
 
 
-      <Top data={productById} />
+        <Link to="attendance" >
+          <HomeCard title="Jejak Kehadiran" />
+        </Link>
 
+        <Link to="total" >
+          <HomeCard title="Trafik Nilai" />
+        </Link>
+
+
+        <Link to="lesson">
+          <HomeCard title="Mata Pelajaran" />
+        </Link>
+        
+        
+        <HomeCard title="Tentang Michael" />
+
+
+      </div>
+
+      {/* <div ref={bottom[2]} >
+        <HeatmapDua data={Attendances} />
+      </div> */}
+
+      {/* <Top data={productById} /> */}
+
+
+
+
+      {/* 
       <div ref={bottom[0]}>
         <TimelineChart  />
-      </div>
+      </div> */}
 
-      <div ref={bottom[1]} className="grid mt-4 grid-flow-col gap-2 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
+      {/* <div ref={bottom[1]} className="grid mt-4 grid-flow-col gap-2 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
         <ScheduleList />
         <ScheduleList />
         <ScheduleList />
         <ScheduleList />
         <ScheduleList />
-      </div>
+      </div> */}
 
       {/* <HeatMap /> */}
 
-      <div ref={bottom[2]} >
-      <HeatmapDua data={Attendances} />
-      </div>
+
 
 
       {/* <BubbleChart /> */}
 
-      <BubbleChartDua />
+
+      {/* <Chat /> */}
 
 
-      <Chat />
+      {/* <Carousel /> */}
 
-
-      <Carousel />
-
-      <CarouselCard />
+      {/* <CarouselCard /> */}
 
 
     </>
@@ -315,7 +362,21 @@ export default function Home() {
 
 
 
-
+function HomeCard(props) {
+  return (
+    <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+      <svg class="w-10 h-10 mb-2 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 5a3 3 0 015-2.236A3 3 0 0114.83 6H16a2 2 0 110 4h-5V9a1 1 0 10-2 0v1H4a2 2 0 110-4h1.17C5.06 5.687 5 5.35 5 5zm4 1V5a1 1 0 10-1 1h1zm3 0a1 1 0 10-1-1v1h1z" clip-rule="evenodd"></path><path d="M9 11H3v5a2 2 0 002 2h4v-7zM11 18h4a2 2 0 002-2v-5h-6v7z"></path></svg>
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"> {props.title} </h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step by step guideline process on how to certify for your weekly benefits:</p>
+      <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
+        See our guideline
+        <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>
+      </a>
+    </div>
+  )
+}
 
 
 

@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom"
+import AttendancePage from "../pages/Attendance"
 import Chat from "../pages/Chat"
 
 import Container from "../pages/Container" 
@@ -7,6 +8,10 @@ import LessonDetail from "../pages/LessonDetail"
 import LessonsList from "../pages/LessonsList"
 import LoginPage from "../pages/Login"
 import ReactChat from "../pages/React-chat"  
+import TotalNilai from "../pages/TotalNilai"
+ 
+
+
 
 const router = createBrowserRouter(
   [
@@ -21,6 +26,14 @@ const router = createBrowserRouter(
         {
           path: "chat",
           element: <Chat />,
+        },
+        {
+          path: "attendance",
+          element: <AttendancePage />,
+        },
+        {
+          path: "total",
+          element: <TotalNilai />,
         },
         {
           path: "react-chat",

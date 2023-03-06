@@ -69,7 +69,7 @@ export default function Chat() {
       <div className="app  border-red-500   ">
  
 
- 
+  
 
         <div className=" grid  overflow-hidden grid-flow-col shadow-lg border-black">
  

@@ -20,7 +20,7 @@ export default function LessonDetail() {
       allProduct,
       productById: {
         Scores
-      }  ,
+      },
       error,
       loading
     },
@@ -30,21 +30,30 @@ export default function LessonDetail() {
   console.log(Scores);
 
   useEffect(() => {
-    dispatch(getProductById())  
+    dispatch(getProductById())
   }, []);
 
   if (Scores?.length) {
-    
-    const MyLessonScores = Scores.filter(each=> each.LessonId == id ) 
+
+    const MyLessonScores = Scores.filter(each => each.LessonId == id)
     console.log(MyLessonScores);
-    
-    
-    
+
+
+
     return (
       // <div style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" max-w-screen-xl  p-2  border border-white grid gap-4 box-border ">
       <>
-        <LineChart data={MyLessonScores} />
-        <TableDetail data={MyLessonScores} />
+        <section className="bg-gray-50 max-w-screen-lg mx-auto pt-20 dark:bg-gray-900 p-3 sm:p-5">
+
+          <div id="chart" className="grid mt-4 overflow-x-scroll   max-w-screen-xl mx-auto border border-red-400 ">
+            <LineChart data={MyLessonScores} />
+          </div>
+
+
+          <TableDetail data={MyLessonScores} />
+
+        </section>
+
       </>
 
     )

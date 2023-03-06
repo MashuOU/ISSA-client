@@ -718,7 +718,7 @@ export default function App(props) {
 
 
 
-      <section className="bg-gray-50 max-w-screen-lg mx-auto mt-4 dark:bg-gray-900 p-3 sm:p-5">
+      {/* <section className="bg-gray-50 max-w-screen-lg mx-auto mt-4 dark:bg-gray-900 p-3 sm:p-5"> */}
         <div className="mx-auto max-w-screen-xl px-4 lg:px-12">
           {/* Start coding here */}
           <div className="bg-white dark:bg-gray-800 relative shadow-md sm:rounded-lg overflow-hidden">
@@ -1135,7 +1135,7 @@ export default function App(props) {
             
           </div>
         </div>
-      </section>
+      {/* </section> */}
 
 
 

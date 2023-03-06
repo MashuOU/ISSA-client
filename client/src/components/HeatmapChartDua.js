@@ -7,11 +7,11 @@ export default function Heatmap(props) {
   const chartRef = useRef(null);
 
   if (props.data) {
-    
+
     props.data.forEach(item => {
       const date = new Date(item.createdAt);
       const unixTimestamp = Math.floor((date.getTime() / 1000));
-    //  console.log(item );
+      //  console.log(item );
       // return Math.floor(Date.parse(timestamp) / 1000);
       // const timestamp = new Date(item.createdAt).setHours(0, 0, 0, 0) / 1000;
       let value = 0;
@@ -36,9 +36,9 @@ export default function Heatmap(props) {
       result[unixTimestamp] = value;
     });
 
-    
+
   }
- 
+
 
 
 
@@ -55,6 +55,10 @@ export default function Heatmap(props) {
       radius: 2,
       //         empty      alfa       sakit      izin       hadir
       colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#17459e'],
+      width:800,
+      height:600
+      // x_axis_mode: "time",
+      // y_axis_mode: "tick",
     });
 
     return () => {
@@ -63,9 +67,16 @@ export default function Heatmap(props) {
   }, [props.data]);
 
   return (
-    <div className="grid mt-4 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
-      <div ref={chartRef} id="heatmap-chart" className="pointer-events-none w-[100%] border border-black " ></div>
-    </div>
+    
+    <div ref={chartRef} id="heatmap-chart" className="pointer-events-none border border-white  " ></div>
+     
+    
+    // <div className="grid mt-4 overflow-y-scroll justify-start sm:justify-center max-w-screen-xl mx-auto border border-red-400" >
+    //   <div ref={chartRef} id="heatmap-chart" className="pointer-events-none w-[300px] h-[500px] border border-black " ></div>
+    // </div>
+    
+    
+    
   );
 }
 
@@ -74,5 +85,5 @@ export default function Heatmap(props) {
 //   '1578355200': 1, // alfa
 //   '1578441600': 50, // // sakit
 //   '1578528000': 70, // izin
-//   '1578614400': 100, //hadir 
+//   '1578614400': 100, //hadir
 // },

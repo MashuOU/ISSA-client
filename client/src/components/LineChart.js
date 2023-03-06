@@ -77,7 +77,7 @@ export default function LineChart(props) {
 
   return (
     <>
-      <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 ">
+      {/* <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 "> */}
         <ReactApexChart className="border border-black"
           options={state.options}
           series={state.series}
@@ -85,7 +85,7 @@ export default function LineChart(props) {
           height={350}
           width={900}
         />
-      </div>
+      {/* </div> */}
     </>
   );
 }
