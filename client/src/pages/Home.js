@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { getProductById } from '../store/actions/actionCreator';
 
 import ScrollReveal from 'scrollreveal';
+
 import { Button } from "flowbite-react"
 
 import Card from '../components/Card';
@@ -66,36 +67,49 @@ export default function Home() {
   //   const [products, setProducts] = useState([]);
   //   const [categories, setCategories] = useState([]);
 
-  ScrollReveal().reveal('.reveal_top',
-    {
-      distance: '20px',
-      origin: 'top',
-      duration: 2000
-    }
 
-  )
-  ScrollReveal().reveal('.reveal_bottom',
-    {
-      distance: '20px',
-      origin: 'bottom',
-      duration: 2000
-    }
+  const bottom = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null)
+  ]
 
-  )
+  const top = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null)
+  ]
 
+  function reveal(ref, origin = "bottom") {
+    return ScrollReveal().reveal(ref.current,
+      {
+        distance: '20px',
+        origin: origin,
+        opacity: 0, 
+        duration: 2000
+      }
+    );
+  }
 
   useEffect(() => {
     dispatch(getProductById())
+      .then(() => {
+        bottom.forEach(each => {
+          reveal(each)
+        })
 
-    // ScrollReveal().reveal('.reveal',
-    //   {
-    //     distance: '20px',
-    //     origin: 'bottom',
-    //     opacity: 0,
-    //     delay: 1000,
-    //     duration: 2000
-    //   }
-    // );
+        top.forEach(each => {
+          reveal(each, "top")
+        })
+      })
+
+
 
   }, []);
 
@@ -238,34 +252,46 @@ export default function Home() {
     ]
   )
 
+  if (loading) {
+    return (
+      <p>Loading</p>
+    )
+  }
 
+  if (error) {
+    return (
+      <p>Error</p>
+    )
+  }
 
 
   return (
     <>
 
-      {/* <ChatPage/> */} 
-      
+      {/* <ChatPage/> */}
 
-      
+
+
 
       <Top data={productById} />
 
-      <TimelineChart/>
+      <div ref={bottom[0]}>
+        <TimelineChart  />
+      </div>
 
-
-      <div className="grid mt-4 grid-flow-col gap-2 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
+      <div ref={bottom[1]} className="grid mt-4 grid-flow-col gap-2 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
         <ScheduleList />
         <ScheduleList />
         <ScheduleList />
         <ScheduleList />
-        <ScheduleList /> 
+        <ScheduleList />
       </div>
 
       {/* <HeatMap /> */}
 
+      <div ref={bottom[2]} >
       <HeatmapDua data={Attendances} />
-
+      </div>
 
 
       {/* <BubbleChart /> */}
@@ -278,7 +304,7 @@ export default function Home() {
 
       <Carousel />
 
-      <CarouselCard/>
+      <CarouselCard />
 
 
     </>

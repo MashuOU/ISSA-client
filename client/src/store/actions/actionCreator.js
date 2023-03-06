@@ -14,7 +14,7 @@ import {
 
   WRITE_CATEGORIES,
   WRITE_CATEGORIES_FAILED,
-  
+
   WRITE_LESSON
 
 } from "./actionTypes"
@@ -27,7 +27,7 @@ import {
 export function loading() {
   return { type: LOADING }
 }
- 
+
 
 export function writeProduct(payload) {
   return { type: WRITE_PRODUCTS, payload }
@@ -94,7 +94,7 @@ export function act_login(data) {
 }
 
 
- 
+
 export function getProducts() {
   return async (dispatch) => {
     try {
@@ -156,12 +156,13 @@ export function getCategories() {
     try {
       // dispatch(loading())
       const request = await
-        fetch(baseUrl + `/public/lesson`,
+        fetch(baseUrl + `/lessons`,
           {
             method: "GET",
             headers: {
               // access_token: localStorage.getItem("myToken")
               access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
+              
             },
           }
         )

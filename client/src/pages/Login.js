@@ -42,7 +42,6 @@ export default function LoginPage() {
         }).showToast();
       })
 
-
   }
 
 
@@ -149,16 +148,8 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
-      </div>
-
-      <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
-        <img
-          alt="Welcome"
-          src="https://cdn.discordapp.com/attachments/1078622980864749640/1080476091799568394/Web_capture_1-3-2023_20518_looka.com.jpeg"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
-      </div>
-    </section>
+      </div> 
+    </section >
 
 
   )
