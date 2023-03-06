@@ -5,7 +5,9 @@ import { Carousel } from "flowbite"
 import { Navbar, Dropdown } from "flowbite-react"
 
 
-export default function Name() {
+export default function Name(props) {
+  const { name, NIM, imgUrl } = props.data
+
   // set the target element that will be collapsed or expanded (eg. navbar menu)
   const $targetEl = document.getElementById('user-dropdown');
   // optionally set a trigger element (eg. a button, hamburger icon)
@@ -36,12 +38,12 @@ export default function Name() {
           <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
 
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex  justify-center items-center">
-              <Avatar imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmKLXSarFSMsiSY7umUqr9wKJ_Tpx_h_zOTv_yn1JxwogDfI6JL9Rw_B5yGUjuiVY6G_Q&usqp=CAU" />
+              <Avatar imgUrl={imgUrl} />
             </div>
 
             <div class="mr-auto place-self-center lg:col-span-7">
-              <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Michael Ustynovych - Repa </h1>
-              <p class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400">3247923749823742472398</p>
+              <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"> {name} </h1>
+              <p class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400"> {NIM} </p>
               {/* <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"> Active </p> */}
               <a href="#" class="inline-flex mr-3  items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                 Present
@@ -81,7 +83,7 @@ export default function Name() {
       </div> */}
 
 
-        <div id="toast-notification" class="w-full mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
+        {/* <div id="toast-notification" class="w-full mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
 
           <div class="flex items-center">
             <div class="relative inline-block shrink-0">
@@ -97,7 +99,7 @@ export default function Name() {
               <span class="text-xs font-medium text-blue-600 dark:text-blue-500">a few seconds ago</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
 
         {/* carosel */}
@@ -148,14 +150,14 @@ export default function Name() {
 
 
         {/* list */}
-        <ul class="w-48 text-sm font-medium mx-auto text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+        {/* <ul class="w-48 text-sm font-medium mx-auto text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
           <a href="#" aria-current="true" class="block w-full px-4 py-2 text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
             Today
           </a>
           <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">IPA</li>
           <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">PENJASKES</li>
           <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">MTK</li>
-        </ul>
+        </ul> */}
 
       </div>
 

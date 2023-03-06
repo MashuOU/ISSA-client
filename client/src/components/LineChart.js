@@ -1,21 +1,14 @@
 import ReactApexChart from "react-apexcharts";
 
-export default function LineChart() {
+export default function LineChart(props) {
+  const { data } = props
+  const Scoresname = data.map(each => each.category)
+  const scores = data.map(each => each.value)
+  
   const series = {
     monthDataSeries1: {
-      name: [
-        "Ujian 1",
-        "Ujian 2",
-        "Ujian 3",
-        "Ujian 4",
-        "Ujian 5",
-        "Ujian 6",
-        "Ujian 7",
-        "Ujian 8",
-        "Ujian 9",
-        "Ujian 10",
-      ],
-      value: [10, 20, 45, 30, 20, 40, 25, 70, 80, 90],
+      name: Scoresname,
+      value:scores,
     },
   };
 

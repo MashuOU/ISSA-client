@@ -148,9 +148,9 @@ function sendMessage (event) {
       
 
       
-      {dummyList.map(each => {
+      {dummyList.map((each, index) => {
         return(
-          <div className="msg online">
+          <div key={index} className="msg online">
             <img
               className="msg-profile"
               src={each.imgUrl}
@@ -278,9 +278,9 @@ function sendMessage (event) {
         </div>
         
         
-       {messageList.map(each => {
+       {messageList.map((each, index) => {
         return(
-          <div className="chat-msg owner">
+          <div key={index} className="chat-msg owner">
           <div className="chat-msg-profile">
             <img
               className="chat-msg-img"

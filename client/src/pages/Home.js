@@ -3,26 +3,25 @@ import { useEffect, useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux"
-import { getProducts } from '../store/actions/actionCreator';
+
+import { getProductById } from '../store/actions/actionCreator';
 
 import ScrollReveal from 'scrollreveal';
 import { Button } from "flowbite-react"
 
 import Card from '../components/Card';
-import Carousel from '../components/Carousel';
+// import Carousel from '../components/Carousel';
 import CtaButton from '../components/buttons/cta-button'
 import Footer from '../components/Footer';
 import Top from '../components/Top';
 import HeatMap from '../components/HeatmapChart';
 import HeatmapDua from '../components/HeatmapChartDua';
-import LineChart from '../components/LineChart';
 import BubbleChart from '../components/BubbleChart';
-import TableDetail from '../components/TableDetailNilai';
-import LessonsList from './LessonsList';
+import TableDetail from '../components/TableDetailNilai'; 
 import BubbleChartDua from '../components/BubbleChartDua';
-import ChatPage from './Chat'; 
+import ChatPage from './Chat';
 import Chat from './Chat-client';
- 
+
 
 
 // import "../../style/custom.css"
@@ -45,12 +44,22 @@ import Chat from './Chat-client';
 
 export default function Home() {
 
-  const { product: { allProduct, productById }, category } = useSelector((state) => state)
+  const { product:
+    {
+      allProduct,
+      productById,
+      error,
+      loading
+    },
+    category
+  } = useSelector((state) => state)
+
+  const { Attendances } = productById
 
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  console.log(allProduct);
+  // console.log(productById, "lashem");
 
   //   const [products, setProducts] = useState([]);
   //   const [categories, setCategories] = useState([]);
@@ -74,16 +83,18 @@ export default function Home() {
 
 
   useEffect(() => {
-    dispatch(getProducts())
-    ScrollReveal().reveal('.reveal',
-      {
-        distance: '20px',
-        origin: 'bottom',
-        opacity: 0,
-        delay: 1000,
-        duration: 2000
-      }
-    );
+    dispatch(getProductById())
+
+    // ScrollReveal().reveal('.reveal',
+    //   {
+    //     distance: '20px',
+    //     origin: 'bottom',
+    //     opacity: 0,
+    //     delay: 1000,
+    //     duration: 2000
+    //   }
+    // );
+
   }, []);
 
 
@@ -229,35 +240,34 @@ export default function Home() {
 
 
   return (
-    <> 
+    <>
 
-     {/* <ChatPage/> */}
+      {/* <ChatPage/> */}
 
-      <Top />
+      <Top data={productById} />
 
-      <Chat/>
+      <Chat />
 
       {/* <HeatMap /> */}
 
-      <HeatmapDua />
+      <HeatmapDua data={Attendances} />
 
-      <LineChart />
+      
 
       {/* <BubbleChart /> */}
 
       <BubbleChartDua />
 
-      <TableDetail />
+      
+ 
 
-      <LessonsList />
 
-     
-      
-      <Carousel/>
 
-      
-      
-      
+      {/* <Carousel/> */}
+
+
+
+
     </>
 
   );

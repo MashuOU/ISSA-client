@@ -1,24 +1,29 @@
 import React from 'react'
 import { useTable, useSortBy, useGlobalFilter } from 'react-table'
 
-export default function App() {
+export default function App(props) {
+
+  const result = [];
+  props.data.forEach((obj) => {
+    const newObj = {
+      col1: obj.category,
+      col2: obj.value.toString(),
+      col3: obj.desc,
+    };
+    result.push(newObj);
+  });
+
   const data = React.useMemo(
-    () => [
-      { col1: 'Hello', col2: 'World', col3: 'Foo' },
-      { col1: 'react-table', col2: 'rocks', col3: 'Bar' },
-      { col1: 'whatever', col2: 'you want', col3: 'Baz' },
-      { col1: 'dog', col2: 'cat', col3: 'Meow' },
-      { col1: 'apple', col2: 'banana', col3: 'Yum' },
-      { col1: 'taco', col2: 'burrito', col3: 'Delish' },
-    ],
+    () => result,
     []
   )
 
+
   const columns = React.useMemo(
     () => [
-      { Header: 'Column 1', accessor: 'col1' },
-      { Header: 'Column 2', accessor: 'col2' },
-      { Header: 'Column 3', accessor: 'col3' },
+      { Header: 'Name', accessor: 'col1' },
+      { Header: 'Score', accessor: 'col2' },
+      { Header: 'Description', accessor: 'col3' },
     ],
     []
   )
@@ -67,10 +72,10 @@ export default function App() {
           </thead>
           <tbody {...getTableBodyProps()}>
             {rows.length === 0 ? (
-              <tr>
+              <tr className="border-b dark:border-gray-700">
                 <td
-                  colSpan={columns.length}
-                  style={{ textAlign: 'center', fontWeight: 'bold', padding: '10px' }}
+                  scope="row"
+                  className="px-4 py-3 font-medium text-gray-900 whitespace-nowrap"
                 >
                   Data not found
                 </td>
@@ -962,6 +967,7 @@ export default function App() {
                   </tr>
                 </thead>
                 <tbody>
+
                   <tr className="border-b dark:border-gray-700">
                     <th
                       scope="row"
@@ -969,63 +975,8 @@ export default function App() {
                     >
                       Apple iMac 27"
                     </th>
-                    <td className="px-4 py-3">PC</td>
-                    <td className="px-4 py-3">Apple</td>
-                    <td className="px-4 py-3">300</td>
-                    <td className="px-4 py-3">$2999</td>
-                    <td className="px-4 py-3 flex items-center justify-end">
-                      <button
-                        id="apple-imac-27-dropdown-button"
-                        data-dropdown-toggle="apple-imac-27-dropdown"
-                        className="inline-flex items-center p-0.5 text-sm font-medium text-center text-gray-500 hover:text-gray-800 rounded-lg focus:outline-none dark:text-gray-400 dark:hover:text-gray-100"
-                        type="button"
-                      >
-                        <svg
-                          className="w-5 h-5"
-                          aria-hidden="true"
-                          fill="currentColor"
-                          viewBox="0 0 20 20"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path d="M6 10a2 2 0 11-4 0 2 2 0 014 0zM12 10a2 2 0 11-4 0 2 2 0 014 0zM16 12a2 2 0 100-4 2 2 0 000 4z" />
-                        </svg>
-                      </button>
-                      <div
-                        id="apple-imac-27-dropdown"
-                        className="hidden z-10 w-44 bg-white rounded divide-y divide-gray-100 shadow dark:bg-gray-700 dark:divide-gray-600"
-                      >
-                        <ul
-                          className="py-1 text-sm text-gray-700 dark:text-gray-200"
-                          aria-labelledby="apple-imac-27-dropdown-button"
-                        >
-                          <li>
-                            <a
-                              href="#"
-                              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Show
-                            </a>
-                          </li>
-                          <li>
-                            <a
-                              href="#"
-                              className="block py-2 px-4 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
-                            >
-                              Edit
-                            </a>
-                          </li>
-                        </ul>
-                        <div className="py-1">
-                          <a
-                            href="#"
-                            className="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
-                          >
-                            Delete
-                          </a>
-                        </div>
-                      </div>
-                    </td>
                   </tr>
+
                   <tr className="border-b dark:border-gray-700">
                     <th
                       scope="row"

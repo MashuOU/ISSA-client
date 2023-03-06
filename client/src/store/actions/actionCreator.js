@@ -1,25 +1,31 @@
+import { useNavigate } from "react-router-dom"
+// const navigate = useNavigate()
+
+
 import {
   LOADING,
   COUNTER_INCREMENTER,
   WRITE_PRODUCTS,
   WRITE_PRODUCT,
   WRITE_PRODUCT_FAILED,
-  
+
   WRITE_PRODUCTS_BY_TYPE,
   WRITE_PRODUCTS_BY_TYPE_FAILED,
-  
+
   WRITE_CATEGORIES,
   WRITE_CATEGORIES_FAILED
-  
+
 } from "./actionTypes"
 
 // export const conterIncremented = (payload) => {
 //   return { type: COUNTER_INCREMENTER, payload }
 // }
 
+
 export function loading() {
   return { type: LOADING }
 }
+ 
 
 export function writeProduct(payload) {
   return { type: WRITE_PRODUCTS, payload }
@@ -30,7 +36,7 @@ export function writeProductById(payload) {
 }
 export function writeProductsByType(payload) {
   return { type: WRITE_PRODUCTS_BY_TYPE, payload }
-} 
+}
 
 
 
@@ -43,10 +49,47 @@ const baseUrl = "http://localhost:3000"
 // const baseUrl = "https://react-server.macnesa.com"
 
 
-// /////////////////////////////////////////////////////////
+
+
+
+
+
+
+// FUNCTIONS /////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////
 
 
+export function act_login(data) {
+  return async (dispatch) => {
+    try {
+      const request = await
+        fetch(baseUrl + `/users/login`,
+          {
+            method: "POST",
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+          }
+        )
+      let respon = await request.json()
+
+      if (!request.ok) throw respon
+
+      // localStorage.setItem("myToken", respon.access_token)
+
+      console.log(respon.access_token);
+
+      return true
+    } catch (error) {
+      throw error
+      // console.log(error);
+    }
+  }
+}
+
+
+ 
 export function getProducts() {
   return async (dispatch) => {
     try {
@@ -77,19 +120,23 @@ export function getProducts() {
 
 
 
-export function getProductById(id) {
+export function getProductById() {
   return async (dispatch) => {
     try {
       dispatch(loading())
       const request = await
-        fetch(baseUrl + `/customer/products/` + id,
+        fetch(baseUrl + `/users/userChild`,
           {
             method: "GET",
+            headers: {
+              // access_token: localStorage.getItem("myToken")
+              access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
+            },
           }
         )
       let respon = await request.json()
       if (!request.ok) throw respon.error
-      // console.log(respon, "yesh");
+      console.log(respon, "yesh");
       dispatch(writeProductById(respon))
     } catch (error) {
       dispatch(writeProductFailed(error))
@@ -104,21 +151,28 @@ export function getCategories() {
     try {
       // dispatch(loading())
       const request = await
-        fetch(baseUrl + `/customer/categories/`,
+        fetch(baseUrl + `/public/lesson`,
           {
             method: "GET",
+            headers: {
+              // access_token: localStorage.getItem("myToken")
+              access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
+            },
           }
         )
       let respon = await request.json()
-        
+
       if (!request.ok) throw respon.error
       dispatch({ type: WRITE_CATEGORIES, payload: respon })
-      
-    } catch (error) { 
+
+    } catch (error) {
       dispatch({ type: WRITE_CATEGORIES_FAILED, payload: error })
     }
   }
 }
+
+
+
 
 
 export function getByType(type) {

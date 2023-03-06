@@ -3,8 +3,10 @@ import Chat from "../pages/Chat"
 
 import Container from "../pages/Container" 
 import Home from "../pages/Home"  
+import LessonDetail from "../pages/LessonDetail"
+import LessonsList from "../pages/LessonsList"
 import LoginPage from "../pages/Login"
-import ReactChat from "../pages/React-chat"
+import ReactChat from "../pages/React-chat"  
 
 const router = createBrowserRouter(
   [
@@ -24,14 +26,14 @@ const router = createBrowserRouter(
           path: "react-chat",
           element: <ReactChat />,
         },
-        // {
-        //   path: "kid",
-        //   element: <KidPage />,
-        // },
-        // {
-        //   path: "detail/:slug",
-        //   element: <Detail />
-        // }
+        {
+          path: "lesson",
+          element: <LessonsList />,
+        },
+        {
+          path: "lesson/:id",
+          element: <LessonDetail />
+        }
       ]
     },
     {
