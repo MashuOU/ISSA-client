@@ -30,13 +30,15 @@ export default function AttendancePage(props) {
 
   return (
     <>
-      <div className='w-full h-[50vh] pt-20 bg-primary2-100  '>
+      <div className='bg-gray-50 max-w-screen-lg mx-auto pt-20 dark:bg-gray-900 p-3 sm:p-5 '>
 
-        <div className='border  mt-10 h-[50vh] grid items-center overflow-scroll border-red-800'>
+        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> Kehadiran </h5>
+
+        <div className='border bg-[#fce4bb] rounded-2xl mt-10 grid items-center overflow-scroll border-red-800'>
 
           {/* <div className='transform scale-[2] ' > */}
 
-            <HeatmapDua data={Attendances} />
+          <HeatmapDua data={Attendances} />
 
           {/* </div> */}
 

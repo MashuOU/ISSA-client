@@ -7,7 +7,7 @@ import Home from "../pages/Home"
 import LessonDetail from "../pages/LessonDetail"
 import LessonsList from "../pages/LessonsList"
 import LoginPage from "../pages/Login"
-import ReactChat from "../pages/React-chat"  
+import ClientChat from "../pages/Chat-client"  
 import TotalNilai from "../pages/TotalNilai"
  
 
@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         },
         {
           path: "chat",
-          element: <Chat />,
+          element: <ClientChat />,
         },
         {
           path: "attendance",
@@ -34,11 +34,7 @@ const router = createBrowserRouter(
         {
           path: "total",
           element: <TotalNilai />,
-        },
-        {
-          path: "react-chat",
-          element: <ReactChat />,
-        },
+        }, 
         {
           path: "lesson",
           element: <LessonsList />,

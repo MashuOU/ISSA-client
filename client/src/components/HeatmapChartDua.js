@@ -45,7 +45,8 @@ export default function Heatmap(props) {
   useEffect(() => {
     const chartd = chartRef.current;
     const chart = new Chart(chartd, {
-      title: "Contoh Heatmap Chart",
+      subtitle: "Contoh Heatmap Chart",
+      color: "#c7323e",
       data: {
         dataPoints: result,
         start: new Date("2023-01-01T00:00:00.000Z"),
@@ -55,8 +56,9 @@ export default function Heatmap(props) {
       radius: 2,
       //         empty      alfa       sakit      izin       hadir
       colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#17459e'],
-      width:800,
-      height:600
+      // width:300,
+      // height:400,
+      // responsive:true
       // x_axis_mode: "time",
       // y_axis_mode: "tick",
     });
@@ -67,8 +69,8 @@ export default function Heatmap(props) {
   }, [props.data]);
 
   return (
-    
-    <div ref={chartRef} id="heatmap-chart" className="pointer-events-none border border-white  " ></div>
+    //pointer-events-none border border-white 
+    <div ref={chartRef} id="heatmap-chart" className=" " ></div>
      
     
     // <div className="grid mt-4 overflow-y-scroll justify-start sm:justify-center max-w-screen-xl mx-auto border border-red-400" >

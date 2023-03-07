@@ -56,7 +56,7 @@ export default function LoginPage() {
         <p className="  text-primary2-100 font-bold ">Profile</p>
 
         {/* mb-3  mt-3  */}
-        <p className=" font-bold text-4xl text-black dark:text-gray-400">Create Account</p>
+        <p className=" font-bold text-4xl text-black">Create Account</p>
 
 
         <p className=" text-sm " >Look, watch, And get insight of your children development <br/> on the time </p>

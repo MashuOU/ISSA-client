@@ -5,6 +5,9 @@ import { getCategories } from '../store/actions/actionCreator';
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useRef } from 'react';
 
+import ScheduleList from '../components/ScheduleList';
+
+
 
 export default function LessonsList() {
 
@@ -23,17 +26,35 @@ export default function LessonsList() {
 
   if (categories.length) {
     return (
+      <div className='pt-24 px-6 max-w-screen-xl mx-auto dark:bg-gray-900 border border-yellow-400 '>
+        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"> Mata Pelajaran </h5>
+
+        <div className="grid grid-flow-col gap-2 overflow-y-scroll justify-start max-w-screen-xl  dark:bg-gray-900 border-red-400" >
+          <ScheduleList />
+          <ScheduleList />
+          <ScheduleList />
+          <ScheduleList />
+          <ScheduleList />
+        </div>
+
+        <section style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" h-auto min-h-screen pt-10 mx-auto max-w-screen-xl  p-2   border-white grid  box-border dark:bg-gray-900">
+          <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> Lihat Nilai </h5>
+
+          {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"> */}
+          {categories.map(each => {
+            return (
+              <LessonCard innerHTML={each.name} src={each.imgUrl} />
+            )
+          })}
+
+        </section>
+
+      </div>
       // <div style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" max-w-screen-xl  p-2  border border-white grid gap-4 box-border ">
 
-      <section style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" h-auto min-h-screen lg:px-16 py-8 lg:py-16  pt-32  mx-auto max-w-screen-xl  p-2  border border-white grid gap-10 box-border dark:bg-gray-900">
-        {/* <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12"> */}
-        {categories.map(each => {
-          return(
-            <LessonCard innerHTML={each.name} src={each.imgUrl} />
-          )
-        })}
-          
-      </section>
+
+
+
     )
   }
 }

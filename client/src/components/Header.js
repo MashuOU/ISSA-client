@@ -1,7 +1,7 @@
 import { useState, Fragment, useEffect } from "react"
 import { Link, useLocation, useRouteMatch } from "react-router-dom"
 import A from "./typography/Anchor"
- 
+
 
 export default function Header(props) {
 
@@ -11,18 +11,21 @@ export default function Header(props) {
     <>
 
 
-      <nav class="bg-white w-[90%] left-[5%] mt-4 border border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
-        <div class="container flex flex-wrap items-center justify-between mx-auto">
+      <nav class="bg-white w-[90%] left-[5%] mt-4 z-[10000]  border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
+        
+        <div class="container flex flex-wrap items-center  border-white justify-between mx-auto">
           <a href="https://flowbite.com/" class="flex items-center">
             {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" /> */}
             {/* <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
+            {/* <span class="flex w-3 h-3 bg-green-400 rounded-full"></span> */}
           </a>
           <div class="flex items-center md:order-2">
-            <button type="button" class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom">
-              <span class="sr-only">Open user menu</span>
-              <img class="w-8 h-8 rounded-full" src="https://i.servimg.com/u/f74/16/53/17/83/head19.jpg" alt="user photo"/>
-            </button>
-            
+
+
+            <img id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmKLXSarFSMsiSY7umUqr9wKJ_Tpx_h_zOTv_yn1JxwogDfI6JL9Rw_B5yGUjuiVY6G_Q&usqp=CAU" alt="Bordered avatar" />
+
+ 
+
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
               <div class="px-4 py-3">
                 <span class="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
@@ -69,8 +72,8 @@ export default function Header(props) {
           </div>
         </div>
       </nav>
-      
-      
+
+
 
 
 

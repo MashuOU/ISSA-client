@@ -4,11 +4,11 @@ export default function LineChart(props) {
   const { data } = props
   const Scoresname = data.map(each => each.category)
   const scores = data.map(each => each.value)
-  
+
   const series = {
     monthDataSeries1: {
       name: Scoresname,
-      value:scores,
+      value: scores,
     },
   };
 
@@ -28,22 +28,42 @@ export default function LineChart(props) {
         zoom: {
           enabled: false,
         },
+        foreColor: "#fff",
+        fontFamily: "montserrat"
       },
       dataLabels: {
         enabled: false,
       },
       stroke: {
         curve: "smooth",
-        // colors: ['#a033c4'],
+        colors: ['#a033c4'],
       },
       title: {
-        text: "Fundamental Analysis of Stocks",
+        // text: "Fundamental Analysis of Stocks",
         align: "left",
       },
       subtitle: {
-        text: "Price Movements",
+        text: "Overview",
         align: "left",
       },
+
+      grid: {
+        show: false,
+        borderColor: '#ccc',
+        strokeDashArray: 5,
+        position: 'back',
+        xaxis: {
+          lines: {
+            show: true
+          }
+        },
+        yaxis: {
+          lines: {
+            show: true
+          }
+        },
+      },
+
       labels: series.monthDataSeries1.name,
       xaxis: {
         type: "category",
@@ -78,13 +98,13 @@ export default function LineChart(props) {
   return (
     <>
       {/* <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 "> */}
-        <ReactApexChart className="border border-black"
-          options={state.options}
-          series={state.series}
-          type="area"
-          height={350}
-          width={900}
-        />
+      <ReactApexChart className="border text-white border-black"
+        options={state.options}
+        series={state.series}
+        type="area"
+        height={250}
+        width={340}
+      />
       {/* </div> */}
     </>
   );

@@ -34,7 +34,7 @@ export default function Name(props) {
   useEffect(() => {
 
     coba.forEach(each => {
-      
+
       ScrollReveal().reveal(each.current,
         {
           distance: '20px',
@@ -44,13 +44,13 @@ export default function Name(props) {
           duration: 2000
         }
       );
-      
+
     })
 
   }, [])
 
-  
-  
+
+
   return (
     <>
       {/* <div className="max-w-screen-xl font-satu mx-auto box-border border-4 border-black grid grid-flow-col ">
@@ -66,10 +66,10 @@ export default function Name(props) {
         </div>
 
       </div> */}
-      <div className="grid max-w-screen-xl mx-auto border border-red-400 " >
+      <div className="grid child:font-satu  max-w-screen-xl mx-auto border border-white " >
 
 
-        <section class="bg-white dark:bg-gray-900">
+        <section class="bg-white px-4 pt-10 dark:bg-gray-900">
 
 
           <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
@@ -79,18 +79,23 @@ export default function Name(props) {
             </div>
 
             <div class="mr-auto place-self-center lg:col-span-7">
-              <h1 ref={coba[0]} class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"> {name} </h1>
+              <h1 ref={coba[0]} class="max-w-2xl mb-1 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white"> {name} </h1>
               <p ref={coba[1]} class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400"> {NIM} </p>
               {/* <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"> Active </p> */}
-              <a  href="#" class="inline-flex mr-3  items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+              {/* <a  href="#" class="inline-flex mr-3  items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                 Present
-              </a>
-              <Link to="/lesson">
-                <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+              </a> */}
+
+              <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span>School</span>
+
+
+              {/* <Link to="/lesson">
+                <a href="#" class="inline-flex items-center justify-center px-3 py-2 font-medium text-sedang text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
                   Usty's Scores
                   <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
                 </a>
-              </Link>
+              </Link> */}
+
             </div>
           </div>
         </section>
@@ -122,7 +127,7 @@ export default function Name(props) {
       </div> */}
 
 
-       
+
 
 
         {/* carosel */}

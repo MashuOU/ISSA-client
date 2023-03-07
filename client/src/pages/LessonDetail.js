@@ -45,12 +45,14 @@ export default function LessonDetail() {
       <>
         <section className="bg-gray-50 max-w-screen-lg mx-auto pt-20 dark:bg-gray-900 p-3 sm:p-5">
 
-          <div id="chart" className="grid mt-4 overflow-x-scroll   max-w-screen-xl mx-auto border border-red-400 ">
+          <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> Matematika </h5>
+          <div id="chart" className="grid mt-4 overflow-x-scroll   max-w-screen-xl mx-auto  border-red-400 ">
             <LineChart data={MyLessonScores} />
           </div>
 
-
-          <TableDetail data={MyLessonScores} />
+          <div className='pt-20'>
+            <TableDetail data={MyLessonScores} />
+          </div>
 
         </section>
 

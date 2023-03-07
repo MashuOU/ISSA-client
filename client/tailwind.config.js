@@ -12,6 +12,7 @@ module.exports = {
         primary2: { "10": "#d9faef", "100": "#469e81", "200": "#bfdbfe", "300": "#93c5fd", "400": "#60a5fa", "500": "#3b82f6", "600": "#2563eb", "700": "#1d4ed8", "800": "#1e40af", "900": "#1e3a8a" }
       },
       fontSize: {
+        'sedang': '1em',
         'kecil': '0.6em',
         'kecil2': '0.8em'
       }
