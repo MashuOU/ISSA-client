@@ -28,7 +28,7 @@ export default function LineChart(props) {
         zoom: {
           enabled: false,
         },
-        foreColor: "#fff",
+        // foreColor: "#fff",
         fontFamily: "montserrat"
       },
       dataLabels: {
@@ -47,22 +47,22 @@ export default function LineChart(props) {
         align: "left",
       },
 
-      grid: {
-        show: false,
-        borderColor: '#ccc',
-        strokeDashArray: 5,
-        position: 'back',
-        xaxis: {
-          lines: {
-            show: true
-          }
-        },
-        yaxis: {
-          lines: {
-            show: true
-          }
-        },
-      },
+      // grid: {
+      //   show: false,
+      //   borderColor: '#ccc',
+      //   strokeDashArray: 5,
+      //   position: 'back',
+      //   xaxis: {
+      //     lines: {
+      //       show: true
+      //     }
+      //   },
+      //   yaxis: {
+      //     lines: {
+      //       show: true
+      //     }
+      //   },
+      // },
 
       labels: series.monthDataSeries1.name,
       xaxis: {

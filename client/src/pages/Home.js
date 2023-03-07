@@ -47,8 +47,7 @@ import TimelineChart from '../components/TimelineChart';
 export default function Home() {
 
   const { product:
-    {
-      allProduct,
+    { 
       productById,
       error,
       loading
@@ -344,10 +343,10 @@ export default function Home() {
 
 
 
-      {/* 
+      
       <div ref={bottom[0]}>
         <TimelineChart  />
-      </div> */}
+      </div>
 
 
 

@@ -1,18 +1,89 @@
-import { useState, Fragment, useEffect } from "react"
-import { Link, useLocation, useRouteMatch } from "react-router-dom"
-import A from "./typography/Anchor"
+import { useState, Fragment, useEffect, useRef } from "react"
+
+import { Link, useNavigate, useLocation, useRouteMatch } from 'react-router-dom';
+
+import { useSelector, useDispatch } from "react-redux"
+
+import { getProductById } from '../store/actions/actionCreator';
+
+import ScrollReveal from 'scrollreveal';
+
+
+
+
 
 
 export default function Header(props) {
 
+  const [arrColor, setArrColor] = useState({})
+
+
+  const { product:
+    {
+      productById,
+      error,
+      loading
+    },
+    category
+  } = useSelector((state) => state)
+
+  const { imgUrl } = productById
+
+  // console.log(productById, "mardua holong");
+
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+
+  const bottom = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null)
+  ]
+
+  function reveal(ref, origin = "bottom") {
+    return ScrollReveal().reveal(ref.current,
+      {
+        distance: '20px',
+        origin: origin,
+        opacity: 0,
+        duration: 2000
+      }
+    );
+  }
+
+  useEffect(() => {
+    // dispatch(getProductById())
+    //   .then(() => {
+    //     bottom.forEach(each => {
+    //       reveal(each)
+    //     })
+    //   })
+
+  }, []);
+
+
+  if (loading) {
+    return (
+      <p></p>
+    )
+  }
+
+  if (error) {
+    return (
+      <p>Error</p>
+    )
+  }
 
   return (
-    //  border border-black transition duration-100 ease-out
+
     <>
 
+      <nav style={{ boxShadow: "0px 3px 9px 0px rgba(13,12,12,0.22)" }} class="bg-white w-[90%]  left-[5%] mt-4 z-[10000]  border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
 
-      <nav style={{boxShadow: "0px 3px 9px 0px rgba(13,12,12,0.22)"}} class="bg-white w-[90%]  left-[5%] mt-4 z-[10000]  border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
-        
         <div class="container flex flex-wrap items-center  border-white justify-between mx-auto">
           <a href="https://flowbite.com/" class="flex items-center">
             {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" /> */}
@@ -22,9 +93,9 @@ export default function Header(props) {
           <div class="flex items-center md:order-2">
 
 
-            <img id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmKLXSarFSMsiSY7umUqr9wKJ_Tpx_h_zOTv_yn1JxwogDfI6JL9Rw_B5yGUjuiVY6G_Q&usqp=CAU" alt="Bordered avatar" />
+            <img id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={imgUrl} alt="Bordered avatar" />
 
- 
+
 
             <div class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600" id="user-dropdown">
               <div class="px-4 py-3">

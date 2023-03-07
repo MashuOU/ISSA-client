@@ -1,7 +1,7 @@
 
 
 
-import { getCategories } from '../store/actions/actionCreator';
+import { getCategories, getProductById } from '../store/actions/actionCreator';
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useRef } from 'react';
 
@@ -21,6 +21,7 @@ export default function LessonsList() {
   console.log(categories);
 
   useEffect(() => {
+    dispatch(getProductById())
     dispatch(getCategories())
   }, [])
 

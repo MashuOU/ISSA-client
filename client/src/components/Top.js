@@ -2,7 +2,7 @@
 import { Collapse } from "flowbite"
 import { Carousel } from "flowbite"
 import { Navbar, Dropdown } from "flowbite-react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 
 import ScrollReveal from 'scrollreveal';
@@ -11,7 +11,28 @@ import ScrollReveal from 'scrollreveal';
 
 export default function Name(props) {
   const navigate = useNavigate()
-  const { name, NIM, imgUrl } = props.data
+  const { name, NIM, imgUrl, Attendances } = props.data
+
+
+  const [todayStatus, setTodayStatus] = useState()
+
+  useEffect(() => {
+    if (Attendances?.length) {
+      const today = new Date().toISOString().slice(0, 10);
+      const findToday = Attendances.filter((each) => {
+        const createdAtDate = each.createdAt.slice(0, 10);
+        return createdAtDate === today;
+      });
+      if (findToday.length) {
+        console.log(findToday, 'melech');
+        setTodayStatus(findToday[0].status)
+      }
+    }
+  }, [Attendances]);
+
+
+  console.log(todayStatus, "testinr");
+
 
   // tailwind
   // set the target element that will be collapsed or expanded (eg. navbar menu)
@@ -69,10 +90,10 @@ export default function Name(props) {
       <div className="grid child:font-satu  max-w-screen-xl mx-auto  border-white " >
 
 
-        <section  class=" px-4  border-red-800 ">
+        <section class=" px-4  border-red-800 ">
 
 
-          <div  class="grid border border-black rounded-xl bg-gray-900 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div class="grid border border-black rounded-xl bg-gray-900 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
 
             <div ref={coba[2]} class="hidden lg:mt-0 lg:col-span-5 lg:flex  justify-center items-center">
               <Avatar imgUrl={imgUrl} />
@@ -86,7 +107,32 @@ export default function Name(props) {
                 Present
               </a> */}
 
-              <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span>At School</span>
+              <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span> {todayStatus} </span>
+
+
+              {/* {todayStatus == "Hadir" &&
+                (
+                  <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span> {todayStatus} </span>
+                )
+              }
+
+              {todayStatus == "Alfa" &&
+                (
+                  <span ref={coba[2]} class="flex text-red-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-red-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              }
+
+              {todayStatus == "Izin" &&
+                (
+                  <span ref={coba[2]} class="flex text-yellow-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-yellow-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              }
+
+              {todayStatus == "Sakit" &&
+                (
+                  <span ref={coba[2]} class="flex text-blue-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-blue-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              } */}
 
 
               {/* <Link to="/lesson">
