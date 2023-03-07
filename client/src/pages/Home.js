@@ -265,11 +265,11 @@ export default function Home() {
 
 
   return (
-    <div className='bg-gray-900 '>
+    <div className=' '>
 
       {/* <ChatPage/> */}
 
-      <Top data={productById} />
+
 
 
       {/* <div className='w-full h-[40vh] bg-primary2-100  '> 
@@ -278,8 +278,9 @@ export default function Home() {
 
 
 
-      <div className='w-full bg-white rounded-l-[2em] grid justify-center pb-10 pt-10 gap-6 '>
+      <div className='w-full p-2 pt-20 bg-white   grid justify-center pb-10  gap-6 '>
 
+        <h5 class="text-xl mt-10 font-bold tracking-tight text-gray-900 dark:text-white"> Selamat Datang </h5>
 
         {/* <div id="toast-notification" class="w-full justify-self-start   mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
 
@@ -301,23 +302,23 @@ export default function Home() {
 
         </div> */}
 
-        <div className='grid p-2 grid-cols-[1fr_1fr] gap-4 '>
+        <div className='grid  grid-cols-[1fr_1fr] gap-4 '>
 
           <Link to="attendance" >
-            <HomeCard title="Jejak Kehadiran" ionIcon="archive" color="#c6dce2" />
+            <HomeCard title="Jejak Kehadiran" ionIcon="archive" backgroundColor="#c7e1eb" />
           </Link>
 
           <Link to="total" >
-            <HomeCard title="Trafik Nilai" ionIcon="bar-chart" />
+            <HomeCard title="Trafik Nilai" ionIcon="bar-chart" color="#6bbfbc" />
           </Link>
 
 
           <Link to="lesson">
-            <HomeCard title="Mata Pelajaran" ionIcon="reader" />
+            <HomeCard title="Mata Pelajaran" ionIcon="reader" color="#c2ac55" />
           </Link>
 
 
-          <HomeCard title="Tentang Michael" ionIcon="person"  />
+          <HomeCard title="Tentang Michael" ionIcon="person" color="#9555c2" boxShadow="-10px 9px 28px -4px rgba(149,85,194,0.33)" />
 
 
         </div>
@@ -329,6 +330,7 @@ export default function Home() {
 
       </div>
 
+      <Top data={productById} />
 
       <CarouselCard />
 
@@ -374,21 +376,25 @@ export default function Home() {
 
 
 function HomeCard(props) {
-  const {color} = props
-  
-  const [ionStyle, setIonStyle] = useState(
-    ` text-[#c6dce2] text-2xl  `
-  )
-  
-  return (
-    <div class="max-w-sm px-6 py-6 bg-white border border-gray-200 rounded-2xl shadow dark:bg-gray-800 dark:border-gray-700">
+  const { color, backgroundColor, boxShadow } = props
 
-      <ion-icon name={props.ionIcon}  class={ionStyle} ></ion-icon>
+  const [ionStyle, setIonStyle] = useState(
+    ` text-[${color}] text-2xl  `
+  )
+
+  useEffect(() => {
+
+  }, [])
+
+  return (
+    <div style={{ boxShadow: boxShadow,  backgroundColor: backgroundColor, border: `1px solid ${color}` }} class="max-w-sm px-4 py-6  bg-white  rounded-2xl  ">
+
+      <ion-icon name={props.ionIcon} style={{ color: color }} className=" text-[20em] " ></ion-icon>
 
       <a href="#">
-        <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white"> {props.title} </h5>
+        <h5 class="mt-4 font-semibold tracking-tight text-gray-900 dark:text-white"> {props.title} </h5>
       </a>
-      <p class="mb-3 font-normal text-gray-500 dark:text-gray-400">Go to this step</p>
+      <p class=" text-sm font-normal text-gray-500 dark:text-gray-400">Go to this step</p>
       {/* <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
 
         <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z"></path><path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z"></path></svg>

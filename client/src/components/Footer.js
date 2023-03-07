@@ -7,7 +7,7 @@ import { Button } from "flowbite-react"
 export default function Footer() {
   return (
 
-    <footer className="p-4 mt-[100vh] bg-white md:p-8 lg:p-10 dark:bg-gray-800">
+    <footer className="p-4 mt-[100vh] hidden sm:block bg-white md:p-8 lg:p-10 dark:bg-gray-800">
       <div className="mx-auto max-w-screen-xl text-center">
         <a
           href="#"

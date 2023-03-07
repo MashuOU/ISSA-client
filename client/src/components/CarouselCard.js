@@ -42,6 +42,10 @@ export default function Carousel() {
 
 
     <div className=' mt-10 p-3 justify-center overflow-scroll max-w-screen-xl mx-auto  border-red-400' >
+      
+      <h5 class="text-xl font-semibold tracking-tight text-gray-900"> Berita </h5>
+
+      
       <Swiper
         spaceBetween={50}
         slidesPerView={1}

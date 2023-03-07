@@ -32,9 +32,9 @@ export default function AttendancePage(props) {
     <>
       <div className='bg-gray-50 max-w-screen-lg mx-auto pt-20 dark:bg-gray-900 p-3 sm:p-5 '>
 
-        <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> Kehadiran </h5>
+        <h5 class="text-xl font-semibold mt-10 tracking-tight text-gray-900 dark:text-white"> Kehadiran </h5>
 
-        <div className='border bg-[#fce4bb] rounded-2xl mt-10 grid items-center overflow-scroll border-red-800'>
+        <div className=' bg-[#fce4bb] rounded-2xl mt-4 grid items-center overflow-scroll border-red-800'>
 
           {/* <div className='transform scale-[2] ' > */}
 

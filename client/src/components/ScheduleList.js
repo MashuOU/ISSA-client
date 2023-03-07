@@ -9,7 +9,9 @@ export default function ScheduleList(props) {
         Senin 
       </a>
       <EachList innerHTML={"IPA"} />
+      <EachList innerHTML={"MTK"} />
       <EachList innerHTML={"IPA"} />
+      <EachList innerHTML={"IPS"} />
       <EachList innerHTML={"IPA"} />
     </ul>
   )

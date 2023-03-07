@@ -11,7 +11,7 @@ export default function Header(props) {
     <>
 
 
-      <nav class="bg-white w-[90%] left-[5%] mt-4 z-[10000]  border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
+      <nav style={{boxShadow: "0px 3px 9px 0px rgba(13,12,12,0.22)"}} class="bg-white w-[90%]  left-[5%] mt-4 z-[10000]  border-red-800 fixed sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
         
         <div class="container flex flex-wrap items-center  border-white justify-between mx-auto">
           <a href="https://flowbite.com/" class="flex items-center">

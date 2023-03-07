@@ -61,8 +61,8 @@ export default function BubbleChart() {
 
 
   return (
-    <div className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400" >
-      <svg ref={chartArea} width={width} height={height}></svg>
-    </div>
+    // <div className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400" >
+      <svg className="border border-black" ref={chartArea} width={width} height={height}></svg>
+    // </div>
   );
 }
