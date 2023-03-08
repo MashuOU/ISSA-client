@@ -1,16 +1,43 @@
-export default function fellowFriend(props) {
+import ScrollReveal from "scrollreveal";
+
+import { useEffect, useState, useRef, Suspense } from "react";
+
+
+
+export default function FellowFriend(props) {
+    
+  // console.log(document.querySelector('.reveal'), "lepzi");
+  useEffect(() => {
+    
+    if (props?.data?.length) {
+      
+      ScrollReveal().reveal(document.querySelectorAll('.reveal'), { 
+        distance: "20px",
+        origin: "left",
+        opacity: 0,
+        duration: 2000,
+      });
+      
+    }
+    
+  }, [])
+
+  
   if (props?.data?.length) {
+    
+    
+    
     return (
-      <>
-        <ul className="max-w-md mt-10 px-4 divide-y divide-gray-200 dark:divide-gray-700">
+
+        <ul  className="  max-w-md mt-10 px-4 divide-y divide-gray-200 dark:divide-gray-700">
           <h5 class="text-xl mb-6 font-semibold tracking-tight text-gray-900">
             {" "}
             Teman Sekelas{" "}
           </h5>
 
-          {props.data.map((each, index) => {
+          {props.data.map((each, index) => { 
             return (
-              <li className="pb-3 sm:pb-4">
+              <li  key={index} className="reveal pb-3 sm:pb-4">
                 <div className="flex items-center space-x-4">
                   <div className="flex-shrink-0">
                     <img
@@ -37,7 +64,7 @@ export default function fellowFriend(props) {
             );
           })}
         </ul>
-      </>
+  
     );
   }
 }

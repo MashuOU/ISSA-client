@@ -105,59 +105,59 @@ export function act_login(data) {
 
 
 
-export function getProducts() {
-  return async (dispatch) => {
-    try {
-      const request = await
-        fetch(baseUrl + `/customer/products`,
-          {
-            method: "GET",
-            // headers: {
-            //   access_token: localStorage.getItem("myToken")
-            //   // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc2NzAwOTY4fQ.2QIA-QzLozcnavVkPd933C1Mu1ayKtNKfMp9nGFE7ZA"
-            // },
-          }
-        )
-      let respon = await request.json()
+// export function getProducts() {
+//   return async (dispatch) => {
+//     try {
+//       const request = await
+//         fetch(baseUrl + `/customer/products`,
+//           {
+//             method: "GET",
+//             // headers: {
+//             //   access_token: localStorage.getItem("myToken")
+//             //   // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc2NzAwOTY4fQ.2QIA-QzLozcnavVkPd933C1Mu1ayKtNKfMp9nGFE7ZA"
+//             // },
+//           }
+//         )
+//       let respon = await request.json()
 
-      if (!request.ok) throw respon
+//       if (!request.ok) throw respon
 
-      dispatch(writeProduct(respon))
+//       dispatch(writeProduct(respon))
 
-      return true
-    } catch (error) {
-      throw error
-      // console.log(error);
-    }
-  }
-}
-
-
+//       return true
+//     } catch (error) {
+//       throw error
+//       // console.log(error);
+//     }
+//   }
+// }
 
 
-export function getProductById() {
-  return async (dispatch) => {
-    try {
-      dispatch(loading())
-      const request = await
-        fetch(baseUrl + `/users/userChild`,
-          {
-            method: "GET",
-            headers: {
-              // access_token: localStorage.getItem("myToken")
-              access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
-            },
-          }
-        )
-      let respon = await request.json()
-      if (!request.ok) throw respon.error
-      // console.log(respon, "yesh");
-      dispatch(writeProductById(respon))
-    } catch (error) {
-      dispatch(writeProductFailed(error))
-    }
-  }
-}
+
+
+// export function getProductById() {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(loading())
+//       const request = await
+//         fetch(baseUrl + `/users/userChild`,
+//           {
+//             method: "GET",
+//             headers: {
+//               // access_token: localStorage.getItem("myToken")
+//               access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
+//             },
+//           }
+//         )
+//       let respon = await request.json()
+//       if (!request.ok) throw respon.error
+//       // console.log(respon, "yesh");
+//       dispatch(writeProductById(respon))
+//     } catch (error) {
+//       dispatch(writeProductFailed(error))
+//     }
+//   }
+// }
 
 
 
@@ -191,46 +191,46 @@ export function getProductById() {
 
 
 
-export function getByType(type) {
-  return async (dispatch) => {
-    try {
-      dispatch(loading())
+// export function getByType(type) {
+//   return async (dispatch) => {
+//     try {
+//       dispatch(loading())
 
 
-      const request = await
-        fetch(baseUrl + `/customer/types`,
-          {
-            method: "GET",
-          }
-        )
+//       const request = await
+//         fetch(baseUrl + `/customer/types`,
+//           {
+//             method: "GET",
+//           }
+//         )
 
-      let respon = await request.json()
-      if (!request.ok) throw respon.error
-      const foundObj = respon.find(obj => obj.name === type);
+//       let respon = await request.json()
+//       if (!request.ok) throw respon.error
+//       const foundObj = respon.find(obj => obj.name === type);
 
-      if (foundObj) {
+//       if (foundObj) {
 
-        const request = await
-          fetch(baseUrl + `/customer/products/?type=` + foundObj.id,
-            {
-              method: "GET",
-            }
-          )
+//         const request = await
+//           fetch(baseUrl + `/customer/products/?type=` + foundObj.id,
+//             {
+//               method: "GET",
+//             }
+//           )
 
-        let respon = await request.json()
-        if (!request.ok) throw respon.error
-        dispatch(writeProductsByType(respon))
+//         let respon = await request.json()
+//         if (!request.ok) throw respon.error
+//         dispatch(writeProductsByType(respon))
 
-        // console.log(respon);
-        // console.log(foundObj);
-      }
+//         // console.log(respon);
+//         // console.log(foundObj);
+//       }
 
 
-    } catch (error) {
-      dispatch(writeProductFailed(error))
-    }
-  }
-}
+//     } catch (error) {
+//       dispatch(writeProductFailed(error))
+//     }
+//   }
+// }
 
 
 
@@ -361,6 +361,7 @@ export const fetchClassmate = (day) => {
 export const fetchStudentDetail = (day) => {
     return async (dispatch, getState) => {
         try {
+            dispatch(loading())
             let { data } = await axios({
                 url: baseUrl + `/public/detail`,
                 headers: { access_token: localStorage.access_token }

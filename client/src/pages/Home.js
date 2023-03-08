@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, Suspense } from "react";
 
 import { Link, useNavigate } from "react-router-dom";
 
@@ -33,23 +33,23 @@ import FellowFriend from "../components/FellowFriends";
 // import "../../style/custom.css"
 
 export default function Home() {
-  const {
-    product: { productById, error, loading },
-    category,
-  } = useSelector((state) => state);
+  // const {
+  //   product: { productById, error, loading },
+  //   category,
+  // } = useSelector((state) => state);
 
   const {
-    student: { studentDetail, classmate },
+    student: { studentDetail, classmate, loading, error },
   } = useSelector((state) => state);
 
-  const { Attendances } = productById;
+  // const { Attendances } = productById;
 
   // console.log(classmate, "lashem");
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  //   const [products, setProducts] = useState([]);
+    const [isLoad, setIsLoad] = useState(true);
   //   const [categories, setCategories] = useState([]);
 
   const bottom = [
@@ -71,7 +71,7 @@ export default function Home() {
   ];
 
   function reveal(ref, origin = "bottom") {
-    return ScrollReveal().reveal(ref.current, {
+    return ScrollReveal().reveal(ref.current, { 
       distance: "20px",
       origin: origin,
       opacity: 0,
@@ -85,16 +85,15 @@ export default function Home() {
       return dispatch(fetchClassmate())
     })
     .then(() => {
-      bottom.forEach((each) => {
-        reveal(each);
-      });
-
-      top.forEach((each) => {
-        reveal(each, "top");
-      });
+      bottom.forEach((each) => reveal(each) );
+      
+      top.forEach((each) => reveal(each, "top"));
+      setIsLoad(false)
+      
     })   
   }, []);
 
+  
   const [arrColor, setArrColor] = useState({});
 
   const [productData, setproductData] = useState([
@@ -244,7 +243,9 @@ export default function Home() {
     },
   ]);
 
-  if (loading) {
+  
+  
+  if (isLoad) {
     return <p>Loading</p>;
   }
 
@@ -252,6 +253,8 @@ export default function Home() {
     return <p>Error</p>;
   }
 
+  
+  
   return (
     <div style={{background: ""}} className=" mb-32 ">
       {/* <ChatPage/> */}
@@ -259,8 +262,9 @@ export default function Home() {
       {/* <div className='w-full h-[40vh] bg-primary2-100  '> 
       </div> */}
 
-      <div className="w-full p-2 pt-20    grid justify-center pb-10  gap-6 ">
-        <h5 class="text-xl mt-10 font-bold tracking-tight text-gray-900 dark:text-white">
+      <div className="w-full p-2 pt-10    grid justify-center pb-10  gap-6 ">
+        
+        <h5 ref={top[0]} class="text-xl mt-10 font-bold tracking-tight text-gray-900 dark:text-white">
           {" "}
           Selamat Datang{" "}
         </h5>
@@ -285,7 +289,8 @@ export default function Home() {
 
         </div> */}
 
-        <div className="grid  grid-cols-[1fr_1fr] gap-4 ">
+        <div  className="grid  grid-cols-[1fr_1fr] gap-4 ">
+          
           <Link to="attendance">
             <HomeCard
               title="Jejak Kehadiran"
@@ -302,7 +307,7 @@ export default function Home() {
             />
           </Link>
 
-          <Link to="lesson">
+          <Link   to="lesson">
             <HomeCard title="Mata Pelajaran" ionIcon="reader" color="#c2ac55" />
           </Link>
 
@@ -312,9 +317,11 @@ export default function Home() {
             ionIcon="person"
             color="#9555c2"
             boxShadow="-10px 9px 28px -4px rgba(149,85,194,0.33)"
+            reveal="top"
             />
             </Link>
         </div>
+        
       </div>
 
       <Top data={studentDetail} />
@@ -351,11 +358,20 @@ export default function Home() {
 }
 
 function HomeCard(props) {
-  const { color, backgroundColor, boxShadow } = props;
+  const { color, backgroundColor, boxShadow, reveal } = props;
 
   const [ionStyle, setIonStyle] = useState(` text-[${color}] text-2xl  `);
 
-  useEffect(() => {}, []);
+  const identifier = useRef(null)
+  
+  useEffect(() => {
+    ScrollReveal().reveal(identifier.current, { 
+      distance: "20px",
+      origin: reveal,
+      opacity: 0,
+      duration: 2000,
+    });
+  }, []);
 
   return (
     <div
@@ -365,6 +381,7 @@ function HomeCard(props) {
         border: `1px solid ${color}`,
       }}
       class="max-w-sm px-4 py-6  bg-white  rounded-2xl  "
+      ref={identifier}
     >
       <ion-icon
         name={props.ionIcon}
@@ -373,7 +390,7 @@ function HomeCard(props) {
       ></ion-icon>
 
       <a href="#">
-        <h5 class="mt-4 font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5 className="mt-4 font-semibold tracking-tight text-gray-900 dark:text-white">
           {" "}
           {props.title}{" "}
         </h5>
@@ -388,6 +405,8 @@ function HomeCard(props) {
     </div>
   );
 }
+
+
 
 // // export default App;
 // // import { useEffect, useState } from 'react';

@@ -1,4 +1,4 @@
-import { FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from '../actions/actionTypes'
+import {LOADING, FETCH_SCHEDULE,  FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from '../actions/actionTypes'
 
 let initialState = {
     schedule: [],
@@ -8,12 +8,19 @@ let initialState = {
     activiy: [],
     SPP: [],
     statistic: [],
-    casts: []
+    casts: [],
+    loading: false,
+    error: null
 }
 
 export default function reducer(state = initialState, action) {
 
     switch (action.type) {
+        case LOADING:
+            return {
+                ...state,
+                loading: true
+            }
         case FETCH_SCHEDULE:
             return {
                 ...state,
@@ -29,6 +36,7 @@ export default function reducer(state = initialState, action) {
         case FETCH_STUDENT_DETAIL:
             return {
                 ...state,
+                loading: false,
                 studentDetail: action.payload
             }
 

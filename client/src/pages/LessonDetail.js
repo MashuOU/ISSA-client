@@ -1,7 +1,7 @@
 
 
 
-import { getProductById } from '../store/actions/actionCreator';
+import { fetchStudentDetail } from '../store/actions/actionCreator';
 import { useSelector, useDispatch } from "react-redux"
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
@@ -15,22 +15,19 @@ export default function LessonDetail() {
   const { id } = useParams()
 
   const dispatch = useDispatch()
-  const { product:
-    {
-      allProduct,
-      productById: {
+   
+  const { 
+    student: {
+      studentDetail: {
         Scores
-      },
-      error,
-      loading
-    },
-    category
+      }
+    }
   } = useSelector((state) => state)
 
   console.log(Scores);
 
   useEffect(() => {
-    dispatch(getProductById())
+    dispatch(fetchStudentDetail())
   }, []);
 
   if (Scores?.length) {
