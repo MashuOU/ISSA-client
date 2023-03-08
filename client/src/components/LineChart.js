@@ -1,29 +1,31 @@
 import ReactApexChart from "react-apexcharts";
 
-export default function LineChart() {
+export default function LineChart(props) {
+  const { data } = props;
+  const Scoresname = data.map((each) => each.category);
+  const scores = data.map((each) => each.value);
+
+  const KKM = data[0].Lesson.KKM;
+
+  // Mendapatkan lebar layar saat ini
+  var lebarLayar = window.innerWidth;
+
+  // Mencetak lebar layar ke console
+  // console.log("Lebar layar: " + lebarLayar + "px");
+
+  
   const series = {
     monthDataSeries1: {
-      name: [
-        "Ujian 1",
-        "Ujian 2",
-        "Ujian 3",
-        "Ujian 4",
-        "Ujian 5",
-        "Ujian 6",
-        "Ujian 7",
-        "Ujian 8",
-        "Ujian 9",
-        "Ujian 10",
-      ],
-      value: [10, 20, 45, 30, 20, 40, 25, 70, 80, 90],
+      name: Scoresname,
+      value: scores,
     },
   };
-
-
+  
+  console.log(series, "noel");
   const state = {
     series: [
       {
-        name: "Math",
+        name: "Nilai",
         data: series.monthDataSeries1.value,
       },
     ],
@@ -35,22 +37,42 @@ export default function LineChart() {
         zoom: {
           enabled: false,
         },
+        // foreColor: "#fff",
+        fontFamily: "montserrat",
       },
       dataLabels: {
         enabled: false,
       },
       stroke: {
         curve: "smooth",
-        // colors: ['#a033c4'],
+        colors: ["#a033c4"],
       },
       title: {
-        text: "Fundamental Analysis of Stocks",
+        // text: "Fundamental Analysis of Stocks",
         align: "left",
       },
       subtitle: {
-        text: "Price Movements",
+        text: "Overview",
         align: "left",
       },
+
+      // grid: {
+      //   show: true,
+      //   borderColor: '#ccc',
+      //   strokeDashArray: 5,
+      //   position: 'back',
+      //   xaxis: {
+      //     lines: {
+      //       show: true
+      //     }
+      //   },
+      //   yaxis: {
+      //     lines: {
+      //       show: true
+      //     }
+      //   },
+      // },
+
       labels: series.monthDataSeries1.name,
       xaxis: {
         type: "category",
@@ -66,7 +88,7 @@ export default function LineChart() {
       annotations: {
         yaxis: [
           {
-            y: 70, // nilai batas
+            y: KKM, // nilai batas
             borderColor: "#a61f31", // warna garis batas
             label: {
               borderColor: "#a61f31",
@@ -84,15 +106,16 @@ export default function LineChart() {
 
   return (
     <>
-      <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 ">
-        <ReactApexChart className="border border-black"
-          options={state.options}
-          series={state.series}
-          type="area"
-          height={350}
-          width={900}
-        />
-      </div>
+      {/* <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 "> */}
+      <ReactApexChart
+        className=" w-full border-black"
+        options={state.options}
+        series={state.series}
+        type="area"
+        height={250}
+        width={lebarLayar - 20}
+      />
+      {/* </div> */}
     </>
   );
 }

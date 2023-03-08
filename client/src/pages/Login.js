@@ -1,114 +1,182 @@
+import { useState, useEffect } from "react"
+import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom";
+import { act_login } from '../store/actions/actionCreator';
 
 
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
 
 
 export default function LoginPage() {
-  return (
-    
-    <section class="relative flex flex-wrap lg:h-screen lg:items-center">
-      <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
-        <div class="mx-auto max-w-lg text-center">
-          <h1 class="text-2xl font-bold sm:text-3xl">Get started today!</h1>
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
-          <p class="mt-4 text-gray-500">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et libero nulla
-            eaque error neque ipsa culpa autem, at itaque nostrum!
+
+  const [loginData, setLoginData] = useState(
+    {
+      NIM: '',
+      password: ''
+    }
+  )
+
+  function updateForm(event) {
+    const { name, value } = event.target;
+    setLoginData({ ...loginData, [name]: value });
+  }
+
+
+
+  function triggerLogin(event) {
+    event.preventDefault()
+    console.log(loginData);
+    dispatch(act_login(loginData))
+      .then((_) => {
+        navigate('/')
+      })
+      .catch(({ msg }) => {
+        Toastify({
+          text: msg,
+          duration: 3000,
+          close: true,
+        }).showToast();
+      })
+
+  }
+
+  const [descInput, setDescInput] = useState()
+
+  return (
+
+    <div className="w-full min-h-[100vh] h-auto  p-4 border-red-600 bg-primary2-10 flex">
+
+      <form onSubmit={triggerLogin}
+       className="font-satu grid  pt-16 pb-6 border rounded-xl bg-white border-gray-400 px-10 gap-4 ">
+
+        <p className="  text-primary2-100 font-bold ">Profile</p>
+
+        {/* mb-3  mt-3  */}
+        <p className=" font-bold text-4xl text-black">Create Account</p>
+
+
+        <p className=" text-sm " >Look, watch, And get insight of your children development <br/> on the time </p>
+
+
+
+        {/* mt-20 */}
+        <label
+          onClick={() => setDescInput('nim')}
+          for="UserEmail"
+          class="relative block overflow-hidden  rounded-md border border-gray-400 px-3 pt-3 shadow-sm focus-within:border-black focus-within:ring-1 focus-within:ring-black"
+        >
+          <input
+            onChange={updateForm}
+            name="NIM"
+            type="number"
+            id="UserEmail"
+            placeholder="Email"
+            class="peer h-10 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+          />
+
+          <span
+            class="absolute left-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs"
+          >
+            Nim
+          </span>
+        </label>
+
+
+        {/*  mt-6 */}
+        <label
+          onClick={() => setDescInput('pw')}
+          for="pw"
+          class="relative block overflow-hidden rounded-md border border-gray-400 px-3 pt-3 shadow-sm focus-within:border-black focus-within:ring-1 focus-within:ring-black"
+        >
+          <input
+            onChange={updateForm}
+            type="password"
+            name="password"
+            id="pw"
+            placeholder="password"
+            class="peer h-10 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+          />
+
+          <span
+            class="absolute left-3 top-3 -translate-y-1/2 text-xs text-gray-700 transition-all peer-placeholder-shown:top-1/2 peer-placeholder-shown:text-sm peer-focus:top-3 peer-focus:text-xs"
+          >
+            Password
+          </span>
+        </label>
+
+
+
+        {descInput == 'nim' &&
+          <p className="mt-4 text-kecil sm:text-sm text-gray-400 font-bold " >
+            Nim adalah Nomor Induk Siswa yang terbentuk unik dan menjadi kode pengenal
+            akan indentitas anak anda
           </p>
+        }
+
+        {descInput == 'pw' &&
+          <p className="mt-4 text-kecil sm:text-sm text-gray-400 font-bold " >Gunakan password yang pernah dikirimkan kepada anda melalui email </p>
+        }
+
+
+
+
+
+
+        {/*  mt-6  */}
+        <div className="flex items-center pl-4 border border-gray-200 rounded dark:border-gray-700">
+          <input
+            id="bordered-radio-1"
+            type="radio"
+            defaultValue=""
+            name="bordered-radio"
+            required
+            className="w-4 h-4 text-blue-600  focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  border-gray-600"
+          />
+          <label
+            htmlFor="bordered-radio-1"
+            className="w-full font-bold text-primary2-100 py-2 ml-2 text-sm   dark:text-gray-300"
+          >
+            Saya benar merupakan wali murid
+          </label>
         </div>
 
-        <form action="" class="mx-auto mt-8 mb-0 max-w-md space-y-4">
-          <div>
-            <label for="email" class="sr-only">Email</label>
+        <p className="text-center  text-kecil sm:text-sm " >By continuing, I agree to the <b>ISSA Platform Terms</b> <br />and <b>Privacy Policy</b> </p>
 
-            <div class="relative">
-              <input
-                type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-                placeholder="Enter email"
-              />
+        {/* mt-5 */}
+        <button
+          disabled=""
+          type="submit"
+          className="py-2.5  px-5 w-full mr-2 text-sm font-bold  rounded-lg border focus:z-10 focus:ring-4  bg-gray-800 text-gray-200 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center justify-center "
+        >
+          {/* <svg
+          aria-hidden="true"
+          role="status"
+          className="inline w-4 h-4 mr-3 text-gray-200 animate-spin dark:text-gray-600"
+          viewBox="0 0 100 101"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+            fill="currentColor"
+          />
+          <path
+            d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+            fill="#1C64F2"
+          /> 
+        </svg> */}
 
-              <span
-                class="absolute inset-y-0 right-0 grid place-content-center px-4"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
+          Continue
+        </button>
 
-          <div>
-            <label for="password" class="sr-only">Password</label>
 
-            <div class="relative">
-              <input
-                type="password"
-                class="w-full rounded-lg border-gray-200 p-4 pr-12 text-sm shadow-sm"
-                placeholder="Enter password"
-              />
+      </form>
 
-              <span
-                class="absolute inset-y-0 right-0 grid place-content-center px-4"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-4 w-4 text-gray-400"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                  />
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                  />
-                </svg>
-              </span>
-            </div>
-          </div>
-
-          <div class="flex items-center justify-between">
-            <p class="text-sm text-gray-500">
-              No account?
-              <a class="underline" href="">Sign up</a>
-            </p>
-
-            <button
-              type="submit"
-              class="inline-block rounded-lg bg-blue-500 px-5 py-3 text-sm font-medium text-white"
-            >
-              Sign in
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
-        <img
-          alt="Welcome"
-          src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
-          class="absolute inset-0 h-full w-full object-cover"
-        />
-      </div>
-    </section>
+    </div>
 
 
   )

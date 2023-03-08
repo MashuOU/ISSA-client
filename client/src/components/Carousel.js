@@ -1,8 +1,9 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Autoplay } from 'swiper';
-import 'swiper/swiper-bundle.css';
+// import 'swiper/swiper-bundle.css';
 import { useState } from 'react';
 // import './newsline.css';  
+import 'swiper/css';
 SwiperCore.use([Autoplay]);
 
 export default function Carousel() {
@@ -18,7 +19,7 @@ export default function Carousel() {
 
 
   return (
-    <div className='grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400' >
+    <div className='grid mt-4 justify-center max-w-screen-xl mx-auto border border-red-400' >
       <Swiper
         spaceBetween={30}
         centeredSlides={true}

@@ -1,50 +1,91 @@
-
 import { Chart } from "frappe-charts/dist/frappe-charts.min.esm";
+import { useEffect, useRef } from "react";
 
-export default function Heatmap() {
+export default function Heatmap(props) {
+
+  let result = {};
+  const chartRef = useRef(null);
+
+  if (props.data) {
+
+    props.data.forEach(item => {
+      const date = new Date(item.createdAt);
+      const unixTimestamp = Math.floor((date.getTime() / 1000));
+      //  console.log(item );
+      // return Math.floor(Date.parse(timestamp) / 1000);
+      // const timestamp = new Date(item.createdAt).setHours(0, 0, 0, 0) / 1000;
+      let value = 0;
+
+      switch (item.status) {
+        case 'Hadir':
+          value = 100;
+          break;
+        case 'Sakit':
+          value = 50;
+          break;
+        case 'Alfa':
+          value = 1;
+          break;
+        case 'Izin':
+          value = 70;
+          break;
+        default:
+          value = 0;
+      }
+
+      result[unixTimestamp] = value;
+    });
+
+
+  }
+
+
+
+
+  useEffect(() => {
+    const chartd = chartRef.current;
+    const chart = new Chart(chartd, {
+      subtitle: "Contoh Heatmap Chart",
+      color: "#c7323e",
+      data: {
+        dataPoints: result,
+        start: new Date("2023-01-01T00:00:00.000Z"),
+        end: new Date("2023-07-31T11:59:00.000Z"),
+      },
+      type: "heatmap",
+      radius: 2,
+      //         empty      alfa       sakit      izin       hadir
+      colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#17459e'],
+      // width:300,
+      // height:400,
+      // responsive:true
+      // x_axis_mode: "time",
+      // y_axis_mode: "tick",
+    });
+
+    return () => {
+      chart.destroy();
+    }
+  }, [props.data]);
+
   return (
-    <div className="grid mt-4 overflow-y-scroll justify-center max-w-screen-xl mx-auto border border-red-400" >
-      <div id="heatmap-chart" className="pointer-events-none w-[100%] border border-black " ></div>
-    </div>
-
+    //pointer-events-none border border-white 
+    <div ref={chartRef} id="heatmap-chart" className=" " ></div>
+     
+    
+    // <div className="grid mt-4 overflow-y-scroll justify-start sm:justify-center max-w-screen-xl mx-auto border border-red-400" >
+    //   <div ref={chartRef} id="heatmap-chart" className="pointer-events-none w-[300px] h-[500px] border border-black " ></div>
+    // </div>
+    
+    
+    
   );
 }
 
 
-window.onload = function () {
-  const chartd = document.getElementById("heatmap-chart");
-  const chart = new Chart(chartd, {
-    title: "Contoh Heatmap Chart",
-    data: {
-      dataPoints: {
-        // 1577836800: 1, //alfa
-        // '1577923200': 20,  
-        // '1578009600': 30,
-        // '1578096000': 40,
-        // '1578182400': 50,
-        // '1578268800': 60,
-        '1578355200': 1, // alfa
-        '1578441600': 50, // // sakit
-        '1578528000': 70, // izin
-        '1578614400': 100, //hadir
-        // '1578700800': 49,
-        // '1578787200': 81,
-        // '1578873600': 55,
-        // '1578960000': 3,
-        // '1579046400': 42,
-        // '1579132800': 91,
-        // '1579219200': 85,
-        // '1579305600': 69,
-        // '1579392000': 20,
-        // '1579478400': 14,
-        // '1579564800': 67
-      },
-      start: new Date("2020-01-01T00:00:00.000Z"),
-      end: new Date("2020-12-31T23:59:59.000Z"),
-    },
-    type: "heatmap",
-    radius: 2,
-    //         empty      alfa       sakit      izin       hadir
-    colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#17459e'],
-  });
-}
+// {
+//   '1578355200': 1, // alfa
+//   '1578441600': 50, // // sakit
+//   '1578528000': 70, // izin
+//   '1578614400': 100, //hadir
+// },
