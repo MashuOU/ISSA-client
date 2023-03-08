@@ -411,7 +411,7 @@ export const fetchSPP = (day) => {
                 url: baseUrl + `/public/transaction`,
                 headers: { access_token: localStorage.access_token }
             })
-            dispatch(insert_Activity_redux(data))
+            dispatch(insert_SPP_redux(data))
         } catch (error) {
             console.log(error);
         }

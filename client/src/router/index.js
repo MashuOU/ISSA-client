@@ -11,7 +11,8 @@ import ClientChat from "../pages/Chat-client"
 import TotalNilai from "../pages/TotalNilai"
 import EventPage from "../pages/Event"
 import PaymentPage from "../pages/PaymentPage"
- 
+import NotFound from "../pages/NotFound"
+
 
 
 
@@ -58,6 +59,10 @@ const router = createBrowserRouter(
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]
 )

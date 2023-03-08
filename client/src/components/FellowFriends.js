@@ -23,7 +23,7 @@ export default function fellowFriend(props) {
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
                     {each.name}
                     </p>
-                    <p className="text-sm text-gray-500 truncate dark:text-gray-400">
+                    <p className="text-[12px] text-gray-500 truncate dark:text-gray-400">
                     {each.feedback}
                     </p>
                   </div>
