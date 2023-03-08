@@ -6,36 +6,30 @@ let baseUrl = "http://localhost:3001";
 
 // STUDENT ONLY //
 
-export const studentsFetch = (query) => {
-  // console.log(temp, "masuk ni");
+export const studentsFetch = (query, pageIndex) => {
+  console.log(query, "masuk ni");
   let url = `http://localhost:3001/students?`;
 
-  if (!query) {
+  if (pageIndex && query.ClassId !== "" && query.ClassId !== "All") {
+    url += `ClassId=${localStorage.ClassId}&pageIndex=${pageIndex}`;
+  } else if (pageIndex) {
+    url += `pageIndex=${pageIndex}`;
+  } else if (!query) {
     url += `ClassId=${localStorage.ClassId}`;
-  } else if (query.ClassId !== "" && query.ClassId === "All" && query.name) {
-    url += `name=${query.name}`;
+  } else if (query.ClassId !== "" && query.ClassId !== "All" && query.name) {
+    url += `ClassId=${localStorage.ClassId}&name=${query.name}`;
   } else if (query.ClassId === "All" && query.name) {
     url += `name=${query.name}`;
-  } else if (query.ClassId !== "" && query.ClassId !== "All") {
+  } else if (query.ClassId !== "" && query.ClassId !== "All" && !pageIndex) {
     const temp = (localStorage.ClassId = query.ClassId);
     url += `ClassId=${temp}`;
-  } else if (query.ClassId === "All") {
+  } else if (query.ClassId === "All" || query.ClassId == "") {
     console.log("masuk");
     url += `${url}`;
   }
-  // else {
-  //   url += `ClassId=${localStorage.ClassId}`;
-  // }
-  // else if (query.ClassId != "" && query.name) {
-  //   url += `ClassId=${localStorage.ClassId}&name=${query.name}`;
-  // }
-  //  else {
-  //   const temp = (localStorage.ClassId = query.ClassId);
-  //   url += `ClassId=${temp}`;
-  // }
 
   return (dispatch, getState) => {
-    fetch(`${url}&pageIndex=1`, {
+    fetch(`${url}`, {
       headers: {
         access_token: localStorage.access_token,
       },

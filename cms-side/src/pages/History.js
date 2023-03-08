@@ -28,9 +28,15 @@ export default function History(params) {
       </div>
     ) : ( */}
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
-        <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
-          <p className="dark:text-white font-raleway italic font-semibold text-[1.3rem] ">Change History</p>
+        <div className="flex items-center justify-center pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
+          <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-[5rem] ">
+            <div className="w-[70%] mask mask-squircle mx-auto">
+              <img src="https://res.cloudinary.com/dslzpyibe/image/upload/v1678270352/assets%20finalproject/undraw_Teaching_re_g7e3_y1leeh.png" />
+            </div>
+            <p className="dark:text-white font-Comfortaa font-semibold text-[1.3rem] text-center mt-6">HISTORY</p>
+          </div>
         </div>
+
         <table className="w-full text-l text-left text-gray-500 dark:text-gray-400 mt-6">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
             <tr>

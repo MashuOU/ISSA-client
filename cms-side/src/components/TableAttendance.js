@@ -8,12 +8,14 @@ export default function TableAttendances(props) {
   const dispatch = useDispatch();
   const length = data.Attendances.length - 1;
   const status = data.Attendances[length];
+
+  console.log(data, "ini ststu");
   const temp = status.createdAt;
   const dateNow = new Date().getDate();
   const dateData = new Date(temp).getDate();
 
   // console.log(dateData, dateNow);
-  console.log(data, "<<<<<");
+  // console.log(data, "<<<<<");
   // console.log(temp, "<<<<<");
 
   const [attendances, setAttendances] = useState({
@@ -43,7 +45,7 @@ export default function TableAttendances(props) {
   };
 
   const handleStudentId = (id) => {
-    console.log(id);
+    // console.log(id);
     dispatch(studentById(id));
   };
 
@@ -55,10 +57,10 @@ export default function TableAttendances(props) {
         <div className="pl-3">
           <div className="text-base font-semibold">{data.name}</div>
 
-          <div className="font-normal text-gray-500">{data.age} Tahun</div>
+          <div className="font-normal text-gray-900 dark:text-white">{data.age} Tahun</div>
         </div>
       </th>
-      <td className="px-6 py-4">{data.Class.name}</td>
+      <td className="px-6 py-4 text-gray-900 dark:text-white">{data.Class.name}</td>
       <td className="px-6 py-4">
         <select
           onChange={changeInputHandler}
@@ -93,8 +95,8 @@ export default function TableAttendances(props) {
           History Attendance
         </button> */}
         {/* The button to open modal */}
-        <label htmlFor={data.id} className="btn bg-gray-900 hover:bg-transparent hover:text-black">
-          open modal
+        <label htmlFor={data.id} className="btn bg-gray-900 hover:bg-transparent hover:text-black dark:bg-gray-700">
+          Attendance
         </label>
         <ModalAttendances data={data.Attendances} id={data.id} />
       </td>

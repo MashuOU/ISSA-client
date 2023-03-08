@@ -7,6 +7,7 @@ module.exports = {
     fontFamily: {
       raleway: ["Raleway"],
       Playfair: ["Playfair Display"],
+      Comfortaa: ["Comfortaa"],
     },
   },
   daisyui: {

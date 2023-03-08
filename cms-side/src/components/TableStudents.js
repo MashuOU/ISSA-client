@@ -41,15 +41,15 @@ export default function TableStudent(props) {
           <img className="w-10 h-10 rounded-full" src={data.imgUrl} alt="Jese image" />
           <div className="pl-3">
             <div className="text-base font-semibold">{data.name}</div>
-            <div className="font-normal text-gray-500">neil.sims@flowbite.com</div>
-            <div className="font-normal text-gray-500">{data.age} Tahun</div>
+            <div className="font-normal text-gray-900 dark:text-white">neil.sims@flowbite.com</div>
+            <div className="font-normal text-gray-900 dark:text-white">{data.age} Tahun</div>
           </div>
         </th>
-        <td className="px-6 py-4">{data.NIM}</td>
-        <td className="px-6 py-4">{data.gender}</td>
-        <td className="px-6 py-4">{data.birthDate.substring(0, 10)}</td>
-        <td className="px-6 py-4">{data.Class.name}</td>
-        <td className="px-6 py-4 flex justify-center">
+        <td className="px-6 py-4 text-gray-900 dark:text-white">{data.NIM}</td>
+        <td className="px-6 py-4 text-gray-900 dark:text-white">{data.gender}</td>
+        <td className="px-6 py-4 text-gray-900 dark:text-white">{data.birthDate.substring(0, 10)}</td>
+        <td className="px-6 py-4 text-gray-900 dark:text-white">{data.Class.name}</td>
+        <td className="px-6 py-4 text-gray-900 dark:text-white flex justify-center">
           <div className="flex items-center">
             <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Done
           </div>
@@ -75,19 +75,19 @@ export default function TableStudent(props) {
           )}
           {dateNow == resultDate && resultStatus == "Alfa" && (
             <div className="flex justify-center">
-              <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div>
             </div>
           )}
           {dateNow != resultDate && (
             <div className="flex justify-center">
-              <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+              <div className="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div>
             </div>
           )}
         </td>
         <td className="px-6 py-4">
           <Link to={`/scores/${data.id}`}>
             <button
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+              className="inline-flex items-center text-gray-900 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
               type="button"
             >
               See Score
@@ -96,7 +96,7 @@ export default function TableStudent(props) {
           <Link to="/addStudent">
             <button
               onClick={() => handleStudentById(data.id)}
-              className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
+              className="inline-flex items-center text-gray-900 bg-white border border-gray-900 focus:outline-none hover:bg-[blue] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
               type="button"
             >
               Edit
@@ -104,12 +104,12 @@ export default function TableStudent(props) {
           </Link>
           <button
             onClick={() => handleDelete(data.id)}
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
+            className="inline-flex items-center text-gray-900 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-[0.5rem] h-10"
             type="button"
           >
             Delete
           </button>
-          {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-500 hover:underline ml-[1rem]">
+          {/* <a href="#" className="font-medium text-blue-600 dark:text-blue-900 hover:underline ml-[1rem]">
                   Edit
                 </a>
                 <a href="#" className="font-medium text-[red] hover:underline ml-[1rem]">

@@ -41,7 +41,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined ">dashboard</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Dashboard</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Dashboard</span>
             </li>
           </Link>
           <Link to="/class">
@@ -50,7 +50,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined">description</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Classes</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Classes</span>
             </li>
           </Link>
           <Link to="/attendance">
@@ -59,7 +59,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined">room_preferences</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Attendences</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Attendences</span>
             </li>
           </Link>
           <Link to="/schedule">
@@ -68,7 +68,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined">date_range</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Schedules</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Schedules</span>
             </li>
           </Link>
           <Link to="/teacher">
@@ -77,7 +77,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined">groups</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Teachers</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Teachers</span>
             </li>
           </Link>
           <Link to="/history">
@@ -86,7 +86,7 @@ const Sidebar = () => {
               `}
             >
               <span className="material-symbols-outlined">history</span>
-              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>History</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>History</span>
             </li>
           </Link>
           <li
@@ -95,7 +95,7 @@ const Sidebar = () => {
               `}
           >
             <span className="material-symbols-outlined ">logout</span>
-            <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Logout</span>
+            <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Logout</span>
           </li>
           <li
             onClick={handleThemeSwitch}
@@ -105,7 +105,7 @@ const Sidebar = () => {
             <span className="material-symbols-outlined ">
               <span className="material-symbols-outlined">radio_button_checked</span>
             </span>
-            <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Dark Mode</span>
+            <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Dark Mode</span>
           </li>
           <Link to="/chat">
             <li
