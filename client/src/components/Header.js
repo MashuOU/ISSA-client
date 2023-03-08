@@ -69,8 +69,13 @@ export default function Header(props) {
           </a>
           <div class="flex items-center md:order-2">
 
-
-            <img id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={imgUrl} alt="Bordered avatar" />
+          <div id="user-menu-button" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom"  className="flex-shrink-0 w-8 h-8 overflow-hidden rounded-full ">
+                    <img
+                      className="w-full"
+                      src={imgUrl} 
+                    />
+                  </div>
+            {/* <img id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown" data-dropdown-placement="bottom" class="w-8 h-8 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500" src={imgUrl} alt="Bordered avatar" /> */}
 
 
 

@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef } from "react";
-import "../style/custom.scss";
 
 export default function Chat() {
   const chatAreaRef = useRef(null);

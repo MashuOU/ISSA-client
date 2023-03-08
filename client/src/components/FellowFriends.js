@@ -39,9 +39,9 @@ export default function FellowFriend(props) {
             return (
               <li  key={index} className="reveal pb-3 sm:pb-4">
                 <div className="flex items-center space-x-4">
-                  <div className="flex-shrink-0">
+                  <div className="flex-shrink-0 w-8 h-8 overflow-hidden rounded-full ">
                     <img
-                      className="w-8 h-8 rounded-full"
+                      className="w-full"
                       src={each.imgUrl}
                       alt={each.name}
                     />

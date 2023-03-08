@@ -4,6 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { useEffect, useState, useRef } from "react";
 
+import ScrollReveal from "scrollreveal";
+
+
   export default function BottomNav(props) {
     const navigate = useNavigate()
     const location = useLocation();
@@ -27,13 +30,28 @@ import { useEffect, useState, useRef } from "react";
     console.log('trigger'); // mencetak path saat ini di konsol
   }, [location.pathname])
   
+  const el = document.querySelector('.yamim')
+  
+  useEffect(() => {
+    
+    
+     ScrollReveal().reveal(el, { 
+      distance: "20px",
+      origin: "bottom",
+      opacity: 0,
+      duration: 2000,
+    });
+    
+    
+  }, [studentDetail])
   
   if(Object.keys(studentDetail).length) {
+    
     
    
   return (
     <>
-    <div style={{display: fixOrHide}} class="fixed z-50 w-[90%] h-14 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+    <div style={{display: fixOrHide}} className="fixed yamim z-50 w-[90%] h-14 max-w-lg -translate-x-1/2 bg-white border border-gray-200 rounded-full bottom-4 left-1/2 dark:bg-gray-700 dark:border-gray-600">
       <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
 
         <button onClick={() => go('/')} data-tooltip-target="tooltip-home" type="button" class="inline-flex flex-col items-center justify-center px-5 rounded-l-full hover:bg-gray-50 dark:hover:bg-gray-800 group">
