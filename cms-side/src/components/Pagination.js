@@ -1,47 +1,84 @@
-import React, { useEffect, useState } from "react";
-import ReactDOM from "react-dom";
-import ReactPaginate from "react-paginate";
+import { Link, useNavigation, useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import ClipLoader from "react-spinners/ClipLoader";
 
-// Example items, to simulate fetching from another resources.
-const items = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
+import TableStudent from "../components/TableStudents";
+import { classesFetch, studentById, studentsFetch } from "../store/action/ActionCreator";
 
-function Items({ currentItems }) {
-  return (
-    <>
-      {currentItems &&
-        currentItems.map((item) => (
-          <div>
-            <h3>Item #{item}</h3>
-          </div>
-        ))}
-    </>
-  );
-}
+export default function Pagination(props) {
+  const { data } = props;
+  const dispatch = useDispatch();
+  const [currentPage, setCurrentPage] = useState(1);
 
-function PaginatedItems({ itemsPerPage }) {
-  // Here we use item offsets; we could also use page offsets
-  // following the API or data you're working with.
-  const [itemOffset, setItemOffset] = useState(0);
+  const [query, setQuery] = useState({
+    ClassId: "",
+    name: "",
+  });
 
-  // Simulate fetching items from another resources.
-  // (This could be items from props; or items loaded in a local state
-  // from an API endpoint with useEffect and useState)
-  const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = items.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(items.length / itemsPerPage);
+  const changeInputHandler = (event) => {
+    const { name, value } = event.target;
 
-  // Invoke when user click to request another page.
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(`User requested page number ${event.selected}, which is offset ${newOffset}`);
-    setItemOffset(newOffset);
+    const newQuery = {
+      ...query,
+    };
+    newQuery[name] = value;
+
+    setQuery(newQuery);
   };
 
+  const prePage = (e) => {
+    e.preventDefault();
+    if (currentPage !== 1) {
+      console.log("masuk pre");
+      setCurrentPage(currentPage - 1);
+      dispatch(studentsFetch(query, currentPage - 1));
+    }
+  };
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    if (data.totalPages != currentPage) {
+      setCurrentPage(currentPage + 1);
+      dispatch(studentsFetch(query, currentPage + 1));
+    }
+  };
   return (
-    <>
-      <Items currentItems={currentItems} />
-      <ReactPaginate breakLabel="..." nextLabel="next >" onPageChange={handlePageClick} pageRangeDisplayed={5} pageCount={pageCount} previousLabel="< previous" renderOnZeroPageCount={null} />
-    </>
+    <div className="flex justify-center mt-[3rem]">
+      <nav aria-label="Page navigation example">
+        <ul className="inline-flex items-center -space-x-px">
+          <li value={query.pageIndex} name="pageIndex" onChange={changeInputHandler} onClick={prePage}>
+            <a
+              href="#"
+              className="block px-3 py-2 ml-0 leading-tight text-gray-800 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              <span className="sr-only">Previous</span>
+              <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              1
+            </a>
+          </li>
+          <li onClick={nextPage} onChange={changeInputHandler} value={query.pageIndex} name="pageIndex">
+            <a
+              href="#"
+              className="block px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              <span className="sr-only">Next</span>
+              <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+              </svg>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
 }

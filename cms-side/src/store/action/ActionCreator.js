@@ -7,7 +7,6 @@ let baseUrl = "http://localhost:3001";
 // STUDENT ONLY //
 
 export const studentsFetch = (query, pageIndex) => {
-  console.log(query, "masuk ni");
   let url = `http://localhost:3001/students?`;
 
   if (pageIndex && query.ClassId !== "" && query.ClassId !== "All") {
@@ -90,6 +89,8 @@ export const studentFetchSuccessById = (payload) => {
 };
 
 export const studentAdd = (payload) => {
+  console.log(payload, "masuk ni");
+
   return (dispatch, getState) => {
     return fetch(`${baseUrl}/students`, {
       method: "POST",
@@ -287,7 +288,7 @@ export const classesFetchSuccess = (payload) => {
 export const classesById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/class/${id}`, {
+    fetch(`${baseUrl}/classes/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
@@ -356,10 +357,10 @@ export const classesAdd = (payload) => {
   };
 };
 
-export const editClass = (payload) => {
-  console.log(payload, "ini action");
+export const editClass = (payload, id) => {
+  console.log(id, "ini action");
   return (dispatch, getState) => {
-    return fetch(`${baseUrl}/class/${payload.StudentId}`, {
+    return fetch(`${baseUrl}/classes/${id}`, {
       method: "PUT",
       headers: {
         access_token: localStorage.access_token,
@@ -385,7 +386,7 @@ export const editClass = (payload) => {
 
 export const classDelete = (id) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/class/${id}`, {
+    fetch(`${baseUrl}/classes/${id}`, {
       method: "DELETE",
       headers: {
         access_token: localStorage.access_token,
@@ -442,7 +443,7 @@ export const lessonsFetchSuccess = (payload) => {
 export const lessonsById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/lessons/${id}`, {
+    return fetch(`${baseUrl}/lessons/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
@@ -468,6 +469,98 @@ export const lessonFetchSuccessById = (payload) => {
   return {
     type: FETCH_LESSON_BYID,
     payload: payload,
+  };
+};
+
+export const addLesson = (payload) => {
+  console.log(payload);
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/lessons`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(lessonsFetch());
+        // console.log("masuk nih");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
+
+export const editLesson = (payload, id) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/lessons/${id}`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(lessonsFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const lessonDelete = (id) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/lessons/${id}`, {
+      method: "DELETE",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(lessonsFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   };
 };
 
@@ -603,9 +696,22 @@ export const schedulesFetchSuccess = (payload) => {
 
 // HISTORY ONLY //
 
-export const historiesFetch = (payload) => {
+export const historiesFetch = (query) => {
+  let url = `http://localhost:3001/histories?`;
+
+  if (!query) {
+    url = url;
+  } else if (query.pageIndex && query.createdBy) {
+    url += `createdBy=${query.createdBy}&pageIndex=${query.pageIndex}`;
+  } else if (query.pageIndex) {
+    url += `pageIndex=${query.pageIndex}`;
+  } else if (query.createdBy) {
+    url += `createdBy=${query.createdBy}`;
+  } else if (query.pageIndex) {
+    url += `pageIndex=${query.pageIndex}`;
+  }
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/histories`, {
+    fetch(`${url}`, {
       headers: {
         access_token: localStorage.access_token,
       },

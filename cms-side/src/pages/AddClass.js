@@ -60,7 +60,7 @@ export default function AddClass(props) {
   const submitForm = (e) => {
     e.preventDefault();
     if (classId.id) {
-      dispatch(editClass(classId.id, form)).then(() => {
+      dispatch(editClass(form, classId.id)).then(() => {
         navigate("/class");
       });
     } else {
@@ -69,17 +69,19 @@ export default function AddClass(props) {
         navigate("/class");
       });
     }
-    setForm({
-      name: "",
-      SPP: "",
-      TeacherId: "",
-    });
+    dispatch(
+      classFetchSuccessById({
+        name: "",
+        SPP: "",
+        TeacherId: "",
+      })
+    );
   };
 
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-auto  mt-[3rem] w-[50%] md:w-[30%] sm:[20%] ">
       <div className="mb-6">
-        <p className="dark:text-white font-raleway italic font-semibold text-[1.3rem] ">Form Class</p>
+        <p className="dark:text-white font-Comfortaa font-semibold text-[1.3rem] ">FORM CLASS</p>
       </div>
       <form className="mr-12" onSubmit={submitForm}>
         <div className="relative z-0 w-full mb-6 group">
@@ -144,15 +146,13 @@ export default function AddClass(props) {
         >
           Submit
         </button>
-        <Link to="/class">
-          <button
-            onClick={handleCancel}
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-2"
-            type="button"
-          >
-            Cancel
-          </button>
-        </Link>
+        <button
+          onClick={handleCancel}
+          className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-2"
+          type="button"
+        >
+          Cancel
+        </button>
       </form>
     </div>
   );

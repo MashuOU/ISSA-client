@@ -5,17 +5,18 @@ import ModalAttendances from "./ModalAttendances";
 
 export default function TableAttendances(props) {
   const { data, index } = props;
+  console.log(data, "<<<<<");
   const dispatch = useDispatch();
-  const length = data.Attendances.length - 1;
+
+  const length = data.Attendances?.length - 1;
   const status = data.Attendances[length];
 
   console.log(data, "ini ststu");
-  const temp = status.createdAt;
+  const temp = status?.createdAt;
   const dateNow = new Date().getDate();
   const dateData = new Date(temp).getDate();
 
   // console.log(dateData, dateNow);
-  // console.log(data, "<<<<<");
   // console.log(temp, "<<<<<");
 
   const [attendances, setAttendances] = useState({
@@ -73,28 +74,21 @@ export default function TableAttendances(props) {
           <option onClick={handleClick} selected={dateData != dateNow ? "selected" : false} disabled>
             Input Attendance
           </option>
-          <option onClick={handleClick} value="Hadir" selected={status.status == "Hadir" && dateData == dateNow ? "selected" : false}>
+          <option value="Hadir" selected={status?.status == "Hadir" && dateData == dateNow ? "selected" : false}>
             Hadir
           </option>
-          <option onClick={handleClick} value="Sakit" selected={status.status == "Sakit" && dateData == dateNow ? "selected" : false}>
+          <option value="Sakit" selected={status?.status == "Sakit" && dateData == dateNow ? "selected" : false}>
             Sakit
           </option>
-          <option onClick={handleClick} value="Izin" selected={status.status == "Izin" && dateData == dateNow ? "selected" : false}>
+          <option value="Izin" selected={status?.status == "Izin" && dateData == dateNow ? "selected" : false}>
             Izin
           </option>
-          <option onClick={handleClick} value="Alfa" selected={status.status == "Alfa" && dateData == dateNow ? "selected" : false}>
+          <option value="Alfa" selected={status?.status == "Alfa" && dateData == dateNow ? "selected" : false}>
             Alfa
           </option>
         </select>
       </td>
       <td onClick={() => handleStudentId(data.id)}>
-        {/* <button
-          className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
-          type="button"
-        >
-          History Attendance
-        </button> */}
-        {/* The button to open modal */}
         <label htmlFor={data.id} className="btn bg-gray-900 hover:bg-transparent hover:text-black dark:bg-gray-700">
           Attendance
         </label>

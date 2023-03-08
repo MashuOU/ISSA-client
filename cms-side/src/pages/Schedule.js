@@ -35,7 +35,7 @@ export default function Schedule(props) {
   return (
     <>
       {loading && (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[18rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -44,8 +44,27 @@ export default function Schedule(props) {
       {!loading && (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
           <div className="ml-4 mb-10">
-            <p className="font-raleway italic font-semibold text-[2rem] dark:text-white text-center mb-[4rem]">SCHEDULES</p>
+            <p className="font-Comfortaa font-semibold text-[2rem] dark:text-white text-center mb-[4rem]">SCHEDULES</p>
           </div>
+          <div className="mr-[35.4rem] mb-6 flex justify-end">
+            <Link to="/addSchedule">
+              <button
+                className="inline-flex items-center   border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800 dark:bg-gray-700 h-10"
+                type="button"
+              >
+                Add
+              </button>
+            </Link>
+            <Link to="/addSchedule">
+              <button
+                className="inline-flex items-center   border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800 dark:bg-gray-700 h-10 ml-4"
+                type="button"
+              >
+                Update
+              </button>
+            </Link>
+          </div>
+
           <div className="flex justify-center items-center">
             <div className="grid grid-cols-3 gap-4 ">
               {day.map((el, index) => {

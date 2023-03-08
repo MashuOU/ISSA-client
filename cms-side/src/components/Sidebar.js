@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={` ${open ? "w-72" : "w-20 "} bg-gray-900 h-screen p-5  pt-8 relative duration-300 dark:bg-gray-700 dark:text-gray-400`}>
+      <div className={` ${open ? "w-72" : "w-20 "} bg-gray-900 p-5  pt-8 relative duration-300 dark:bg-gray-700 dark:text-gray-400`}>
         <img
           src="https://res.cloudinary.com/dslzpyibe/image/upload/v1677950995/assets/control_jdqubc.png"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
@@ -51,6 +51,15 @@ const Sidebar = () => {
             >
               <span className="material-symbols-outlined">description</span>
               <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Classes</span>
+            </li>
+          </Link>
+          <Link to="/lesson">
+            <li
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+              `}
+            >
+              <span className="material-symbols-outlined">menu_book</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Comfortaa text-[1rem]`}>Lessons</span>
             </li>
           </Link>
           <Link to="/attendance">

@@ -22,7 +22,7 @@ export default function Teacher(props) {
   return (
     <>
       {loading ? (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[18rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -37,7 +37,7 @@ export default function Teacher(props) {
             </div>
           </div>
           <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-[6.5rem] mr-6">
-            <div>
+            <div className="ml-[4rem]">
               <Link to="/newAdmin">
                 <button
                   className="inline-flex items-center text-gray-300  border border-gray-900 focus:outline-none bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"

@@ -2,19 +2,16 @@ import { Link, useNavigation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import Pagination from "../components/Pagination";
 import TableStudent from "../components/TableStudents";
 import { classesFetch, studentById, studentsFetch } from "../store/action/ActionCreator";
-import PaginatedItems from "../components/Pagination";
 
 export default function Dashboard(params) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-  const navigate = useNavigation();
   const students = useSelector((state) => state.students.students);
   const classes = useSelector((state) => state.classes.classes);
 
-  const [currentPage, setCurrentPage] = useState(1);
   // const numbers = [...Array(page + 1).keys()].slice(1);
 
   const [query, setQuery] = useState({
@@ -45,32 +42,16 @@ export default function Dashboard(params) {
   };
 
   const submitQuery = (e) => {
+    e.preventDefault();
     dispatch(studentsFetch(query));
   };
 
-  const prePage = (e) => {
-    e.preventDefault();
-    if (currentPage !== 1) {
-      console.log("masuk pre");
-      setCurrentPage(currentPage - 1);
-      dispatch(studentsFetch(query, currentPage - 1));
-    }
-  };
-
-  const nextPage = (e) => {
-    e.preventDefault();
-    if (students.totalPages != currentPage) {
-      setCurrentPage(currentPage + 1);
-      dispatch(studentsFetch(query, currentPage + 1));
-    }
-  };
-
-  console.log(query);
+  // console.log(query);
 
   return (
     <>
       {loading && (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[18rem] w-full md:w-full sm:[50%] ">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -172,7 +153,7 @@ export default function Dashboard(params) {
                   Payment Status
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Absensi
+                  Attendances
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Action
@@ -186,42 +167,8 @@ export default function Dashboard(params) {
           </table>
 
           {/* Pagination */}
-
-          <div className="flex justify-center mt-[3rem]">
-            <nav aria-label="Page navigation example">
-              <ul className="inline-flex items-center -space-x-px">
-                <li value={query.pageIndex} name="pageIndex" onChange={changeInputHandler} onClick={prePage}>
-                  <a
-                    href="#"
-                    className="block px-3 py-2 ml-0 leading-tight text-gray-800 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    <span className="sr-only">Previous</span>
-                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    1
-                  </a>
-                </li>
-                <li onClick={nextPage} onChange={changeInputHandler} value={query.pageIndex} name="pageIndex">
-                  <a
-                    href="#"
-                    className="block px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    <span className="sr-only">Next</span>
-                    <svg aria-hidden="true" className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
-                    </svg>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+          <div className="mb-[5rem]">
+            <Pagination data={students} />
           </div>
         </div>
       )}

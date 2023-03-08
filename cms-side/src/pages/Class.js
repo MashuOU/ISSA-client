@@ -24,7 +24,7 @@ export default function Classes(props) {
   return (
     <>
       {loading ? (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[18rem] w-full md:w-full sm:[50%] ">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -39,10 +39,10 @@ export default function Classes(props) {
               <p className="dark:text-white font-Comfortaa font-semibold text-[1.3rem] text-center mt-6">CLASSES</p>
             </div>
           </div>
-          <div className="ml-[7rem]">
+          <div className="w-[80%] text-l text-left text-gray-500 dark:text-gray-400 mt-6 flex justify-end">
             <Link to="/formClass">
               <button
-                className="inline-flex items-center  dark:text-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 h-10 mr-4"
+                className="inline-flex items-center  dark:text-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 h-10"
                 type="button"
               >
                 Add Class

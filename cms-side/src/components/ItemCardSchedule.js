@@ -20,7 +20,7 @@ export default function Item(props) {
   }, []);
 
   const check = schedules.filter((el) => el.day == day);
-  console.log(check);
+  // console.log(check);
 
   return (
     <>

@@ -3,7 +3,6 @@ import { createBrowserRouter, redirect } from "react-router-dom";
 import Layout from "../pages/Layout";
 import Dashboard from "../pages/Dashboard";
 import NewAdmin from "../pages/NewAdmin";
-import Student from "../pages/Student";
 import Scores from "../pages/Scores";
 import AddLesson from "../pages/AddLesson";
 import AddClass from "../pages/AddClass";
@@ -17,6 +16,7 @@ import Attendance from "../pages/Attendance";
 import ChatRoom from "../pages/ChatRoom";
 import AddScores from "../pages/AddScores";
 import History from "../pages/History";
+import Lessons from "../pages/Lessons";
 
 const router = createBrowserRouter([
   {
@@ -34,22 +34,12 @@ const router = createBrowserRouter([
         path: "/",
         element: <Dashboard />,
       },
-      {
-        path: "/student/:id",
-        element: <Student />,
-      },
+
       {
         path: "/scores/:studentId",
         element: <Scores />,
       },
-      // {
-      //   path: "/product/:id",
-      //   element: <Modal />,
-      // },
-      // {
-      //   path: "/categories",
-      //   element: <Categories />,
-      // },
+
       {
         path: "/chat",
         element: <ChatRoom />,
@@ -63,7 +53,7 @@ const router = createBrowserRouter([
         element: <AddStudent />,
       },
       {
-        path: "/addLesson",
+        path: "/formLesson",
         element: <AddLesson />,
       },
       {
@@ -77,6 +67,10 @@ const router = createBrowserRouter([
       {
         path: "/schedule",
         element: <Schedule />,
+      },
+      {
+        path: "/lesson",
+        element: <Lessons />,
       },
       {
         path: "/teacher",

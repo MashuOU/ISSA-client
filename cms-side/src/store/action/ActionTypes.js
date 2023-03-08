@@ -12,7 +12,7 @@ export const FETCH_TEACHER = "teachers/fetchSuccess";
 
 export const FETCH_LESSON = "lessons/fetchSuccess";
 
-export const FETCH_LESSON_BYID = "lessons/fetchSuccess";
+export const FETCH_LESSON_BYID = "lesson/fetchSuccess";
 
 export const FETCH_HISTORY = "history/fetchSuccess";
 

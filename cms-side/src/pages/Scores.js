@@ -6,7 +6,7 @@ import TableScores from "../components/TableScores";
 import { lessonsFetch, studentById } from "../store/action/ActionCreator";
 import ClipLoader from "react-spinners/ClipLoader";
 
-export default function Lessons(props) {
+export default function Scores(props) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
@@ -17,14 +17,14 @@ export default function Lessons(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 700);
+    }, 1000);
     dispatch(studentById(studentId));
   }, []);
 
   return (
     <>
       {loading ? (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[18rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -39,9 +39,9 @@ export default function Lessons(props) {
               </div>
             </th>
             <div>
-              <Link to="/attendance">
+              <Link to="/addScores">
                 <button
-                  className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+                  className="inline-flex items-center border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
                   type="button"
                 >
                   Add Scores
