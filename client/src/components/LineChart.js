@@ -1,22 +1,31 @@
 import ReactApexChart from "react-apexcharts";
 
 export default function LineChart(props) {
-  const { data } = props
-  const Scoresname = data.map(each => each.category)
-  const scores = data.map(each => each.value)
+  const { data } = props;
+  const Scoresname = data.map((each) => each.category);
+  const scores = data.map((each) => each.value);
 
+  const KKM = data[0].Lesson.KKM;
+
+  // Mendapatkan lebar layar saat ini
+  var lebarLayar = window.innerWidth;
+
+  // Mencetak lebar layar ke console
+  // console.log("Lebar layar: " + lebarLayar + "px");
+
+  
   const series = {
     monthDataSeries1: {
       name: Scoresname,
       value: scores,
     },
   };
-
-
+  
+  console.log(series, "noel");
   const state = {
     series: [
       {
-        name: "Math",
+        name: "Nilai",
         data: series.monthDataSeries1.value,
       },
     ],
@@ -29,14 +38,14 @@ export default function LineChart(props) {
           enabled: false,
         },
         // foreColor: "#fff",
-        fontFamily: "montserrat"
+        fontFamily: "montserrat",
       },
       dataLabels: {
         enabled: false,
       },
       stroke: {
         curve: "smooth",
-        colors: ['#a033c4'],
+        colors: ["#a033c4"],
       },
       title: {
         // text: "Fundamental Analysis of Stocks",
@@ -48,7 +57,7 @@ export default function LineChart(props) {
       },
 
       // grid: {
-      //   show: false,
+      //   show: true,
       //   borderColor: '#ccc',
       //   strokeDashArray: 5,
       //   position: 'back',
@@ -79,7 +88,7 @@ export default function LineChart(props) {
       annotations: {
         yaxis: [
           {
-            y: 70, // nilai batas
+            y: KKM, // nilai batas
             borderColor: "#a61f31", // warna garis batas
             label: {
               borderColor: "#a61f31",
@@ -98,12 +107,13 @@ export default function LineChart(props) {
   return (
     <>
       {/* <div id="chart" className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400 "> */}
-      <ReactApexChart className="border text-white border-black"
+      <ReactApexChart
+        className=" w-full border-black"
         options={state.options}
         series={state.series}
         type="area"
         height={250}
-        width={340}
+        width={lebarLayar - 20}
       />
       {/* </div> */}
     </>

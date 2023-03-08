@@ -1,375 +1,187 @@
-
-import { useEffect, useState } from 'react'
-import '../style/custom.scss'
-
+import { useEffect, useState, useRef } from "react";
+import "../style/custom.scss";
 
 export default function Chat() {
-
-
+  const chatAreaRef = useRef(null);
   function sendMessage(event) {
     if (event.key === "Enter") {
       const newMessage = {
         message: event.target.value,
         time: "Message sent at " + new Date().toLocaleTimeString(),
-        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
+        imgUrl:
+          "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png",
       };
-      setMessageList(prevMessages => [...prevMessages, newMessage]);
-      event.target.value = "";
+      setMessageList((prevMessages) => [...prevMessages, newMessage]);
+      event.target.value = null;
 
-      const chatbox = document.getElementById('chatArea');
-      chatbox.scrollTop = chatbox.scrollHeight;
+      // const chatbox = document.getElementById("chatArea");
+      // chatbox.scrollTop = chatbox.scrollHeight;
       // alert(chatbox.scrollTop)
-
     }
   }
 
+  const [dummyList, setDummyList] = useState([
+    {
+      imgUrl:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png",
+      name: "Madison Jones",
+      message: "What time was our meet",
+      time: "20m",
+    },
+    {
+      imgUrl:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png",
+      name: "Miguel Cohen",
+      message: "Snackwave craft ",
+      time: "22m",
+    },
+    {
+      imgUrl:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%288%29.png",
+      name: "Sarah Jones",
+      message: "Oyoyoy",
+      time: "40m",
+    },
+  ]);
 
+  const [messageList, setMessageList] = useState([
+    {
+      message: "Luctus et ultrices posuere cubilia curae.",
+      time: "Message seen 1.22pm",
+      imgUrl:
+        "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png",
+    },
+  ]);
 
-
-
-  const [dummyList, setDummyList] = useState(
-    [
-      {
-        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png",
-        name: "Madison Jones",
-        message: "What time was our meet",
-        time: "20m"
-      },
-      {
-        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png",
-        name: "Miguel Cohen",
-        message: "Snackwave craft ",
-        time: "22m"
-      },
-      {
-        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%288%29.png",
-        name: "Sarah Jones",
-        message: "Oyoyoy",
-        time: "40m"
-      }
-    ]
-  )
-
-  const [messageList, setMessageList] = useState(
-    [
-      {
-        message: "Luctus et ultrices posuere cubilia curae.",
-        time: "Message seen 1.22pm",
-        imgUrl: "https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
-      }
-    ]
-  )
-
- 
+  useEffect(() => {
+    // scroll to the bottom of the chat area after each message is added
+    chatAreaRef.current.scrollTop = chatAreaRef.current.scrollHeight;
+  }, [messageList]);
 
   return (
-
-    <>
-
-      <div className="app  border-red-500   ">
- 
-
-  
-
-        <div className=" grid  overflow-hidden grid-flow-col shadow-lg border-black">
- 
-
- 
-          <div id="chatArea" className="chat-area  border-yellow-800">
-
-            <div className="chat-area-header">
-              <div className="chat-area-title">CodePen Group</div>
-              <div className="chat-area-group">
-                <img
-                  className="chat-area-profile"
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
-                  alt=""
-                />
-                <img
-                  className="chat-area-profile"
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png"
-                  alt=""
-                />
-                <img
-                  className="chat-area-profile"
-                  src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png"
-                  alt=""
-                />
-                <span>+4</span>
-              </div>
-            </div>
-
-            <div className="chat-area-main ">
-
-
-
-              <div className="chat-msg">
-                <div className="chat-msg-profile">
-                  <img
-                    className="chat-msg-img"
-                    src=""
-                    alt=""
-                  />
-                  <div className="chat-msg-date">Message seen 1.22pm</div>
-                </div>
-
-                <div className="chat-msg-content">
-                  <div className="chat-msg-text">
-                    Luctus et ultrices posuere cubilia curae.
-                  </div>
-                  <div className="chat-msg-text">
-                    <img src="https://media0.giphy.com/media/yYSSBtDgbbRzq/giphy.gif?cid=ecf05e47344fb5d835f832a976d1007c241548cc4eea4e7e&rid=giphy.gif" />
-                  </div>
-                  <div className="chat-msg-text">
-                    Neque gravida in fermentum et sollicitudin ac orci phasellus
-                    egestas. Pretium lectus quam id leo.
-                  </div>
-                </div>
-
-              </div>
-
-              <div className="chat-msg owner">
-                <div className="chat-msg-profile">
-                  <img
-                    className="chat-msg-img"
-                    src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"
-                    alt=""
-                  />
-                  <div className="chat-msg-date">Message seen 1.22pm</div>
-                </div>
-                <div className="chat-msg-content">
-                  <div className="chat-msg-text">
-                    Sit amet risus nullam eget felis eget. Dolor sed viverra
-                    ipsum😂😂😂
-                  </div>
-                  <div className="chat-msg-text">
-                    Cras mollis nec arcu malesuada tincidunt.
-                  </div>
-                </div>
-              </div>
-
-
-              {messageList.map(each => {
-                return (
-                  <div className="chat-msg owner">
-                    <div className="chat-msg-profile">
-                      <img
-                        className="chat-msg-img"
-                        src={each.imgUrl}
-                        alt=""
-                      />
-                      <div className="chat-msg-date"> {each.time} </div>
-                    </div>
-                    <div className="chat-msg-content">
-                      <div className="chat-msg-text">
-                        {each.message}
-                      </div>
-                    </div>
-                  </div>
-                )
-              })}
-
-
-
-              {/* <div className="chat-msg">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 2.45pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">
-              Aenean tristique maximus tortor non tincidunt. Vestibulum ante
-              ipsum primis in faucibus orci luctus et ultrices posuere cubilia
-              curae😊
-            </div>
-            <div className="chat-msg-text">
-              Ut faucibus pulvinar elementum integer enim neque volutpat.
-            </div>
-          </div>
-        </div> */}
-              {/* <div className="chat-msg owner">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 2.50pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">
-              posuere eget augue sodales, aliquet posuere eros.
-            </div>
-            <div className="chat-msg-text">
-              Cras mollis nec arcu malesuada tincidunt.
-            </div>
-          </div>
-        </div> */}
-              {/* <div className="chat-msg">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%2812%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 3.16pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">
-              Egestas tellus rutrum tellus pellentesque
-            </div>
-          </div>
-        </div> */}
-              {/* <div className="chat-msg">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%283%29+%281%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 3.16pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">
-              Consectetur adipiscing elit pellentesque habitant morbi tristique
-              senectus et.
-            </div>
-          </div>
-        </div> */}
-              {/* <div className="chat-msg owner">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%281%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 2.50pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">Tincidunt arcu non sodales😂</div>
-          </div>
-        </div> */}
-              {/* <div className="chat-msg owner">
-          <div className="chat-msg-profile">
-            <img
-              className="chat-msg-img"
-              src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/3364143/download+%282%29.png"
-              alt=""
-            />
-            <div className="chat-msg-date">Message seen 3.16pm</div>
-          </div>
-          <div className="chat-msg-content">
-            <div className="chat-msg-text">
-              Consectetur adipiscing elit pellentesque habitant morbi tristique
-              senectus et🥰
-            </div>
-          </div>
-        </div> */}
-            </div>
-            <div className="chat-area-footer">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-video"
-              >
-                <path d="M23 7l-7 5 7 5V7z" />
-                <rect x={1} y={5} width={15} height={14} rx={2} ry={2} />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-image"
-              >
-                <rect x={3} y={3} width={18} height={18} rx={2} ry={2} />
-                <circle cx="8.5" cy="8.5" r="1.5" />
-                <path d="M21 15l-5-5L5 21" />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-plus-circle"
-              >
-                <circle cx={12} cy={12} r={10} />
-                <path d="M12 8v8M8 12h8" />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-paperclip"
-              >
-                <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" />
-              </svg>
-              {/* <input onMouseEnter={() => alert() } type="text" placeholder="Type something here..." />  */}
-              <input
-                type="text"
-                placeholder="Type something here..."
-                onKeyDown={sendMessage}
-              />
-
-
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-smile"
-              >
-                <circle cx={12} cy={12} r={10} />
-                <path d="M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01" />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="feather feather-thumbs-up"
-              >
-                <path d="M14 9V5a3 3 0 00-3-3l-4 9v11h11.28a2 2 0 002-1.7l1.38-9a2 2 0 00-2-2.3zM7 22H4a2 2 0 01-2-2v-7a2 2 0 012-2h3" />
-              </svg>
-            </div>
-          </div>
-
- 
-
-
+    <div clasName="  ">
+      <div className=" grid h-[100vh] pt-20 grid-rows-[max-content_1fr_max-content] border-black">
+        <div className="pl-4">
+          <h5 class="text-xl mb-6 font-semibold tracking-tight   text-gray-900 dark:text-white">
+            {" "}
+            Chat{" "}
+          </h5>
         </div>
 
+        <div
+          id="chatArea"
+          ref={chatAreaRef}
+          className=" border-black overflow-scroll "
+          style={{
+            backgroundImage:
+              "url(https://i.pinimg.com/736x/3d/8c/2f/3d8c2f2c82c1c9ef1e27be645cd1aa17.jpg)",
+            backgroundSize: "cover",
+          }}
+        >
+          <div className="chat chat-start  ">
+            <div className="chat-image avatar">
+              {/* <div className="w-10 rounded-full">
+                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              </div> */}
+            </div>
+            <div className="chat-bubble bg-white text-black ">
+              It was said that you would, destroy the Sith, not join them.
+            </div>
+          </div>
+          <div className="chat chat-start text-sm">
+            <div className="chat-image avatar">
+              {/* <div className="w-10 rounded-full">
+              <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+            </div> */}
+            </div>
+            <div className="chat-bubble bg-white text-black   ">
+              It was you who would bring balance to the Force
+            </div>
+          </div>
 
+          {messageList.map((each, index) => {
+            return (
+              <div key={each.index} className="chat chat-end text-sm  ">
+                {/* <div className="chat-image avatar">
+                    <div className="w-10 rounded-full">
+                      <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    </div>
+                  </div> */}
+                <div className="chat-bubble bg-white text-black   "> {each.message} </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <form className=" border-black">
+          <label htmlFor="chat" className="sr-only">
+            Your message
+          </label>
+          <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+            <button
+              type="button"
+              className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+            >
+              <svg
+                aria-hidden="true"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="sr-only">Upload image</span>
+            </button>
+            <button
+              type="button"
+              className="p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
+            >
+              <svg
+                aria-hidden="true"
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zM7 9a1 1 0 100-2 1 1 0 000 2zm7-1a1 1 0 11-2 0 1 1 0 012 0zm-.464 5.535a1 1 0 10-1.415-1.414 3 3 0 01-4.242 0 1 1 0 00-1.415 1.414 5 5 0 007.072 0z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              <span className="sr-only">Add emoji</span>
+            </button>
+            <textarea
+              id="chat"
+              rows={1}
+              className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              placeholder="Your message..."
+              defaultValue={""}
+              onKeyDown={sendMessage}
+            />
+            <button
+              type="submit"
+              className="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600"
+            >
+              <svg
+                aria-hidden="true"
+                className="w-6 h-6 rotate-90"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+              </svg>
+              <span className="sr-only">Send message</span>
+            </button>
+          </div>
+        </form>
       </div>
-
-
-
-    </>
-
-  )
+    </div>
+  );
 }

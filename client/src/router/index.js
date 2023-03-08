@@ -9,6 +9,8 @@ import LessonsList from "../pages/LessonsList"
 import LoginPage from "../pages/Login"
 import ClientChat from "../pages/Chat-client"  
 import TotalNilai from "../pages/TotalNilai"
+import EventPage from "../pages/Event"
+import PaymentPage from "../pages/PaymentPage"
  
 
 
@@ -42,6 +44,14 @@ const router = createBrowserRouter(
         {
           path: "lesson/:id",
           element: <LessonDetail />
+        },
+        {
+          path: "event",
+          element: <EventPage />
+        },
+        {
+          path: "payment",
+          element: <PaymentPage />
         }
       ]
     },

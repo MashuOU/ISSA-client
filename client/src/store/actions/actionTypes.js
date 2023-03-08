@@ -23,3 +23,43 @@ export const UPDATE_PRODUCT_IMAGEVALUE = "UPDATE_PRODUCT_IMAGEVALUE"
 
 
 export const WRITE_LESSON = "WRITE_LESSON"
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const FETCH_SCHEDULE = (type) => {
+  return `SCHEDULE/fetchAll`
+}
+
+export const FETCH_CLASSMATE = (type) => {
+  return `CLASSMATE/fetchAll`
+}
+
+export const FETCH_STUDENT_DETAIL = (type) => {
+  return `STUDENT_DETAIL/fetchAll`
+}
+
+export const FETCH_CLASS_SCHEDULE = (type) => {
+  return `SCHEDULE_CLASS/fetchAll`
+}
+
+export const FETCH_ACTIVIY = (type) => {
+  return `ACTIVIY/fetchAll`
+}
+
+export const FETCH_SPP = (type) => {
+  return `SPP/fetchAll`
+}
+
+export const FETCH_STATISTIC = (type) => {
+  return `STATISTIC/fetchAll`
+}

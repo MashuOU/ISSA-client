@@ -1,24 +1,33 @@
 
 
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import BubbleChartDua from '../components/BubbleChartDua';
+import { useEffect, useState, useRef } from 'react';
 
+import { fetchStatistic } from '../store/actions/actionCreator';
 
 export default function TotalNilai(props) {
 
 
-  // const { product:
-  //   {
-  //     allProduct,
-  //     productById,
-  //     error,
-  //     loading
-  //   },
-  //   category
-  // } = useSelector((state) => state)
+  const dispatch = useDispatch()
 
-  // const { Attendances } = productById
+  const {
+    student: {
+      statistic
+    }
+  } = useSelector((state) => state)
 
+  // console.log(statistic, "ora prono");
+
+  useEffect(() => {
+    dispatch(fetchStatistic()) 
+  }, [])
+  
+  if(!statistic.length) {
+    return(
+      <p>Loading</p>
+    )
+  }
 
   return (
     <>
@@ -26,7 +35,7 @@ export default function TotalNilai(props) {
 
         <div className=' bg-[#fce4bb] rounded-2xl mt-4 grid justify-center items-center overflow-scroll border-red-800'>
 
-          <BubbleChartDua />
+          <BubbleChartDua data={statistic} />
 
         </div>
 

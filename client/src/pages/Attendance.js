@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { getProductById } from '../store/actions/actionCreator';
+import { fetchStudentDetail } from '../store/actions/actionCreator';
 
 import ScrollReveal from 'scrollreveal';
 
@@ -14,19 +14,19 @@ import HeatmapDua from '../components/HeatmapChartDua';
 
 
 export default function AttendancePage(props) {
+  const dispatch = useDispatch()
 
-  const { product:
-    {
-      allProduct,
-      productById,
-      error,
-      loading
-    },
-    category
-  } = useSelector((state) => state)
+  const {
+    student: { studentDetail },
+  } = useSelector((state) => state);
 
-  const { Attendances } = productById
+  const { Attendances } = studentDetail
 
+  console.log(studentDetail, 'lech');
+  
+  useEffect(() => {
+    
+  }, [])
 
   return (
     <>

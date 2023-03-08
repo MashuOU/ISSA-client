@@ -24,7 +24,7 @@ export default function Name(props) {
         return createdAtDate === today;
       });
       if (findToday.length) {
-        console.log(findToday, 'melech');
+        // console.log(findToday, 'melech');
         setTodayStatus(findToday[0].status)
       }
     }

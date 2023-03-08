@@ -42,19 +42,19 @@ export default function Carousel() {
 
 
     <div className=' mt-10 p-3 justify-center overflow-scroll max-w-screen-xl mx-auto  border-red-400' >
-      
+
       <h5 class="text-xl font-semibold tracking-tight text-gray-900"> Berita </h5>
 
-      
+
       <Swiper
         spaceBetween={50}
         slidesPerView={1}
-        onSlideChange={() => console.log('slide change')}
-        onSwiper={(swiper) => console.log(swiper)}
+        // onSlideChange={() => console.log('slide change')}
+        // onSwiper={(swiper) => console.log(swiper)}
       >
-        {productData.map(each => {
+        {productData.map((each, index) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={index} >
               <CardImage src={each.imgUrl} title={each.name} />
             </SwiperSlide>
           )
@@ -62,8 +62,8 @@ export default function Carousel() {
 
       </Swiper>
     </div>
-    
-    
+
+
   );
 }
 
