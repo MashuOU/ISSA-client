@@ -1,15 +1,15 @@
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const baseUrl = "http://localhost:3001";
+const baseUrl = 'http://localhost:3000';
 
 export default function Login(props) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    NIP: "",
-    password: "",
+    NIP: '',
+    password: '',
   });
 
   const changeInputHandler = (event) => {
@@ -26,9 +26,9 @@ export default function Login(props) {
   const submitForm = (e) => {
     e.preventDefault();
     fetch(`${baseUrl}/teachers/login`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
 
       body: JSON.stringify(form),
@@ -49,8 +49,9 @@ export default function Login(props) {
         //   showConfirmButton: false,
         //   timer: 1500,
         // });
-        localStorage.setItem("access_token", data.access_token);
-        localStorage.setItem("ClassId", data.ClassId);
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('ClassId', data.ClassId);
+        localStorage.setItem('TeacherId', data.id);
         navigate(`/`);
       })
       .catch((error) => {
