@@ -20,7 +20,14 @@ Note: For simplicity purpose, I removed all the classnames, you can check the re
   return (
     <section {...props}>
       {isEditing ? (
-        <div onBlur={() => setEditing(false)} onKeyDown={(e) => handleKeyDown(e, type)}>
+        <div
+          onBlur={() => {
+            setTimeout(() => {
+              setEditing(false);
+            }, 1000);
+          }}
+          onKeyDown={(e) => handleKeyDown(e, type)}
+        >
           {children}
         </div>
       ) : (

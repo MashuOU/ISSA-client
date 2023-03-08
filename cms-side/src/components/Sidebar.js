@@ -80,6 +80,15 @@ const Sidebar = () => {
               <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Teachers</span>
             </li>
           </Link>
+          <Link to="/history">
+            <li
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
+              `}
+            >
+              <span className="material-symbols-outlined">history</span>
+              <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>History</span>
+            </li>
+          </Link>
           <li
             onClick={logout}
             className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4 
@@ -98,12 +107,14 @@ const Sidebar = () => {
             </span>
             <span className={`${!open && "hidden"} origin-left duration-200 font-Playfair text-[1rem]`}>Dark Mode</span>
           </li>
-          <li
-            className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4  justify-center mt-[23rem]
+          <Link to="/chat">
+            <li
+              className={`flex  rounded-md p-2 cursor-pointer hover:bg-light-white text-gray-300 text-sm items-center gap-x-4  justify-center mt-[20rem]
               `}
-          >
-            <Chat />
-          </li>
+            >
+              <Chat />
+            </li>
+          </Link>
         </ul>
       </div>
       {/* <div className="h-screen flex-1 p-7">

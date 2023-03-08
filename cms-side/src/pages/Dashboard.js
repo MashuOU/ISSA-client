@@ -5,82 +5,130 @@ import ClipLoader from "react-spinners/ClipLoader";
 
 import TableStudent from "../components/TableStudents";
 import { classesFetch, studentById, studentsFetch } from "../store/action/ActionCreator";
+import PaginatedItems from "../components/Pagination";
 
 export default function Dashboard(params) {
-  const navigate = useNavigation();
-  const students = useSelector((state) => state.students.students);
-  // const classes = useSelector((state) => state.classes.classes);
-  // console.log(classes);
-  // console.log(students);
-
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigation();
+  const students = useSelector((state) => state.students.students);
+  const classes = useSelector((state) => state.classes.classes);
+  const [query, setQuery] = useState({
+    ClassId: "All",
+    name: "",
+    pageIndex: 1,
+  });
+
+  // console.log(classes, "ini class");
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
-    dispatch(studentsFetch(localStorage.ClassId));
-    // dispatch(classesFetch());
+    }, 2500);
+    dispatch(studentsFetch());
+    dispatch(classesFetch());
   }, []);
 
-  const clearClassId = () => {
-    const temp = localStorage.removeItem("ClassId");
-    console.log(temp);
+  const changeInputHandler = (event) => {
+    const { name, value } = event.target;
+
+    const newQuery = {
+      ...query,
+    };
+    newQuery[name] = value;
+
+    setQuery(newQuery);
+  };
+
+  const submitQuery = (e) => {
+    if (query.ClassId != "" || query.name != "") {
+      // localStorage.removeItem("ClassId");
+      dispatch(studentsFetch(query));
+      setQuery({
+        ClassId: "All",
+        name: "",
+      });
+    }
   };
 
   return (
     <>
-      {loading ? (
+      {loading && (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
         </div>
-      ) : (
+      )}
+      {!loading && (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
           <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
             <div>
               <Link to="/addStudent">
                 <button
-                  className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+                  className="inline-flex items-center dark:text-gray-500 dark:bg-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800  h-10"
                   type="button"
                 >
                   Add New Murid
                 </button>
               </Link>
             </div>
-            {/* <div className="w-[20%]">
-              <select
-                id="countries"
-                className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              >
-                <option selected>Sort By Class</option>
-                {classes?.map((el) => {
-                  return (
-                    <option key={el.id} value="US">
-                      {el.name}
-                    </option>
-                  );
-                })}
-              </select>
-            </div> */}
-            <label htmlFor="table-search" className="sr-only">
-              Search
-            </label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none ">
-                <svg className="w-5 h-5 text-gray-500 dark:text-gray-400" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                  <path fillRule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clipRule="evenodd"></path>
-                </svg>
+            <div className="flex row">
+              <div className="flex items-center dark:text-white">
+                <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Hadir
               </div>
-              <input
-                type="text"
-                id="table-search-users"
-                className="block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
-                placeholder="Search for users"
-              />
+
+              <div className="flex items-center ml-4 dark:text-white">
+                <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-2"></div> Sakit
+              </div>
+              <div className="flex items-center ml-4 dark:text-white">
+                <div className="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div> Izin
+              </div>
+              <div className="flex items-center ml-4 dark:text-white">
+                <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div> Alfa
+              </div>
+            </div>
+            <select
+              value={query.ClassId}
+              onChange={changeInputHandler}
+              onClick={submitQuery}
+              name="ClassId"
+              id="countries"
+              className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[20%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            >
+              <option selected disabled>
+                Sort By Class
+              </option>
+              <option value="All">All</option>
+              {classes.map((el) => {
+                return (
+                  <option key={el.id} value={el.id}>
+                    {el.name}
+                  </option>
+                );
+              })}
+            </select>
+            <div className="flex justify-between">
+              <div>
+                <input
+                  onChange={changeInputHandler}
+                  value={query.name}
+                  type="text"
+                  name="name"
+                  placeholder="Type here"
+                  className="input input-bordered  max-w-xs block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 dark:bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
+                />
+              </div>
+              <div className="ml-4">
+                <button
+                  onClick={submitQuery}
+                  className="inline-flex items-center dark:text-gray-500 dark:bg-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800  h-10"
+                  type="button"
+                >
+                  Search
+                </button>
+              </div>
             </div>
           </div>
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-6 ">
@@ -105,7 +153,7 @@ export default function Dashboard(params) {
                   Class
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Biaya SPP
+                  Payment Status
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Absensi
@@ -115,18 +163,23 @@ export default function Dashboard(params) {
                 </th>
               </tr>
             </thead>
-            {students.map((el, index) => {
-              return <TableStudent key={el.id} data={el} index={index} />;
-            })}
+            {Array.isArray(students.rows) &&
+              students?.rows.map((el, index) => {
+                return <TableStudent key={el.id} data={el} index={index} />;
+              })}
           </table>
 
           {/* Pagination */}
-          {/* <div className="flex justify-center mt-[35rem]">
+
+          <div className="flex justify-center mt-[3rem]">
             <nav aria-label="Page navigation example">
               <ul className="inline-flex items-center -space-x-px">
                 <li>
                   <a
-                    href="#"
+                    onChange={changeInputHandler}
+                    value={query.pageIndex}
+                    name="pageIndex"
+                    href=""
                     className="block px-3 py-2 ml-0 leading-tight text-gray-800 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <span className="sr-only">Previous</span>
@@ -146,35 +199,6 @@ export default function Dashboard(params) {
                 <li>
                   <a
                     href="#"
-                    className="px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    2
-                  </a>
-                </li>
-                <li>
-                  <a href="#" aria-current="page" className="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">
-                    3
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    4
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
-                    className="px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  >
-                    5
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#"
                     className="block px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <span className="sr-only">Next</span>
@@ -185,7 +209,7 @@ export default function Dashboard(params) {
                 </li>
               </ul>
             </nav>
-          </div> */}
+          </div>
         </div>
       )}
     </>

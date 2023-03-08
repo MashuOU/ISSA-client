@@ -1,14 +1,41 @@
-import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH_SCHEDULE } from "./ActionTypes";
-import axios from "axios";
-import { redirect } from "react-router-dom";
+import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH_SCHEDULE, FETCH_TEACHER, FETCH_LESSON, FETCH_LESSON_BYID, FETCH_HISTORY } from "./ActionTypes";
 
 // import Swal from "sweetalert2";
 
-const baseUrl = "http://localhost:3001";
+let baseUrl = "http://localhost:3001";
 
-export const studentsFetch = (payload) => {
+// STUDENT ONLY //
+
+export const studentsFetch = (query) => {
+  // console.log(temp, "masuk ni");
+  let url = `http://localhost:3001/students?`;
+
+  if (!query) {
+    url += `ClassId=${localStorage.ClassId}`;
+  } else if (query.ClassId !== "" && query.ClassId === "All" && query.name) {
+    url += `name=${query.name}`;
+  } else if (query.ClassId === "All" && query.name) {
+    url += `name=${query.name}`;
+  } else if (query.ClassId !== "" && query.ClassId !== "All") {
+    const temp = (localStorage.ClassId = query.ClassId);
+    url += `ClassId=${temp}`;
+  } else if (query.ClassId === "All") {
+    console.log("masuk");
+    url += `${url}`;
+  }
+  // else {
+  //   url += `ClassId=${localStorage.ClassId}`;
+  // }
+  // else if (query.ClassId != "" && query.name) {
+  //   url += `ClassId=${localStorage.ClassId}&name=${query.name}`;
+  // }
+  //  else {
+  //   const temp = (localStorage.ClassId = query.ClassId);
+  //   url += `ClassId=${temp}`;
+  // }
+
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/students?ClassId=${localStorage.ClassId}`, {
+    fetch(`${url}&pageIndex=1`, {
       headers: {
         access_token: localStorage.access_token,
       },
@@ -128,7 +155,6 @@ export const editStudent = (id, payload) => {
       .then((data) => {
         // console.log("Success:", data);
         dispatch(studentsFetch());
-        redirect("/student");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -160,9 +186,83 @@ export const studentDelete = (id) => {
   };
 };
 
+//  TEACHER ONLY //
+export const teachersFetch = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/teachers`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data, ">>>>>>>>");
+        dispatch(teachersFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const teachersFetchSuccess = (payload) => {
+  return {
+    type: FETCH_TEACHER,
+    payload: payload,
+  };
+};
+
+export const teacherAdd = (payload) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/teachers/register`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(teachersFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
+
+// CLASS ONLY //
+
 export const classesFetch = (payload) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/class`, {
+    fetch(`${baseUrl}/classes`, {
       headers: {
         access_token: localStorage.access_token,
       },
@@ -190,7 +290,7 @@ export const classesFetchSuccess = (payload) => {
   };
 };
 
-export const classById = (id) => {
+export const classesById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
     fetch(`${baseUrl}/class/${id}`, {
@@ -222,6 +322,191 @@ export const classFetchSuccessById = (payload) => {
   };
 };
 
+export const classesAdd = (payload) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/classes`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(classesFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
+
+export const editClass = (payload) => {
+  console.log(payload, "ini action");
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/class/${payload.StudentId}`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(classesFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const classDelete = (id) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/class/${id}`, {
+      method: "DELETE",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(classesFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+// LESSON ONLY //
+
+export const lessonsFetch = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/lessons`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        dispatch(lessonsFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const lessonsFetchSuccess = (payload) => {
+  return {
+    type: FETCH_LESSON,
+    payload: payload,
+  };
+};
+
+export const lessonsById = (id) => {
+  console.log(id);
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/lessons/${id}`, {
+      method: "GET",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(lessonFetchSuccessById(data));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const lessonFetchSuccessById = (payload) => {
+  return {
+    type: FETCH_LESSON_BYID,
+    payload: payload,
+  };
+};
+
+// ONLY SCORES //
+
+export const editScores = (id, payload) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/scores`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(studentById(id));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+// ATTENDANCE ONLY //
+
 export const addAttendances = (payload) => {
   console.log(payload);
   return (dispatch, getState) => {
@@ -251,7 +536,7 @@ export const addAttendances = (payload) => {
         //   timer: 1500,
         // });
         dispatch(studentsFetch());
-        console.log("masuk nih");
+        // console.log("masuk nih");
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -263,6 +548,34 @@ export const addAttendances = (payload) => {
       });
   };
 };
+
+export const editAttendance = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/attendances`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(studentsFetch());
+      })
+      .catch((error) => {
+        // console.error("Error:", error);
+      });
+  };
+};
+
+// SCHEDULE ONLY //
 
 export const scheduleFetch = (payload) => {
   return (dispatch, getState) => {
@@ -290,6 +603,39 @@ export const scheduleFetch = (payload) => {
 export const schedulesFetchSuccess = (payload) => {
   return {
     type: FETCH_SCHEDULE,
+    payload: payload,
+  };
+};
+
+// HISTORY ONLY //
+
+export const historiesFetch = (payload) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/histories`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data, ">>>>>>>>");
+        dispatch(historiesFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const historiesFetchSuccess = (payload) => {
+  return {
+    type: FETCH_HISTORY,
     payload: payload,
   };
 };

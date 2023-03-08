@@ -1,12 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableSchedule from "../components/TableSchedule";
 import { scheduleFetch } from "../store/action/ActionCreator";
+import ClipLoader from "react-spinners/ClipLoader";
+import Item from "../components/ItemCardSchedule";
 
 export default function Schedule(props) {
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+
   const schedules = useSelector((state) => state.schedules.schedules);
+
+  // console.log(schedules.values());
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    dispatch(scheduleFetch());
+  }, []);
 
   const result1 = schedules.filter((el) => el.day == "senin");
   const result2 = schedules.filter((el) => el.day == "selasa");
@@ -16,52 +29,43 @@ export default function Schedule(props) {
   const result6 = schedules.filter((el) => el.day == "sabtu");
 
   const temp = [result1, result2, result3, result4, result5, result6];
-  // console.log(result1);
+  // console.log(temp);
 
-  useEffect(() => {
-    dispatch(scheduleFetch());
-  }, []);
+  const day = ["senin", "selasa", "rabu", "kamis", "jumat", "sabtu"];
+
   return (
     <>
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
-        <div className="ml-4 mb-10">
-          <p className="font-raleway italic font-semibold text-[1.3rem] dark:text-white ">List Schedules</p>
+      {loading && (
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+          <div className="flex content-center justify-center my-auto ">
+            <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
+          </div>
         </div>
-        <table className="w-full text-l text-left text-gray-500 dark:text-gray-400 ">
-          <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
-            <tr>
-              <th scope="col" className="px-12 py-3">
-                No
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Senin
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Selesa
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Rabu
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Kamis
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Jumat
-              </th>
-              <th scope="col" className="px-12 py-3">
-                Sabtu
-              </th>
-
-              <th scope="col" className="px-6 py-3">
-                Action
-              </th>
-            </tr>
-          </thead>
-          <tbody className="text-center">
-            <TableSchedule data={schedules} />
-          </tbody>
-        </table>
-      </div>
+      )}
+      {!loading && (
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+          <div className="ml-4 mb-10">
+            <p className="font-raleway italic font-semibold text-[2rem] dark:text-white text-center mb-[4rem]">SCHEDULES</p>
+          </div>
+          <div className="flex justify-center items-center">
+            <div className="grid grid-cols-3 gap-4 ">
+              {day.map((el, index) => {
+                return (
+                  <div class="max-w-sm bg-[#d4d4d4] border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    <div class="p-5">
+                      <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white text-center">{el.toUpperCase()}</h5>
+                      <ul class="list-disc ml-2">
+                        <Item key={el} day={el} />
+                      </ul>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+      ( )
     </>
   );
 }

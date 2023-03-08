@@ -1,18 +1,25 @@
 import { useDispatch } from "react-redux";
-import { Link, redirect, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { studentById, studentDelete } from "../store/action/ActionCreator";
 
 export default function TableStudent(props) {
   const { data, index } = props;
+  // console.log(data, "<<<<<<<");
   const dispatch = useDispatch();
-  const temp = data.Attendances.map((el) => {
+
+  const temp = data.Attendances?.map((el) => {
     return el.createdAt;
+  });
+
+  const status = data.Attendances.map((el) => {
+    return el.status;
   });
 
   const date = new Date();
   const dateNow = date.getDate();
   const length = temp.length - 1;
-  const result = new Date(temp[length]).getDate();
+  const resultDate = new Date(temp[length]).getDate();
+  const resultStatus = status[length];
 
   // const handleStudentById = () => {
   //   dispatch(studentById(studentId));
@@ -42,7 +49,7 @@ export default function TableStudent(props) {
         <td className="px-6 py-4">{data.gender}</td>
         <td className="px-6 py-4">{data.birthDate.substring(0, 10)}</td>
         <td className="px-6 py-4">{data.Class.name}</td>
-        <td className="px-6 py-4">
+        <td className="px-6 py-4 flex justify-center">
           <div className="flex items-center">
             <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div> Done
           </div>
@@ -50,14 +57,29 @@ export default function TableStudent(props) {
                 <div className="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div> Pending
               </div> */}
         </td>
-        <td className="px-6 py-4">
-          {dateNow == result && (
-            <div className="flex items-center">
+        <td className="px-6 py-4 justify-center">
+          {dateNow == resultDate && resultStatus == "Hadir" && (
+            <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
             </div>
           )}
-          {dateNow != result && (
-            <div className="flex items-center">
+          {dateNow == resultDate && resultStatus == "Sakit" && (
+            <div className="flex justify-center">
+              <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-2"></div>
+            </div>
+          )}
+          {dateNow == resultDate && resultStatus == "Izin" && (
+            <div className="flex justify-center">
+              <div className="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div>
+            </div>
+          )}
+          {dateNow == resultDate && resultStatus == "Alfa" && (
+            <div className="flex justify-center">
+              <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
+            </div>
+          )}
+          {dateNow != resultDate && (
+            <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-red-500 mr-2"></div>
             </div>
           )}
@@ -68,7 +90,7 @@ export default function TableStudent(props) {
               className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
               type="button"
             >
-              Lihat Detail
+              See Score
             </button>
           </Link>
           <Link to="/addStudent">

@@ -1,14 +1,93 @@
-export default function AddClass(params) {
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { classesAdd, classFetchSuccessById, teachersFetch, classesById, editClass } from "../store/action/ActionCreator";
+
+export default function AddClass(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const teachers = useSelector((state) => state.teachers.teachers);
+  const classId = useSelector((state) => state.classes.classById);
+  console.log(classId, ".......");
+
+  const [form, setForm] = useState({
+    name: "",
+    SPP: "",
+    TeacherId: "",
+  });
+
+  useEffect(() => {
+    dispatch(teachersFetch());
+    let temp = classId.id
+      ? {
+          name: classId.name,
+          SPP: classId.SPP,
+          TeacherId: classId.TeacherId,
+        }
+      : {
+          name: "",
+          SPP: "",
+          TeacherId: "",
+        };
+    setForm(temp);
+  }, [classId]);
+
+  const changeInputHandler = (event) => {
+    const { name, value } = event.target;
+
+    const newForm = {
+      ...form,
+    };
+    newForm[name] = value;
+
+    setForm(newForm);
+  };
+  console.log(form);
+
+  const handleCancel = () => {
+    dispatch(
+      classFetchSuccessById({
+        name: "",
+        SPP: "",
+        TeacherId: "",
+      })
+    );
+    navigate("/class");
+  };
+
+  const submitForm = (e) => {
+    e.preventDefault();
+    if (classId.id) {
+      dispatch(editClass(classId.id, form)).then(() => {
+        navigate("/class");
+      });
+    } else {
+      console.log("masuknih");
+      dispatch(classesAdd(form)).then(() => {
+        navigate("/class");
+      });
+    }
+    setForm({
+      name: "",
+      SPP: "",
+      TeacherId: "",
+    });
+  };
+
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
       <div className="mb-6">
         <p className="dark:text-white font-raleway italic font-semibold text-[1.3rem] ">Form Class</p>
       </div>
-      <form className="mr-12">
+      <form className="mr-12" onSubmit={submitForm}>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
+            value={form.name}
             type="text"
-            name="floating_name"
+            name="name"
             id="floating_name"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
@@ -23,8 +102,10 @@ export default function AddClass(params) {
         </div>
         <div className="relative z-0 w-full mb-6 group">
           <input
+            onChange={changeInputHandler}
+            value={form.SPP}
             type="number"
-            name="floating_biayaSpp"
+            name="SPP"
             id="floating_biayaSpp"
             className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
             placeholder=" "
@@ -40,21 +121,38 @@ export default function AddClass(params) {
 
         <div className="relative z-0 w-full mb-6 group">
           <select
+            onChange={changeInputHandler}
+            value={form.TeacherId}
+            name="TeacherId"
             id="countries"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
           >
             <option selected>Choose Wali Kelas</option>
-            <option value="US">Sri Pujianti</option>
-            <option value="CA">Leny Farhani</option>
+            {teachers.map((el) => {
+              return (
+                <option key={el.id} value={el.id}>
+                  {el.name}
+                </option>
+              );
+            })}
           </select>
         </div>
 
         <button
           className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 "
-          type="button"
+          type="submit"
         >
           Submit
         </button>
+        <Link to="/class">
+          <button
+            onClick={handleCancel}
+            className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 ml-2"
+            type="button"
+          >
+            Cancel
+          </button>
+        </Link>
       </form>
     </div>
   );

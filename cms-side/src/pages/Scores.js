@@ -3,16 +3,15 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import TableScores from "../components/TableScores";
-import { studentById } from "../store/action/ActionCreator";
+import { lessonsFetch, studentById } from "../store/action/ActionCreator";
 import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Lessons(props) {
-  const { studentId } = useParams();
-  const student = useSelector((state) => state.students.student);
-  console.log(student);
+  const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const [loading, setLoading] = useState(false);
+  const { studentId } = useParams();
+  const student = useSelector((state) => state.students.student);
 
   useEffect(() => {
     setLoading(true);
@@ -45,7 +44,7 @@ export default function Lessons(props) {
                   className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
                   type="button"
                 >
-                  Attendances
+                  Add Scores
                 </button>
               </Link>
             </div>
@@ -54,17 +53,20 @@ export default function Lessons(props) {
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
-                <th scope="col" className="p-4">
+                <th scope="col" className="px-6 py-3 ">
+                  Type
+                </th>
+                <th scope="col" className="px-6 py-3 ">
                   Lessons
                 </th>
                 <th scope="col" className="px-6 py-3">
                   KKM
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Nilai
+                  Score
                 </th>
                 <th scope="col" className="px-6 py-3">
-                  Category
+                  Grade
                 </th>
                 <th scope="col" className="px-6 py-3">
                   Report
@@ -73,7 +75,7 @@ export default function Lessons(props) {
             </thead>
             <tbody className="mb-[2rem] text-center">
               {student.Scores?.map((el) => {
-                return <TableScores key={el.id} data={el} />;
+                return <TableScores key={el.id} data={el} student={student} />;
               })}
             </tbody>
             {/* <tfoot>

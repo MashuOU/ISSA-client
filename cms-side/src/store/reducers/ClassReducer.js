@@ -2,7 +2,7 @@ import { FETCH_CLASS, FETCH_CLASS_BYID } from "../action/ActionTypes";
 
 const initialState = {
   classes: [],
-  class: [],
+  classById: [],
 };
 
 function classReducer(state = initialState, action) {
@@ -15,7 +15,7 @@ function classReducer(state = initialState, action) {
     case FETCH_CLASS_BYID:
       return {
         ...state,
-        class: action.payload,
+        classById: action.payload,
       };
 
     default:

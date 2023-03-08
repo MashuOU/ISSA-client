@@ -14,6 +14,9 @@ import Class from "../pages/Class";
 import Schedule from "../pages/Schedule";
 import Teacher from "../pages/Teacher";
 import Attendance from "../pages/Attendance";
+import ChatRoom from "../pages/ChatRoom";
+import AddScores from "../pages/AddScores";
+import History from "../pages/History";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +51,10 @@ const router = createBrowserRouter([
       //   element: <Categories />,
       // },
       {
+        path: "/chat",
+        element: <ChatRoom />,
+      },
+      {
         path: "/newAdmin",
         element: <NewAdmin />,
       },
@@ -76,8 +83,16 @@ const router = createBrowserRouter([
         element: <Teacher />,
       },
       {
-        path: "/addClass",
+        path: "/history",
+        element: <History />,
+      },
+      {
+        path: "/formClass",
         element: <AddClass />,
+      },
+      {
+        path: "/addScores",
+        element: <AddScores />,
       },
       {
         path: "/addSchedule",

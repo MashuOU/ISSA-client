@@ -1,6 +1,6 @@
 export default function AddSchedule(params) {
   return (
-    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
       <div className="mb-6">
         <p className="font-raleway italic font-semibold text-[1.3rem] dark:text-white">Form Schedule</p>
       </div>
