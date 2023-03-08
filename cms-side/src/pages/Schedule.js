@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import TableSchedule from "../components/TableSchedule";
 import { scheduleFetch } from "../store/action/ActionCreator";
 import ClipLoader from "react-spinners/ClipLoader";
 import Item from "../components/ItemCardSchedule";

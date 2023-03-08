@@ -29,23 +29,27 @@ export default function Teacher(props) {
         </div>
       ) : (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
-          <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
-            <div className="ml-4 mb-10">
-              <p className="font-raleway italic font-semibold text-[1.3rem] dark:text-white">List Teachers</p>
+          <div className="flex items-center justify-center pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
+            <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-[5rem] ">
+              <div className="w-[70%] mask mask-squircle mx-auto">
+                <img src="https://res.cloudinary.com/dslzpyibe/image/upload/v1678271653/assets%20finalproject/undraw_Teacher_re_sico_a3o50c.png" />
+              </div>
             </div>
+          </div>
+          <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-[6.5rem] mr-6">
             <div>
               <Link to="/newAdmin">
                 <button
-                  className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
+                  className="inline-flex items-center text-gray-300  border border-gray-900 focus:outline-none bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10"
                   type="button"
                 >
-                  Add New Teacher
+                  Add Teacher
                 </button>
               </Link>
             </div>
           </div>
 
-          <table className="w-full text-l text-left text-gray-500 dark:text-gray-400 mt-6">
+          <table className="w-[80%] text-l text-left text-gray-500 dark:text-gray-400 mt-6 mx-auto">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
                 <th scope="col" className="px-12 py-3">

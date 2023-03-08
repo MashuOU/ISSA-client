@@ -13,10 +13,13 @@ export default function Dashboard(params) {
   const navigate = useNavigation();
   const students = useSelector((state) => state.students.students);
   const classes = useSelector((state) => state.classes.classes);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  // const numbers = [...Array(page + 1).keys()].slice(1);
+
   const [query, setQuery] = useState({
-    ClassId: "All",
+    ClassId: "",
     name: "",
-    pageIndex: 1,
   });
 
   // console.log(classes, "ini class");
@@ -25,7 +28,7 @@ export default function Dashboard(params) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 2500);
+    }, 1000);
     dispatch(studentsFetch());
     dispatch(classesFetch());
   }, []);
@@ -42,20 +45,32 @@ export default function Dashboard(params) {
   };
 
   const submitQuery = (e) => {
-    if (query.ClassId != "" || query.name != "") {
-      // localStorage.removeItem("ClassId");
-      dispatch(studentsFetch(query));
-      setQuery({
-        ClassId: "All",
-        name: "",
-      });
+    dispatch(studentsFetch(query));
+  };
+
+  const prePage = (e) => {
+    e.preventDefault();
+    if (currentPage !== 1) {
+      console.log("masuk pre");
+      setCurrentPage(currentPage - 1);
+      dispatch(studentsFetch(query, currentPage - 1));
     }
   };
+
+  const nextPage = (e) => {
+    e.preventDefault();
+    if (students.totalPages != currentPage) {
+      setCurrentPage(currentPage + 1);
+      dispatch(studentsFetch(query, currentPage + 1));
+    }
+  };
+
+  console.log(query);
 
   return (
     <>
       {loading && (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-[4rem] w-full md:w-full sm:[50%]">
           <div className="flex content-center justify-center my-auto ">
             <ClipLoader color={"gray-900"} loading={loading} size={100} aria-label="Loading Spinner" data-testid="loader" />
           </div>
@@ -67,10 +82,10 @@ export default function Dashboard(params) {
             <div>
               <Link to="/addStudent">
                 <button
-                  className="inline-flex items-center dark:text-gray-500 dark:bg-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800  h-10"
+                  className="inline-flex items-center   border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800 dark:bg-gray-700 h-10"
                   type="button"
                 >
-                  Add New Murid
+                  Add Murid
                 </button>
               </Link>
             </div>
@@ -97,9 +112,10 @@ export default function Dashboard(params) {
               id="countries"
               className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[20%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-              <option selected disabled>
+              <option selected value="All">
                 Sort By Class
               </option>
+
               <option value="All">All</option>
               {classes.map((el) => {
                 return (
@@ -117,13 +133,13 @@ export default function Dashboard(params) {
                   type="text"
                   name="name"
                   placeholder="Type here"
-                  className="input input-bordered  max-w-xs block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 dark:bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
+                  className="input input-bordered  max-w-xs block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
                 />
               </div>
               <div className="ml-4">
                 <button
                   onClick={submitQuery}
-                  className="inline-flex items-center dark:text-gray-500 dark:bg-white border border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800  h-10"
+                  className="inline-flex items-center  dark:bg-gray-700 border border-gray-900 focus:outline-none bg-gray-900 text-white dark:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800  h-10"
                   type="button"
                 >
                   Search
@@ -174,12 +190,9 @@ export default function Dashboard(params) {
           <div className="flex justify-center mt-[3rem]">
             <nav aria-label="Page navigation example">
               <ul className="inline-flex items-center -space-x-px">
-                <li>
+                <li value={query.pageIndex} name="pageIndex" onChange={changeInputHandler} onClick={prePage}>
                   <a
-                    onChange={changeInputHandler}
-                    value={query.pageIndex}
-                    name="pageIndex"
-                    href=""
+                    href="#"
                     className="block px-3 py-2 ml-0 leading-tight text-gray-800 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
                   >
                     <span className="sr-only">Previous</span>
@@ -196,7 +209,7 @@ export default function Dashboard(params) {
                     1
                   </a>
                 </li>
-                <li>
+                <li onClick={nextPage} onChange={changeInputHandler} value={query.pageIndex} name="pageIndex">
                   <a
                     href="#"
                     className="block px-3 py-2 leading-tight text-gray-800 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"

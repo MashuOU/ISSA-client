@@ -20,7 +20,7 @@ export default function TableClass(props) {
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="w-4 p-4">{index + 1}</td>
 
-      <td className="px-6 py-4">{classes.name}</td>
+      <td className="px-6 py-4 text-gray-900 dark:text-white">{classes.name}</td>
       <td className="px-6 py-4 text-black dark:text-white">
         {new Intl.NumberFormat("id-ID", {
           style: "currency",
@@ -31,7 +31,7 @@ export default function TableClass(props) {
         <Link to="/formClass">
           <button
             onClick={() => handleDetail(classes.id)}
-            className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 mr-4"
+            className="inline-flex items-center text-gray-900 dark:text-white bg-white border border-gray-900 focus:outline-none hover:bg-gray-900 hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 h-10 mr-4"
             type="button"
           >
             Edit
@@ -39,7 +39,7 @@ export default function TableClass(props) {
         </Link>
         <button
           onClick={() => handleDeleteClass(classes.id)}
-          className="inline-flex items-center text-gray-500 bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 "
+          className="inline-flex items-center text-gray-900 dark:text-white bg-white border border-gray-900 focus:outline-none hover:bg-[red] hover:text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 h-10 "
           type="button"
         >
           DELETE

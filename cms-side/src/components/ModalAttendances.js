@@ -6,20 +6,11 @@ export default function ModalAttendances(props) {
   const { data, id } = props;
 
   const myModal = id;
-  console.log(data, "ini data");
+  // console.log(data, "ini data");
 
   const day = data.map((el) => {
     console.log(new Date(el.updatedAt).toLocaleString("id-ID", { weekday: "long" }));
   });
-
-  //   const dispatch = useDispatch();
-  //   const student = useSelector((state) => state.students.student);
-  //   const students = useSelector((state) => state.students.students);
-
-  //   console.log(student, " student nih");
-  //   useEffect(() => {
-  //     dispatch(studentsFetch());
-  //   }, []);
 
   return (
     <>
@@ -33,6 +24,9 @@ export default function ModalAttendances(props) {
                   <div className="flex justify-center">
                     <div className="mr-16">
                       <h3 className="text-lg text-black">{new Date(el.updatedAt).toLocaleString("id-ID", { weekday: "long" })}</h3>
+                    </div>
+                    <div className="mr-16">
+                      <h3 className="text-lg text-black">{el.updatedAt.substring(0, 10)}</h3>
                     </div>
                     <div>
                       <h3 className="text-lg text-blue-800">{el.status}</h3>
