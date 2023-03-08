@@ -2,11 +2,12 @@ import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH
 
 // import Swal from "sweetalert2";
 
-let baseUrl = "http://localhost:3001";
+let baseUrl = "http://13.213.63.194";
 
 // STUDENT ONLY //
 
 export const studentsFetch = (query, pageIndex) => {
+  console.log(query, "masuk ni");
   let url = `http://localhost:3001/students?`;
 
   if (pageIndex && query.ClassId !== "" && query.ClassId !== "All") {
@@ -288,7 +289,7 @@ export const classesFetchSuccess = (payload) => {
 export const classesById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/classes/${id}`, {
+    fetch(`${baseUrl}/class/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
@@ -357,10 +358,10 @@ export const classesAdd = (payload) => {
   };
 };
 
-export const editClass = (payload, id) => {
-  console.log(id, "ini action");
+export const editClass = (payload) => {
+  console.log(payload, "ini action");
   return (dispatch, getState) => {
-    return fetch(`${baseUrl}/classes/${id}`, {
+    return fetch(`${baseUrl}/class/${payload.StudentId}`, {
       method: "PUT",
       headers: {
         access_token: localStorage.access_token,
@@ -386,7 +387,7 @@ export const editClass = (payload, id) => {
 
 export const classDelete = (id) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/classes/${id}`, {
+    fetch(`${baseUrl}/class/${id}`, {
       method: "DELETE",
       headers: {
         access_token: localStorage.access_token,
@@ -443,7 +444,7 @@ export const lessonsFetchSuccess = (payload) => {
 export const lessonsById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    return fetch(`${baseUrl}/lessons/${id}`, {
+    fetch(`${baseUrl}/lessons/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
