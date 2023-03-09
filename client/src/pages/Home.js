@@ -94,7 +94,7 @@ export default function Home() {
       setIsLoad(false);
       isHidden = "block" 
       });
-  }, [])
+  }, [studentDetail])
 
   const [arrColor, setArrColor] = useState({});
 
@@ -247,6 +247,7 @@ export default function Home() {
 
   if (isLoad) {
     return (
+      
       <div class="flex items-center justify-center w-[100vw] h-[100vh] border border-gray-200 rounded-lg  dark:border-gray-700">
         <div role="status">
           <svg
@@ -276,7 +277,7 @@ export default function Home() {
   }
 
   return (
-    <div style={{ display: isHidden }} className=" mb-32 ">
+    <div style={{ display: isHidden}} className=" mb-32 ">
       {/* <ChatPage/> */}
 
       {/* <div className='w-full h-[40vh] bg-primary2-100  '> 
@@ -286,9 +287,8 @@ export default function Home() {
         <h5
           ref={top[0]}
           class="text-xl  font-bold tracking-tight text-gray-900 dark:text-white"
-        >
-          {" "}
-          Selamat Datang{" "}
+        > 
+          ISSA
         </h5>
 
         {/* <div id="toast-notification" class="w-full justify-self-start   mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
@@ -314,10 +314,13 @@ export default function Home() {
         <div className="grid  grid-cols-[1fr_1fr] gap-4 ">
           <Link to="attendance">
             <HomeCard
-              title="Jejak Kehadiran"
+              title="Kehadiran"
               ionIcon="archive"
               backgroundColor="#c7e1eb"
-            />
+              color="#e0d9ff"
+              fontColor="#e0d9ff"
+              backgroundImage="https://static.vecteezy.com/system/resources/previews/003/126/110/non_2x/abstract-blue-gradient-radial-background-with-square-pattern-texture-vector.jpg"
+              />
           </Link>
 
           <Link to="total">
@@ -325,23 +328,35 @@ export default function Home() {
               title="Trafik Nilai"
               ionIcon="bar-chart"
               color="#6bbfbc"
+              backgroundImage="https://img.freepik.com/free-vector/white-abstract-background_23-2148810113.jpg"
+              borderColor="#96e3b7"
+              fontColor="#857a80"
             />
           </Link>
 
           <Link to="lesson">
-            <HomeCard title="Mata Pelajaran" ionIcon="reader" color="#c2ac55" />
+            <HomeCard 
+            title="Mata Pelajaran" 
+            ionIcon="reader" 
+            color="#f2e291" 
+            fontColor="#fddbff"
+            backgroundImage="https://img.freepik.com/premium-photo/modern-background_102121-59.jpg"
+            />
           </Link>
 
           <Link to="event">
             <HomeCard
               title={"Jadwal "}
               ionIcon="person"
-              color="#9555c2"
+              color="white"
               boxShadow="-10px 9px 28px -4px rgba(149,85,194,0.33)"
               reveal="top"
-            />
+              backgroundImage="https://cdn.dribbble.com/users/1995480/screenshots/7391446/media/9f831f268b6098e5901c493ba8aa4568.jpg?compress=1&resize=400x300&vertical=top"
+              fontColor="#d8db97"
+              />
           </Link>
         </div>
+        
       </div>
 
       <Top data={studentDetail} />
@@ -364,12 +379,14 @@ export default function Home() {
       {/* <BubbleChart /> */}
 
       {/* <Carousel /> */}
+      
+      
     </div>
   );
 }
 
 function HomeCard(props) {
-  const { color, backgroundColor, boxShadow, reveal } = props;
+  const { color, borderColor, backgroundColor, backgroundImage, fontColor, boxShadow, reveal } = props;
 
   const [ionStyle, setIonStyle] = useState(` text-[${color}] text-2xl  `);
 
@@ -388,26 +405,28 @@ function HomeCard(props) {
     <div
       style={{
         boxShadow: boxShadow,
-        backgroundColor: backgroundColor,
-        border: `1px solid ${color}`,
+        // backgroundColor: backgroundColor,
+        border: `1px solid ${borderColor}`,
+        backgroundImage: `url(${backgroundImage})`
       }}
       class="max-w-sm px-4 py-6  bg-white  rounded-2xl  "
       ref={identifier}
     >
       <ion-icon
         name={props.ionIcon}
-        style={{ color: color }}
+        style={{ color: color, fontSize:"35px" }}
         className=" text-[20em] "
+        
       ></ion-icon>
 
       <a href="#">
-        <h5 className="mt-4 font-semibold tracking-tight text-gray-900 dark:text-white">
+        <h5  style={{color: fontColor}} className="mt-2 font-semibold tracking-tight">
           {" "}
           {props.title}{" "}
         </h5>
       </a>
       <p class=" text-sm font-normal text-gray-500 dark:text-gray-400">
-      <ion-icon name="log-out-outline" style={{color: "gray"}} className="text-blue-400" ></ion-icon>
+      {/* <ion-icon name="log-out-outline" style={{color: "gray"}} className="text-blue-400" ></ion-icon> */}
       </p>
       {/* <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
 
@@ -415,66 +434,4 @@ function HomeCard(props) {
       </a> */}
     </div>
   );
-}
-
-// // export default App;
-// // import { useEffect, useState } from 'react';
-
-// // import logo from './logo.svg';
-// // import './App.css';
-// // import Header from "./components/Header"
-
-// // export default function App() {
-
-// //   const [formValue, setformValue] = useState(
-// //     {
-// //       name: 'chaimGreen',
-// //       password: 'i am ',
-// //       username: 'twin'
-// //     }
-// //   )
-
-// //   function updateForm(event) {
-// //     const { name, value } = event.target;
-// //     setformValue({ ...formValue, [name]: value });
-// //     // const { name, value } = event.target
-
-// //     // let plain = {
-// //     //   ...formValue,
-// //     // }
-// //     // plain[name] = value
-// //     // setformValue(plain)
-// //   }
-
-// //   useEffect(() => {
-// //     console.log('tagidi');
-// //   })
-
-// //   return (
-// //     <div className="App">
-// //       <Header innerHTML="i love chaim green" />
-// //       <header className="App-header" style={{ border: "1px solid white", boxSizing: "border-box" }} >
-// //         <img src={logo} className="App-logo" alt="logo" />
-// //         <p>
-// //           Edit <code>src/App.js</code> and done
-// //         </p>
-// //         <a
-// //           className="App-link"
-// //           href="https://reactjs.org"
-// //           target="_blank"
-// //           rel="noopener noreferrer"
-// //         >
-// //           Learn React
-// //         </a>
-// //         <form>
-// //           {/* <input type="text" value={formValue.name} onChange={function () { }} /> */}
-// //           <input name="name" type="text" value={formValue.name} onChange={updateForm} />
-// //           <input name="password" type="text" value={formValue.password} onChange={updateForm} />
-// //           <input name="username" value={formValue.username} onChange={updateForm} />
-// //         </form>
-// //       </header>
-// //     </div >
-// //   );
-// // }
-
-// // export default App;
+} 

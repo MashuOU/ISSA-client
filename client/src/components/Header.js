@@ -48,6 +48,11 @@ export default function Header(props) {
       }
     );
   }
+  
+  function triggerSignOut() {
+    localStorage.removeItem('access_token')
+    navigate('/login')
+  }
 
   useEffect(() => { 
 
@@ -59,10 +64,10 @@ export default function Header(props) {
 
     <>
 
-      <nav style={{ boxShadow: "" }} class="bg-white w-[90%]  mx-auto mt-4 z-[10000]  border-red-800  sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
+      <nav style={{ boxShadow: "", backgroundColor: "" }} class="bg-white w-[90%]  mx-auto mt-4 z-[10000]  border-red-800  sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900">
 
         <div class="container flex flex-wrap items-center  border-white justify-between mx-auto">
-          <a href="#" style={{opacity: 0.5}} class="flex items-center  border-black ml-2 flex justify-center ">
+          <a href="#" style={{}} class="flex items-center  border-black ml-2 flex justify-center ">
             {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" /> */}
             <img src="https://live.staticflickr.com/65535/52735891608_e4bb396871_w.jpg" class="h-7  sm:h-9" alt="Flowbite Logo" />
             {/* <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> */}
@@ -96,7 +101,7 @@ export default function Header(props) {
                   {/* <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a> */}
                 </li>
                 <li>
-                  <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                  <a href="#" onClick={() => triggerSignOut()} class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
                 </li>
               </ul>
             </div>

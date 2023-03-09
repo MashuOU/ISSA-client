@@ -63,3 +63,7 @@ export const FETCH_SPP = (type) => {
 export const FETCH_STATISTIC = (type) => {
   return `STATISTIC/fetchAll`
 }
+
+export const FETCH_STATUS = (type) => {
+  return `STATUS/fetchAll`
+}

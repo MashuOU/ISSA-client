@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import { LOADING, COUNTER_INCREMENTER, WRITE_PRODUCTS, WRITE_PRODUCT, WRITE_PRODUCT_FAILED, WRITE_PRODUCTS_BY_TYPE, WRITE_PRODUCTS_BY_TYPE_FAILED, WRITE_CATEGORIES, WRITE_CATEGORIES_FAILED, WRITE_LESSON } from './actionTypes';
 
-import { FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from './actionTypes';
+import { FETCH_STATUS, FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from './actionTypes';
 import axios from 'axios';
+console.log(localStorage.getItem('access_token'));
 
 // DEVELOPING PURPOSES' 
 //   localStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMw.KonkCxKvwN64cDI51mdvjWs2OcebdJUylynmQ17kaPo" )
@@ -36,7 +37,8 @@ export function writeTodayLesson(payload) {
   return { type: WRITE_LESSON, payload };
 }
  
-const baseUrl = "http://13.213.63.194" 
+const baseUrl = "https://issa.rhazzid.site" 
+// const baseUrl = "http://13.213.63.194" 
 // const baseUrl = 'http://localhost:3000'; 
 
 // FUNCTIONS /////////////////////////////////////////////////////////
@@ -70,121 +72,6 @@ export function act_login(data) {
   };
 }
 
-// export function getProducts() {
-//   return async (dispatch) => {
-//     try {
-//       const request = await
-//         fetch(baseUrl + `/customer/products`,
-//           {
-//             method: "GET",
-//             // headers: {
-//             //   access_token: localStorage.getItem("myToken")
-//             //   // access_token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjc2NzAwOTY4fQ.2QIA-QzLozcnavVkPd933C1Mu1ayKtNKfMp9nGFE7ZA"
-//             // },
-//           }
-//         )
-//       let respon = await request.json()
-
-//       if (!request.ok) throw respon
-
-//       dispatch(writeProduct(respon))
-
-//       return true
-//     } catch (error) {
-//       throw error
-//       // console.log(error);
-//     }
-//   }
-// }
-
-// export function getProductById() {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(loading())
-//       const request = await
-//         fetch(baseUrl + `/users/userChild`,
-//           {
-//             method: "GET",
-//             headers: {
-//               // access_token: localStorage.getItem("myToken")
-//               access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
-//             },
-//           }
-//         )
-//       let respon = await request.json()
-//       if (!request.ok) throw respon.error
-//       // console.log(respon, "yesh");
-//       dispatch(writeProductById(respon))
-//     } catch (error) {
-//       dispatch(writeProductFailed(error))
-//     }
-//   }
-// }
-
-// export function getCategories() {
-//   return async (dispatch) => {
-//     try {
-//       // dispatch(loading())
-//       const request = await
-//         fetch(baseUrl + `/lessons`,
-//           {
-//             method: "GET",
-//             headers: {
-//               // access_token: localStorage.getItem("myToken")
-//               access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
-
-//             },
-//           }
-//         )
-//       let respon = await request.json()
-
-//       if (!request.ok) throw respon.error
-//       dispatch({ type: WRITE_CATEGORIES, payload: respon })
-
-//     } catch (error) {
-//       dispatch({ type: WRITE_CATEGORIES_FAILED, payload: error })
-//     }
-//   }
-// }
-
-// export function getByType(type) {
-//   return async (dispatch) => {
-//     try {
-//       dispatch(loading())
-
-//       const request = await
-//         fetch(baseUrl + `/customer/types`,
-//           {
-//             method: "GET",
-//           }
-//         )
-
-//       let respon = await request.json()
-//       if (!request.ok) throw respon.error
-//       const foundObj = respon.find(obj => obj.name === type);
-
-//       if (foundObj) {
-
-//         const request = await
-//           fetch(baseUrl + `/customer/products/?type=` + foundObj.id,
-//             {
-//               method: "GET",
-//             }
-//           )
-
-//         let respon = await request.json()
-//         if (!request.ok) throw respon.error
-//         dispatch(writeProductsByType(respon))
-
-//         // console.log(respon);
-//         // console.log(foundObj);
-//       }
-
-//     } catch (error) {
-//       dispatch(writeProductFailed(error))
-//     }
-//   }
-// }
 
 // ////////////////////////
 
@@ -237,6 +124,14 @@ export const insert_Statistic_redux = (payload) => {
     payload: payload,
   };
 };
+
+export const insert_status_redux = (payload) => {
+  return {
+    type: FETCH_STATUS,
+    payload: payload,
+  };
+};
+
 
 // handle login | logout
 export const handleLogin = (dataLogin) => {
@@ -368,42 +263,43 @@ export const fetchStatistic = (day) => {
   };
 };
 
-export function snap() {
-  return async (dispatch, getState) => {
-    try {
-      // /generate-midtrans/:id
 
-      let { data: payment_token } = await axios({
+
+export function snap(id) {
+  return async (dispatch, getState) => {
+    try { 
+
+      let { data } = await axios({
         method: 'post',
-        url: baseUrl + `/users/generate-midtrans/1`,
+        url: baseUrl + `/users/generate-midtrans/`+ id,
         headers: { access_token: localStorage.access_token },
       });
-
-      // const { payment_token } = await this.getPaymentToken()
-      // const  payment_token  = '78218382163721312836'
-      // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
-      // const flagging = this.subscribed
-      window.snap.pay(payment_token, {
-        onSuccess: function (result) {
-          /* You may add your own implementation here */
-          // flagging(payment_token)
+      
+      window.snap.pay(data.token, {
+        onSuccess: function (result) { 
           console.log(result);
-        },
-        onPending: function (result) {
-          /* You may add your own implementation here */
-          console.log('wating your payment!', result);
-        },
-        onError: function (result) {
-          /* You may add your own implementation here */
-          console.log('payment failed!', result);
-        },
-        onClose: function () {
-          /* You may add your own implementation here */
-          console.log('you closed the popup without finishing the payment');
-        },
+        }, 
       });
     } catch (error) {
       console.log(error);
     }
   };
+}
+
+
+export function getPaymentStatus() {
+  return async(dispatch) => {
+    try {
+      let { data } = await axios({
+        method: 'get',
+        url: baseUrl + `/public/transaction`,
+        headers: { access_token: localStorage.access_token },
+      });
+      
+      dispatch(insert_status_redux(data));
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }

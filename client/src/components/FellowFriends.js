@@ -51,7 +51,7 @@ export default function FellowFriend(props) {
                     {each.name}
                     </p>
                     <p className="text-[12px] text-gray-500 truncate dark:text-gray-400">
-                    {each.feedback}
+                    { new Date(each.birthDate ).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })   }
                     </p>
                   </div>
                   <div className="inline-flex items-center text-base font-semibold text-gray-900 dark:text-white">

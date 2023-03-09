@@ -49,13 +49,13 @@ export default function AttendancePage(props) {
   if (Attendances?.length) {
     return (
       <>
-        <div className="bg-gray-50 max-w-screen-lg mb-20 mx-auto pt-4 dark:bg-gray-900 p-3 sm:p-5 ">
+        <div className=" max-w-screen-lg mb-20 mx-auto pt-4 dark:bg-gray-900 p-3 sm:p-5 ">
           <h5 class="text-xl font-semibold mt-10 tracking-tight text-gray-900 dark:text-white">
             {" "}
-            Kehadiran{" "}
+            Rekap   Kehadiran{" "}
           </h5>
 
-          <div className=" bg-[#fce4bb] rounded-2xl mt-4 grid items-center overflow-scroll border-red-800">
+          <div style={{backgroundImage: "url(https://cdn.pixabay.com/photo/2017/09/06/11/41/clean-2721102__340.jpg)"}} className=" bg-[#fce4bb] rounded-2xl mt-4 grid items-center overflow-scroll border-red-800">
             {/* <div className='transform scale-[2] ' > */}
 
             <HeatmapDua data={Attendances} />

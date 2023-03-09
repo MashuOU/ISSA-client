@@ -23,11 +23,11 @@ export default function Container() {
   }, []);
   
   return (
-    <>
+    <div  style={{minHeight: "100vh", backgroundImage: "url(https://i.pinimg.com/736x/8c/98/99/8c98994518b575bfd8c949e91d20548b.jpg)"}}>
       <Header />
       <Outlet />
       <BottomNav/>
       {/* <Footer /> */}
-    </>
+    </div>
   )
 }

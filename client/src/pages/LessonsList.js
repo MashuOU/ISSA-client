@@ -65,7 +65,7 @@ export default function LessonsList() {
     console.log(uniqueLessons, "yossi");
 
     return (
-      <div className="pt-10 px-6 mb-20 max-w-screen-xl mx-auto dark:bg-gray-900 border border-yellow-400 ">
+      <div className="pt-10 px-6 mb-20 max-w-screen-xl mx-auto dark:bg-gray-900  border-yellow-400 ">
         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
           {" "}
           Mata Pelajaran{" "}

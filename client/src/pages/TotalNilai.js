@@ -17,7 +17,7 @@ export default function TotalNilai(props) {
     }
   } = useSelector((state) => state)
 
-  // console.log(statistic, "ora prono");
+  console.log(statistic, "ora prono");
 
   useEffect(() => {
     dispatch(fetchStatistic()) 

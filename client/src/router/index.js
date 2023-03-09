@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, redirect } from "react-router-dom"
 import AttendancePage from "../pages/Attendance"
 import Chat from "../pages/Chat"
 
@@ -13,23 +13,23 @@ import EventPage from "../pages/Event"
 import PaymentPage from "../pages/PaymentPage"
 import NotFound from "../pages/NotFound"
 
-
-
-
+  
 const router = createBrowserRouter(
   [
     {
       path: "/",
       element: <Container />,
+      loader: () => {
+        if(!localStorage.getItem('access_token')) {
+          return redirect('/login')
+        }
+        return null
+      },
       children: [
         {
           path: "",
           element: <Home />,
-        },
-        {
-          path: "chat",
-          element: <ClientChat />,
-        },
+        }, 
         {
           path: "attendance",
           element: <AttendancePage />,
@@ -55,6 +55,10 @@ const router = createBrowserRouter(
           element: <PaymentPage />
         }
       ]
+    },
+    {
+      path: "/chat",
+      element: <ClientChat />,
     },
     {
       path: "/login",

@@ -93,7 +93,7 @@ export default function Name(props) {
         <section class=" px-4  border-red-800 ">
 
 
-          <div ref={coba[3]}  class="grid border border-black rounded-xl bg-gray-900 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div ref={coba[3]} style={{backgroundImage: "url(https://i.pinimg.com/originals/e1/f8/55/e1f8554dd0f4e79613cceb8cd006161d.jpg)"}} class="grid border border-black rounded-xl bg-gray-900 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
 
             <div ref={coba[2]} class="hidden lg:mt-0 lg:col-span-5 lg:flex  justify-center items-center">
               <Avatar imgUrl={imgUrl} />
