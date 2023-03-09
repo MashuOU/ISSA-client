@@ -18,7 +18,7 @@ export default function ChatRoom(params) {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}`, {
         headers: {
-          access_token: 'eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8',
+          access_token: localStorage.access_token,
         },
       });
       console.log(data, 'data parents');
@@ -36,7 +36,7 @@ export default function ChatRoom(params) {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}/${user.fromUserId}`, {
         headers: {
-          access_token: 'eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8',
+          access_token: localStorage.access_token,
         },
       });
       console.log(data, 'dataaaa');
