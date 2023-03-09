@@ -40,14 +40,14 @@ export default function LessonDetail() {
     return (
       // <div style={{ listStyle: "none", gridTemplateColumns: "repeat(auto-fill,minmax(200px,1fr)" }} className=" max-w-screen-xl  p-2  border border-white grid gap-4 box-border ">
       <>
-        <section className="bg-gray-50 mb-20 max-w-screen-lg mx-auto pt-20 dark:bg-gray-900 p-3 sm:p-5">
+        <section className="bg-gray-50 mb-20 max-w-screen-lg mx-auto pt-10 dark:bg-gray-900 p-3 sm:p-5">
 
-          <h5 class="text-xl font-semibold tracking-tight mt-10 text-gray-900 dark:text-white"> {MyLessonScores[0].Lesson.name} </h5>
-          <div id="chart" className="grid mt-4 overflow-x-scroll pt-2 rounded-2xl bg-[#d0e6ca]  max-w-screen-xl mx-auto shadow-xl border-red-400 ">
+          <h5 class="text-xl font-semibold tracking-tight text-gray-900 dark:text-white"> {MyLessonScores[0].Lesson.name} </h5>
+          <div id="chart" className="grid mt-4 overflow-x-scroll pt-2 rounded-2xl bg-[]  max-w-screen-xl mx-auto shadow-xl border-red-400 ">
             <LineChart data={MyLessonScores} />
           </div>
 
-          <div className='pt-10'>
+          <div className='pt-4'>
             <TableDetail data={MyLessonScores} />
           </div>
 

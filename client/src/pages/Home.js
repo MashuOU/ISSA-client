@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   getProductById,
   fetchStudentDetail,
-  fetchClassmate
+  fetchClassmate,
 } from "../store/actions/actionCreator";
 
 import ScrollReveal from "scrollreveal";
@@ -49,7 +49,7 @@ export default function Home() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-    const [isLoad, setIsLoad] = useState(true);
+  const [isLoad, setIsLoad] = useState(true);
   //   const [categories, setCategories] = useState([]);
 
   const bottom = [
@@ -71,7 +71,7 @@ export default function Home() {
   ];
 
   function reveal(ref, origin = "bottom") {
-    return ScrollReveal().reveal(ref.current, { 
+    return ScrollReveal().reveal(ref.current, {
       distance: "20px",
       origin: origin,
       opacity: 0,
@@ -79,21 +79,23 @@ export default function Home() {
     });
   }
 
+  const homeContainer = document.querySelector('.homeContainer')
+  let isHidden 
   useEffect(() => {
+    isHidden = "none" 
     dispatch(fetchStudentDetail())
-    .then(() => { 
-      return dispatch(fetchClassmate())
+    .then(() => {
+      return dispatch(fetchClassmate());
     })
     .then(() => {
-      bottom.forEach((each) => reveal(each) );
+      bottom.forEach((each) => reveal(each));
       
       top.forEach((each) => reveal(each, "top"));
-      setIsLoad(false)
-      
-    })   
-  }, []);
+      setIsLoad(false);
+      isHidden = "block" 
+      });
+  }, [])
 
-  
   const [arrColor, setArrColor] = useState({});
 
   const [productData, setproductData] = useState([
@@ -243,28 +245,48 @@ export default function Home() {
     },
   ]);
 
-  
-  
   if (isLoad) {
-    return <p>Loading</p>;
+    return (
+      <div class="flex items-center justify-center w-[100vw] h-[100vh] border border-gray-200 rounded-lg  dark:border-gray-700">
+        <div role="status">
+          <svg
+            aria-hidden="true"
+            class="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor"
+            />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill"
+            />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    );
   }
 
   if (error) {
     return <p>Error</p>;
   }
 
-  
-  
   return (
-    <div style={{background: ""}} className=" mb-32 ">
+    <div style={{ display: isHidden }} className=" mb-32 ">
       {/* <ChatPage/> */}
 
       {/* <div className='w-full h-[40vh] bg-primary2-100  '> 
       </div> */}
 
       <div className="w-full p-2 pt-10    grid justify-center pb-10  gap-6 ">
-        
-        <h5 ref={top[0]} class="text-xl mt-10 font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5
+          ref={top[0]}
+          class="text-xl  font-bold tracking-tight text-gray-900 dark:text-white"
+        >
           {" "}
           Selamat Datang{" "}
         </h5>
@@ -289,8 +311,7 @@ export default function Home() {
 
         </div> */}
 
-        <div  className="grid  grid-cols-[1fr_1fr] gap-4 ">
-          
+        <div className="grid  grid-cols-[1fr_1fr] gap-4 ">
           <Link to="attendance">
             <HomeCard
               title="Jejak Kehadiran"
@@ -307,33 +328,27 @@ export default function Home() {
             />
           </Link>
 
-          <Link   to="lesson">
+          <Link to="lesson">
             <HomeCard title="Mata Pelajaran" ionIcon="reader" color="#c2ac55" />
           </Link>
 
           <Link to="event">
-          <HomeCard
-            title={"Jadwal "}
-            ionIcon="person"
-            color="#9555c2"
-            boxShadow="-10px 9px 28px -4px rgba(149,85,194,0.33)"
-            reveal="top"
+            <HomeCard
+              title={"Jadwal "}
+              ionIcon="person"
+              color="#9555c2"
+              boxShadow="-10px 9px 28px -4px rgba(149,85,194,0.33)"
+              reveal="top"
             />
-            </Link>
+          </Link>
         </div>
-        
       </div>
 
       <Top data={studentDetail} />
 
-
       <FellowFriend data={classmate} />
 
-      
-
-
-
-      <CarouselCard />
+      {/* <CarouselCard /> */}
 
       {/* <div ref={bottom[2]} >
         <HeatmapDua data={Attendances} />
@@ -349,10 +364,6 @@ export default function Home() {
       {/* <BubbleChart /> */}
 
       {/* <Carousel /> */}
-
-
-      
-      
     </div>
   );
 }
@@ -362,10 +373,10 @@ function HomeCard(props) {
 
   const [ionStyle, setIonStyle] = useState(` text-[${color}] text-2xl  `);
 
-  const identifier = useRef(null)
-  
+  const identifier = useRef(null);
+
   useEffect(() => {
-    ScrollReveal().reveal(identifier.current, { 
+    ScrollReveal().reveal(identifier.current, {
       distance: "20px",
       origin: reveal,
       opacity: 0,
@@ -396,7 +407,7 @@ function HomeCard(props) {
         </h5>
       </a>
       <p class=" text-sm font-normal text-gray-500 dark:text-gray-400">
-        Go to this step
+      <ion-icon name="log-out-outline" style={{color: "gray"}} className="text-blue-400" ></ion-icon>
       </p>
       {/* <a href="#" class="inline-flex items-center text-blue-600 hover:underline">
 
@@ -405,8 +416,6 @@ function HomeCard(props) {
     </div>
   );
 }
-
-
 
 // // export default App;
 // // import { useEffect, useState } from 'react';

@@ -26,7 +26,7 @@ import axios from 'axios'
 
 
 // DEVELOPING PURPOSES'
-  localStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk" )
+//   localStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMw.KonkCxKvwN64cDI51mdvjWs2OcebdJUylynmQ17kaPo" )
 
 
 // export const conterIncremented = (payload) => {
@@ -60,7 +60,7 @@ export function writeTodayLesson(payload) {
   return { type: WRITE_LESSON, payload }
 }
 
-const baseUrl = "http://localhost:3000"
+const baseUrl = "http://13.213.63.194"
 // const baseUrl = "https://react-server.macnesa.com"
 
 
@@ -91,7 +91,7 @@ export function act_login(data) {
 
       if (!request.ok) throw respon
 
-      // localStorage.setItem("myToken", respon.access_token)
+      localStorage.setItem("myToken", respon.access_token)
 
       console.log(respon.access_token);
 

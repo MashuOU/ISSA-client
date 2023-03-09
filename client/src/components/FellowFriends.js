@@ -29,7 +29,7 @@ export default function FellowFriend(props) {
     
     return (
 
-        <ul  className="  max-w-md mt-10 px-4 divide-y divide-gray-200 dark:divide-gray-700">
+        <ul  className="  max-w-md mt-10 px-6 divide-y divide-gray-200 dark:divide-gray-700">
           <h5 class="text-xl mb-6 font-semibold tracking-tight text-gray-900">
             {" "}
             Teman Sekelas{" "}

@@ -55,7 +55,7 @@ export default function Heatmap(props) {
       type: "heatmap",
       radius: 2,
       //         empty      alfa       sakit      izin       hadir
-      colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#17459e'],
+      colors: ['#d9d9d9', '#c7323e', '#73b3f3', '#e6cc4e', '#2b5c31'],
       // width:300,
       // height:400,
       // responsive:true
@@ -70,7 +70,7 @@ export default function Heatmap(props) {
 
   return (
     //pointer-events-none border border-white 
-    <div ref={chartRef} id="heatmap-chart" className=" " ></div>
+    <div ref={chartRef} id="heatmap-chart" className="  border-black " style={{clipPath: "inset(0 0 15% 0%)"}} ></div>
      
     
     // <div className="grid mt-4 overflow-y-scroll justify-start sm:justify-center max-w-screen-xl mx-auto border border-red-400" >

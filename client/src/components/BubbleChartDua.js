@@ -102,7 +102,7 @@ export default function BubbleChart(props) {
   return (
     // <div className="grid mt-4   justify-center max-w-screen-xl mx-auto border border-red-400" >
     <svg
-      className="border border-black"
+      className=" border-black"
       ref={chartArea}
       width={width}
       height={height}

@@ -156,8 +156,10 @@ import ScrollReveal from "scrollreveal";
         </div>
     </div>
     <div class="flex flex-col items-center pb-10">
-        <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src={studentDetail.imgUrl} alt="Bonnie image"/>
-        {/* <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"> {studentDetail.name} </h5> */}
+      <div className="w-24 h-24 overflow-hidden rounded-full mb-3  shadow-lg" >
+        <img class="" src={studentDetail.imgUrl} alt="Bonnie image"/>
+       </div> 
+        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white"> {studentDetail.name} </h5>
         <span class="text-sm text-gray-500 dark:text-gray-400"> {studentDetail.NIM} </span>
         <div class="flex mt-4 space-x-3 md:mt-6">
             <a href="#" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Lihat Nilai</a>

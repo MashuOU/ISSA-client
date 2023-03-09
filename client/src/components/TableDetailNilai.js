@@ -6,9 +6,9 @@ export default function App(props) {
   const result = [];
   props.data.forEach((obj) => {
     const newObj = {
-      col1: obj.category,
+      col1: obj.Assignment.desc,
       col2: obj.value.toString(),
-      col3: obj.desc,
+      col3: obj.category,
     };
     result.push(newObj);
   });
@@ -23,7 +23,7 @@ export default function App(props) {
     () => [
       { Header: 'Name', accessor: 'col1' },
       { Header: 'Score', accessor: 'col2' },
-      { Header: 'Description', accessor: 'col3' },
+      { Header: 'Grade', accessor: 'col3' },
     ],
     []
   )

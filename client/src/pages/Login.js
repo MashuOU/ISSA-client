@@ -48,18 +48,21 @@ export default function LoginPage() {
 
   return (
 
-    <div className="w-full min-h-[100vh] h-auto  p-4 border-red-600 bg-primary2-10 flex">
+    <div className="w-full min-h-[100vh] h-auto border-red-600 flex">
+
+
 
       <form onSubmit={triggerLogin}
-       className="font-satu grid  pt-16 pb-6 border rounded-xl bg-white border-gray-400 px-10 gap-4 ">
+       className="font-satu grid gap-3 grid-rows-[0.5fr_0.2fr_0.5fr_0.3fr_0.3fr_0.3fr_1fr_0.3fr]  pt-16 pb-6 border rounded-xl bg-white border-gray-400 px-10  ">
 
+{/* <iframe src="https://embed.lottiefiles.com/animation/101088"></iframe> */}
         <p className="  text-primary2-100 font-bold ">Profile</p>
 
         {/* mb-3  mt-3  */}
-        <p className=" font-bold text-4xl text-black">Create Account</p>
+        <p className=" font-bold text-3xl text-black">Log In</p>
 
 
-        <p className=" text-sm " >Look, watch, And get insight of your children development <br/> on the time </p>
+        <p className=" text-kecil2 " >Look, watch, And get insight of your children development <br/> on the time </p>
 
 
 
@@ -75,7 +78,7 @@ export default function LoginPage() {
             type="number"
             id="UserEmail"
             placeholder="Email"
-            class="peer h-10 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+            class="peer h-8 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
           />
 
           <span
@@ -98,7 +101,7 @@ export default function LoginPage() {
             name="password"
             id="pw"
             placeholder="password"
-            class="peer h-10 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
+            class="peer h-8 w-full font-bold border-none bg-transparent p-0 placeholder-transparent focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
           />
 
           <span
@@ -110,7 +113,7 @@ export default function LoginPage() {
 
 
 
-        {descInput == 'nim' &&
+        {/* {descInput == 'nim' &&
           <p className="mt-4 text-kecil sm:text-sm text-gray-400 font-bold " >
             Nim adalah Nomor Induk Siswa yang terbentuk unik dan menjadi kode pengenal
             akan indentitas anak anda
@@ -119,7 +122,7 @@ export default function LoginPage() {
 
         {descInput == 'pw' &&
           <p className="mt-4 text-kecil sm:text-sm text-gray-400 font-bold " >Gunakan password yang pernah dikirimkan kepada anda melalui email </p>
-        }
+        } */}
 
 
 
@@ -134,23 +137,23 @@ export default function LoginPage() {
             defaultValue=""
             name="bordered-radio"
             required
-            className="w-4 h-4 text-blue-600  focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2  border-gray-600"
+            className="w-4 h-4 text-blue-600  focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 "
           />
           <label
             htmlFor="bordered-radio-1"
             className="w-full font-bold text-primary2-100 py-2 ml-2 text-sm   dark:text-gray-300"
           >
-            Saya benar merupakan wali murid
+            I am a parent  
           </label>
         </div>
 
-        <p className="text-center  text-kecil sm:text-sm " >By continuing, I agree to the <b>ISSA Platform Terms</b> <br />and <b>Privacy Policy</b> </p>
+        <p className="text-center self-end text-kecil sm:text-sm " >By continuing, I agree to the <b>ISSA Platform Terms</b> <br />and <b>Privacy Policy</b> </p>
 
         {/* mt-5 */}
         <button
           disabled=""
           type="submit"
-          className="py-2.5  px-5 w-full mr-2 text-sm font-bold  rounded-lg border focus:z-10 focus:ring-4  bg-gray-800 text-gray-200 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center justify-center "
+          className="py-2.5 self-end  px-5 w-full mr-2 text-sm font-bold  bg-black rounded-lg border focus:z-10 focus:ring-4 text-white  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 inline-flex items-center justify-center "
         >
           {/* <svg
           aria-hidden="true"

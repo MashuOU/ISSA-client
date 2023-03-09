@@ -27,13 +27,13 @@ export default function About() {
     
     
     return (
-      <div className=" pl-4 pt-16 border-black">
-        <h5 class="text-xl mb-6 font-semibold tracking-tight mt-10 text-gray-900 dark:text-white">
+      <div className=" pl-6 pt-10  border-black mb-20 ">
+        <h5 class="text-xl mb-6 font-semibold tracking-tight text-gray-900 dark:text-white">
           {" "}
           Jadwal{" "}
         </h5>
 
-        <ol class="relative border-l    border-gray-200 dark:border-gray-700">
+        <ol class="relative border-l   border-gray-200 dark:border-gray-700">
           
           {activiy.map((each, index) => {
             return (
@@ -60,7 +60,7 @@ export default function About() {
                   </span>
                 </h3>
                 <time class="block mb-2 text-sm font-normal leading-none text-gray-400 dark:text-gray-500">
-                {  new Date(each.createdAt).getDate()}
+                { new Date(each.createdAt).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })  }
                 </time>
                 <p class="mb-4 text-base font-normal text-gray-500 dark:text-gray-400"></p>
               </li>
