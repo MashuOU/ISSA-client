@@ -2,12 +2,19 @@ import '../style/custom.scss';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import socket from '../config/socket';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:3000';
+// const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://issa.rhazzid.site';
 
 export default function Chat() {
+  const {
+    student: { studentDetail, classmate, loading, error },
+  } = useSelector((state) => state);
+
   const [userId, setUserId] = useState(localStorage.userId);
-  const [room, setJoinRoom] = useState(``);
+  const [room, setJoinRoom] = useState('');
   const [allChat, setAllChat] = useState([]);
   const [message, setMessage] = useState('');
   // console.log(message, 'ini messagee');
@@ -63,19 +70,45 @@ export default function Chat() {
     event.preventDefault();
     setMessage({ message: '' });
     try {
-      socket.emit('chat:msg', { msg: message, room: room, from: userId, to: teacherId });
+      socket.emit('chat:msg', {
+        msg: message,
+        room: room,
+        from: userId,
+        to: teacherId,
+      });
     } catch (err) {
       console.log(err);
     }
   };
+
   return (
     <div clasName="  ">
-      <div className=" grid h-[100vh] pt-20 grid-rows-[max-content_1fr_max-content] border-black">
-        <div className="pl-4">
+      <div className=" grid h-[100vh] grid-rows-[max-content_1fr_max-content] border-black">
+        {/* <div className="pl-4">
           <h5 class="text-xl mb-6 font-semibold tracking-tight   text-gray-900 dark:text-white"> Chat </h5>
+        </div> */}
+
+        <div class="flex border-t shadow-lg border-white py-2 pl-4 items-center space-x-4">
+          <Link to="/">
+            <ion-icon name="chevron-back"></ion-icon>
+          </Link>
+          <div className="w-10 h-10 rounded-full overflow-hidden ">
+            <img className="w-[100%]" src="https://s3.ap-southeast-1.amazonaws.com/indosistem/smpnegeri1talawi/NGx2cjJoSmFVK3cwdFZsUzdzOHFndz09-60.JPG" alt="" />
+          </div>
+          <div class="font-medium dark:text-white">
+            <div> {studentDetail?.Class?.Teacher?.name} </div>
+            <div class="text-sm text-gray-500 dark:text-gray-400">Wali Kelas</div>
+          </div>
         </div>
 
-        <div id="chatArea" className=" border-black overflow-scroll ">
+        <div
+          id="chatArea"
+          style={{
+            backgroundImage: 'url(https://i.pinimg.com/736x/3d/8c/2f/3d8c2f2c82c1c9ef1e27be645cd1aa17.jpg)',
+            backgroundSize: 'cover',
+          }}
+          className="  border-black overflow-scroll pb-10 "
+        >
           {allChat.map((each, index) => {
             if (each.fromUserId == userId) {
               return (
@@ -93,11 +126,11 @@ export default function Chat() {
           })}
         </div>
 
-        <form className=" border-black">
+        <form className=" border-black fixed bottom-0 w-[100vw] ">
           <label htmlFor="chat" className="sr-only">
             Your message
           </label>
-          <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
+          <div className="flex items-center px-3 py-2  bg-gray-50 dark:bg-gray-700">
             <button type="button" className="inline-flex justify-center p-2 text-gray-500 rounded-lg cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
               <svg aria-hidden="true" className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path fillRule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clipRule="evenodd" />
