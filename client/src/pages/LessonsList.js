@@ -2,7 +2,7 @@ import { fetchClassSchedule, fetchStudentDetail } from "../store/actions/actionC
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import Loading from "../components/Loading";
 
 
 import ScheduleList from "../components/ScheduleList";
@@ -10,6 +10,10 @@ import ScheduleList from "../components/ScheduleList";
 export default function LessonsList() {
   const dispatch = useDispatch();
 
+  const [isLoad, setIsLoad] = useState(true);
+
+  
+  
   const {
     student: { classSchedule, studentDetail },
   } = useSelector((state) => state);
@@ -25,6 +29,7 @@ export default function LessonsList() {
    
 
   if (classSchedule.length) {
+    
     const result = [];
     const days = {};
 
@@ -64,6 +69,19 @@ export default function LessonsList() {
 
     console.log(uniqueLessons, "yossi");
 
+    
+    
+    
+    
+    
+    
+    
+    // if(isLoad) {
+    //   return <Loading/>
+    // }
+    
+     
+    
     return (
       <div className="pt-10 px-6 mb-20 max-w-screen-xl mx-auto dark:bg-gray-900  border-yellow-400 ">
         <h5 class="mb-2 text-2xl font-semibold tracking-tight text-gray-900 dark:text-white">
@@ -109,6 +127,13 @@ export default function LessonsList() {
     );
   }
 }
+
+
+
+
+
+
+
 
 function LessonCard(props) {
   const { name, imgUrl, id } = props.data;

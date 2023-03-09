@@ -28,7 +28,7 @@ export default function Name(props) {
         setTodayStatus(findToday[0].status)
       }
     }
-  }, [Attendances]);
+  }, []);
 
 
   console.log(todayStatus, "testinr");
