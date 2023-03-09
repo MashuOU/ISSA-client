@@ -7,7 +7,7 @@ import { FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHE
 import axios from 'axios';
 
 // DEVELOPING PURPOSES'
-localStorage.setItem('access_token', 'eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk');
+// localStorage.setItem('access_token', 'eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk');
 
 // export const conterIncremented = (payload) => {
 //   return { type: COUNTER_INCREMENTER, payload }
