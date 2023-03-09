@@ -26,7 +26,9 @@
     "react-table": "^7.8.0",
     "redux": "^4.2.1",
     "redux-thunk": "^2.4.2",
+    "sass": "^1.58.3",
     "scrollreveal": "^4.0.9",
+    "socket.io-client": "^4.6.1",
     "swiper": "^9.1.0",
     "toastify-js": "^1.12.0",
     "web-vitals": "^2.1.4",
@@ -44,7 +46,7 @@
     "workbox-streams": "^6.4.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=8000 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
