@@ -10,7 +10,7 @@ export default function Chat() {
   const [room, setJoinRoom] = useState('');
   const [allChat, setAllChat] = useState([]);
   const [message, setMessage] = useState('');
-  console.log(message, 'ini messagee');
+  // console.log(message, 'ini messagee');
 
   const teacherId = localStorage.teacherId;
 
@@ -18,7 +18,7 @@ export default function Chat() {
     try {
       const { data } = await axios.get(`${baseUrl}/chatParent/${userId}/${teacherId}`, {
         headers: {
-          access_token: 'eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk',
+          access_token: localStorage.access_token,
         },
       });
       if (!data.length) {
