@@ -17,7 +17,7 @@ export default function Classes(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
     dispatch(classesFetch());
   }, []);
 

@@ -4,30 +4,29 @@ import { useEffect, useState } from "react";
 import ClipLoader from "react-spinners/ClipLoader";
 import Pagination from "../components/Pagination";
 import TableStudent from "../components/TableStudents";
-import { classesFetch, studentById, studentsFetch } from "../store/action/ActionCreator";
+import { classesFetch, studentById, studentsFetch, transactionsFetch } from "../store/action/ActionCreator";
 
 export default function Dashboard(params) {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const students = useSelector((state) => state.students.students);
   const classes = useSelector((state) => state.classes.classes);
-
-  // const numbers = [...Array(page + 1).keys()].slice(1);
+  const transactions = useSelector((state) => state.transactions.transactions);
 
   const [query, setQuery] = useState({
     ClassId: "",
     name: "",
   });
 
-  // console.log(classes, "ini class");
-
   useEffect(() => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
+    dispatch(transactionsFetch());
     dispatch(studentsFetch());
     dispatch(classesFetch());
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000);
   }, []);
 
   const changeInputHandler = (event) => {
@@ -93,14 +92,14 @@ export default function Dashboard(params) {
               id="countries"
               className="bg-gray-50 border border-gray-900 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-[20%] p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             >
-              <option selected value="All">
-                Sort By Class
-              </option>
+              <option disabled>Sort By Class</option>
 
-              <option value="All">All</option>
-              {classes.map((el) => {
+              <option selected value="All">
+                All
+              </option>
+              {classes?.map((el) => {
                 return (
-                  <option key={el.id} value={el.id}>
+                  <option selected={query.ClassId == el.id ? "selected" : false} key={el.id} value={el.id}>
                     {el.name}
                   </option>
                 );
@@ -113,7 +112,7 @@ export default function Dashboard(params) {
                   value={query.name}
                   type="text"
                   name="name"
-                  placeholder="Type here"
+                  placeholder="Search By Name"
                   className="input input-bordered  max-w-xs block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
                 />
               </div>
@@ -128,6 +127,7 @@ export default function Dashboard(params) {
               </div>
             </div>
           </div>
+
           <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 mt-6 ">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
@@ -162,7 +162,7 @@ export default function Dashboard(params) {
             </thead>
             {Array.isArray(students.rows) &&
               students?.rows.map((el, index) => {
-                return <TableStudent key={el.id} data={el} index={index} />;
+                return <TableStudent key={el.id} data={el} index={index} transactions={transactions} />;
               })}
           </table>
 

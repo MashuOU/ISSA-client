@@ -1,14 +1,15 @@
-import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH_SCHEDULE, FETCH_TEACHER, FETCH_LESSON, FETCH_LESSON_BYID, FETCH_HISTORY } from "./ActionTypes";
+import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH_SCHEDULE, FETCH_TEACHER, FETCH_LESSON, FETCH_LESSON_BYID, FETCH_HISTORY, FETCH_SCHEDULE_BYID, FETCH_TRANSACTION } from "./ActionTypes";
 
 // import Swal from "sweetalert2";
 
-let baseUrl = "http://13.213.63.194";
+// let baseUrl = "https://issa.rhazzid.site";
+let baseUrl = "http://localhost:3001";
 
 // STUDENT ONLY //
 
 export const studentsFetch = (query, pageIndex) => {
   console.log(query, "masuk ni");
-  let url = `http://localhost:3001/students?`;
+  let url = `${baseUrl}/students?`;
 
   if (pageIndex && query.ClassId !== "" && query.ClassId !== "All") {
     url += `ClassId=${localStorage.ClassId}&pageIndex=${pageIndex}`;
@@ -18,7 +19,7 @@ export const studentsFetch = (query, pageIndex) => {
     url += `ClassId=${localStorage.ClassId}`;
   } else if (query.ClassId !== "" && query.ClassId !== "All" && query.name) {
     url += `ClassId=${localStorage.ClassId}&name=${query.name}`;
-  } else if (query.ClassId === "All" && query.name) {
+  } else if (query.ClassId === "All" || (query.ClassId === "" && query.name)) {
     url += `name=${query.name}`;
   } else if (query.ClassId !== "" && query.ClassId !== "All" && !pageIndex) {
     const temp = (localStorage.ClassId = query.ClassId);
@@ -29,7 +30,7 @@ export const studentsFetch = (query, pageIndex) => {
   }
 
   return (dispatch, getState) => {
-    fetch(`${url}`, {
+    return fetch(`${url}`, {
       headers: {
         access_token: localStorage.access_token,
       },
@@ -42,6 +43,7 @@ export const studentsFetch = (query, pageIndex) => {
       })
       .then((data) => {
         dispatch(studentsFetchSuccess(data));
+
         // console.log(data);
       })
       .catch((err) => {
@@ -289,7 +291,7 @@ export const classesFetchSuccess = (payload) => {
 export const classesById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/class/${id}`, {
+    fetch(`${baseUrl}/classes/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
@@ -361,7 +363,7 @@ export const classesAdd = (payload) => {
 export const editClass = (payload) => {
   console.log(payload, "ini action");
   return (dispatch, getState) => {
-    return fetch(`${baseUrl}/class/${payload.StudentId}`, {
+    return fetch(`${baseUrl}/classes/${payload.StudentId}`, {
       method: "PUT",
       headers: {
         access_token: localStorage.access_token,
@@ -387,7 +389,7 @@ export const editClass = (payload) => {
 
 export const classDelete = (id) => {
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/class/${id}`, {
+    fetch(`${baseUrl}/classes/${id}`, {
       method: "DELETE",
       headers: {
         access_token: localStorage.access_token,
@@ -444,7 +446,7 @@ export const lessonsFetchSuccess = (payload) => {
 export const lessonsById = (id) => {
   console.log(id);
   return (dispatch, getState) => {
-    fetch(`${baseUrl}/lessons/${id}`, {
+    return fetch(`${baseUrl}/lessons/${id}`, {
       method: "GET",
       headers: {
         access_token: localStorage.access_token,
@@ -695,22 +697,146 @@ export const schedulesFetchSuccess = (payload) => {
   };
 };
 
+export const scheduleById = (id) => {
+  console.log(id);
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/schedules/${id}`, {
+      method: "GET",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(scheduleFetchSuccessById(data));
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
+export const scheduleFetchSuccessById = (payload) => {
+  return {
+    type: FETCH_SCHEDULE_BYID,
+    payload: payload,
+  };
+};
+
+export const addSchedule = (payload) => {
+  console.log(payload);
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/schedules`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        access_token: localStorage.access_token,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          const error = await response.json();
+          console.log(error);
+          throw new Error(error.message);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        // Swal.fire({
+        //   position: "top-end",
+        //   icon: "success",
+        //   title: "Add Product Success",
+        //   showConfirmButton: false,
+        //   timer: 1500,
+        // });
+        dispatch(scheduleFetch());
+        // console.log("masuk nih");
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+        // Swal.fire({
+        //   icon: "error",
+        //   title: "Oops...",
+        //   text: error.message,
+        // });
+      });
+  };
+};
+
+export const editSchedule = (payload, id) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/schedules/${id}`, {
+      method: "PUT",
+      headers: {
+        access_token: localStorage.access_token,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(scheduleFetch());
+      })
+      .catch((error) => {
+        // console.error("Error:", error);
+      });
+  };
+};
+
+export const scheduleDelete = (id) => {
+  return (dispatch, getState) => {
+    fetch(`${baseUrl}/schedules/${id}`, {
+      method: "DELETE",
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log("Success:", data);
+        dispatch(scheduleFetch());
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  };
+};
+
 // HISTORY ONLY //
 
-export const historiesFetch = (query) => {
-  let url = `http://localhost:3001/histories?`;
+export const historiesFetch = (query, pageIndex) => {
+  console.log(query, pageIndex);
+  let url = `${baseUrl}/histories?`;
 
-  if (!query) {
+  if (!query && !pageIndex) {
     url = url;
-  } else if (query.pageIndex && query.createdBy) {
-    url += `createdBy=${query.createdBy}&pageIndex=${query.pageIndex}`;
-  } else if (query.pageIndex) {
-    url += `pageIndex=${query.pageIndex}`;
-  } else if (query.createdBy) {
+  } else if (!pageIndex && query.createdBy !== "") {
     url += `createdBy=${query.createdBy}`;
-  } else if (query.pageIndex) {
-    url += `pageIndex=${query.pageIndex}`;
+  } else if (pageIndex && !query.createdBy) {
+    url += `pageIndex=${pageIndex}`;
+  } else if (query.createdBy !== "" && pageIndex) {
+    url += `createdBy=${query.createdBy}&pageIndex=${pageIndex}`;
   }
+
   return (dispatch, getState) => {
     fetch(`${url}`, {
       headers: {
@@ -741,169 +867,35 @@ export const historiesFetchSuccess = (payload) => {
   };
 };
 
-// export const productDelete = (id) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/product/${id}`, {
-//       method: "DELETE",
-//       headers: {
-//         access_token: localStorage.access_token,
-//       },
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error(response);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // console.log("Success:", data);
-//         dispatch(productFetch());
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   };
-// };
+// TRANSACTIONS ONLY //
 
-// export const productById = (id) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/product/${id}`, {
-//       method: "GET",
-//       headers: {
-//         access_token: localStorage.access_token,
-//       },
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error(response);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // console.log("Success:", data);
-//         dispatch(productFetchSuccessById(data));
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   };
-// };
+export const transactionsFetch = (query, pageIndex) => {
+  return (dispatch, getState) => {
+    return fetch(`${baseUrl}/transactions`, {
+      headers: {
+        access_token: localStorage.access_token,
+      },
+    })
+      .then(async (response) => {
+        if (!response.ok) {
+          throw new Error("Network was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // console.log(data, ">>>>>>>>");
+        dispatch(transactionsFetchSuccess(data));
+        // console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
-// export const productFetchSuccessById = (payload) => {
-//   return {
-//     type: FETCH_PRODUCT_BYID,
-//     payload: payload,
-//   };
-// };
-
-// export const categoryFetch = (payload) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/categories`, {
-//       headers: {
-//         access_token: localStorage.access_token,
-//       },
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error("Network response was not OK");
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         dispatch(categoryFetchSuccess(data));
-//         // console.log(data);
-//       });
-//   };
-// };
-
-// export const categoryFetchSuccess = (payload) => {
-//   return {
-//     type: FETCH_CATEGORY,
-//     payload: payload,
-//   };
-// };
-
-// export const categoryAdd = (payload) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/categories`, {
-//       method: "POST",
-//       headers: {
-//         "Content-Type": "application/json",
-//         access_token: localStorage.access_token,
-//       },
-//       body: JSON.stringify(payload),
-//     })
-//       .then(async (response) => {
-//         if (!response.ok) {
-//           const error = await response.json();
-
-//           throw new Error(error.message);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // console.log("Success:", data);
-//         dispatch(categoryFetch());
-//         redirect("/category");
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//         Swal.fire({
-//           icon: "error",
-//           title: "Oops...",
-//           text: error.message,
-//         });
-//       });
-//   };
-// };
-
-// export const categoryDelete = (id) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/categories/${id}`, {
-//       method: "DELETE",
-//       headers: {
-//         access_token: localStorage.access_token,
-//       },
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error(response);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         console.log("Success:", data);
-//         dispatch(categoryFetch());
-//       })
-//       .catch((error) => {
-//         console.error("Error:", error);
-//       });
-//   };
-// };
-
-// export const editProduct = (id, payload) => {
-//   return (dispatch, getState) => {
-//     fetch(`${baseUrl}/product/${id}`, {
-//       method: "PUT",
-//       headers: {
-//         access_token: localStorage.access_token,
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify(payload),
-//     })
-//       .then((response) => {
-//         if (!response.ok) {
-//           throw new Error(response);
-//         }
-//         return response.json();
-//       })
-//       .then((data) => {
-//         // console.log("Success:", data);
-//         dispatch(productFetch());
-//         redirect("/product");
-//       })
-//       .catch((error) => {
-//         // console.error("Error:", error);
-//       });
-//   };
-// };
+export const transactionsFetchSuccess = (payload) => {
+  return {
+    type: FETCH_TRANSACTION,
+    payload: payload,
+  };
+};

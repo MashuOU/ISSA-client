@@ -14,7 +14,6 @@ import Schedule from "../pages/Schedule";
 import Teacher from "../pages/Teacher";
 import Attendance from "../pages/Attendance";
 import ChatRoom from "../pages/ChatRoom";
-import AddScores from "../pages/AddScores";
 import History from "../pages/History";
 import Lessons from "../pages/Lessons";
 
@@ -84,12 +83,9 @@ const router = createBrowserRouter([
         path: "/formClass",
         element: <AddClass />,
       },
+
       {
-        path: "/addScores",
-        element: <AddScores />,
-      },
-      {
-        path: "/addSchedule",
+        path: "/formSchedule",
         element: <AddSchedule />,
       },
     ],

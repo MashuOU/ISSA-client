@@ -17,7 +17,7 @@ export default function Lessons(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 1500);
     dispatch(lessonsFetch());
   }, []);
 
@@ -35,7 +35,7 @@ export default function Lessons(props) {
           <div className="ml-4 mb-10">
             <p className="font-Comfortaa font-semibold text-[2rem] dark:text-white text-center mb-[4rem]">LESSONS</p>
           </div>
-          <div className="mr-[28.8rem] mb-6 flex justify-end">
+          <div className="flex justify-center mb-10">
             <Link to="/formLesson">
               <button
                 className="inline-flex items-center   border-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 :bg-gray-800 dark:bg-gray-700 h-10"

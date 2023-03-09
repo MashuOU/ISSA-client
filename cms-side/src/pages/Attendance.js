@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import TableAttendances from "../components/TableAttendance";
-import TableStudent from "../components/TableStudents";
 import { studentsFetch, classesFetch } from "../store/action/ActionCreator";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useNavigation } from "react-router-dom";
@@ -23,13 +22,13 @@ export default function Attendance(props) {
     name: "",
   });
 
-  console.log(query, "ini query");
+  // console.log(query, "ini query");
 
   useEffect(() => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
     dispatch(studentsFetch());
     dispatch(classesFetch());
   }, []);
@@ -47,14 +46,8 @@ export default function Attendance(props) {
 
   console.log(query);
   const submitQuery = (e) => {
-    // if (query.ClassId != "" || query.name != "") {
-    // localStorage.removeItem("ClassId");
+    e.preventDefault();
     dispatch(studentsFetch(query));
-    // setQuery({
-    //   ClassId: "All",
-    //   name: "",
-    // });
-    // }
   };
 
   return (
@@ -66,7 +59,7 @@ export default function Attendance(props) {
           </div>
         </div>
       ) : (
-        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[3rem] w-full md:w-full sm:[50%] ">
+        <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[2rem] w-full md:w-full sm:[50%] ">
           {/* <p className="dark:text-white font-raleway italic font-semibold text-[1.3rem]  ml-10 ">Attendances</p> */}
           <div className="flex items-center justify-center pb-4 bg-white dark:bg-gray-900">
             <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-[5rem] ">

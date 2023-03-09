@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react';
-import axios, { all } from 'axios';
-import socket from '../config/socket';
+import { useState, useEffect } from "react";
+import axios, { all } from "axios";
+import socket from "../config/socket";
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = "https://issa.rhazzid.site";
 
 // let teacher = { id: 1, NIP: '1800011221', name: 'Sumiyati' };
 
 export default function ChatRoom(params) {
   const [parents, setParents] = useState([]);
   const [allChat, setAllChat] = useState([]);
-  const [message, setMessage] = useState('');
-  const [room, setJoinRoom] = useState('');
+  const [message, setMessage] = useState("");
+  const [room, setJoinRoom] = useState("");
   const [user, setUser] = useState({ fromUserId: null });
   const teacherId = localStorage.TeacherId;
 
@@ -18,10 +18,10 @@ export default function ChatRoom(params) {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}`, {
         headers: {
-          access_token: 'eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8',
+          access_token: "eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8",
         },
       });
-      console.log(data, 'data parents');
+      console.log(data, "data parents");
       setParents(data);
     } catch (err) {
       console.log(err);
@@ -36,10 +36,10 @@ export default function ChatRoom(params) {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}/${user.fromUserId}`, {
         headers: {
-          access_token: 'eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8',
+          access_token: "eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8",
         },
       });
-      console.log(data, 'dataaaa');
+      console.log(data, "dataaaa");
       setAllChat(data);
       setJoinRoom(data[0].roomId);
     } catch (err) {
@@ -61,78 +61,78 @@ export default function ChatRoom(params) {
   };
 
   const joinRoom = (detail) => {
-    console.log(detail, 'detailll');
+    console.log(detail, "detailll");
     setUser(detail);
-    socket.emit('join:room', room);
+    socket.emit("join:room", room);
   };
   const handleNewMessage = async (event) => {
     event.preventDefault();
     // const dataMsg = { from: teacher.id, to: user.id, message: message.message };
-    setMessage({ message: '' });
+    setMessage({ message: "" });
     try {
       // const { data } = await axios.post(`${baseUrl}/chats`, dataMsg);
       // gaperlu karena, uda dihandle sama socket
-      socket.emit('chat:msg', { msg: message, room: room, from: teacherId, to: user.fromUserId });
+      socket.emit("chat:msg", { msg: message, room: room, from: teacherId, to: user.fromUserId });
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    socket.on('resp:msg', (data) => {
-      console.log(data, '<<<<< nich');
+    socket.on("resp:msg", (data) => {
+      console.log(data, "<<<<< nich");
       setAllChat(data);
     });
   }, [message]);
 
   return (
     <>
-      <div className="flex h-screen antialiased text-gray-800">
+      <div className="flex h-screen antialiased text-gray-800 mx-auto">
         <div className="flex flex-row h-full w-full overflow-x-hidden">
-          <div className="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0">
-            <div className="flex flex-col mt-8">
+          <div className="flex flex-col py-8 pl-6 pr-2 w-64 bg-white flex-shrink-0 dark:bg-gray-900">
+            <div className="flex flex-col mt-8 ">
               <div className="flex flex-col space-y-1 mt-4 -mx-2">
-                <div className="flex flex-row items-center justify-center h-12 w-full">
-                  <div className="flex items-center justify-center rounded-2xl text-indigo-700 bg-indigo-100 h-10 w-10 dark:bg-gray-900 dark:text-gray-400">
+                <div className="flex flex-row items-center justify-center h-12 w-full mb-[2rem]">
+                  <div className="flex items-center justify-center rounded-2xl text-white bg-gray-900 h-10 w-10  dark:text-gray-800 dark:bg-white">
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
                     </svg>
                   </div>
-                  <div className="ml-2 font-bold text-2xl">Chat</div>
-                  <br></br>
-                  <br></br>
-                  <br></br>
+                  <div className="ml-2 font-bold text-2xl dark:text-white text-gray-800">Chat</div>
                 </div>
-                {parents.map((x, i) => {
-                  return (
-                    <button
-                      key={i}
-                      onClick={(e) => {
-                        e.preventDefault();
-                        joinRoom(x);
-                      }}
-                      className="flex flex-row items-center hover:bg-gray-100 rounded-xl p-2"
-                    >
-                      <div className="flex items-center justify-center h-8 w-8 bg-indigo-200 rounded-full">{x.fromUserId}</div>
-                      <div className="ml-2 text-sm font-semibold">{x.parentName[0].Student.name}'s parent</div>
-                    </button>
-                  );
-                })}
+                <div>
+                  {parents?.map((x, i) => {
+                    return (
+                      <button
+                        key={i}
+                        onClick={(e) => {
+                          e.preventDefault();
+                          joinRoom(x);
+                        }}
+                        className="flex flex-row items-center rounded-xl p-2 hover:bg-gray-400 active:bg-gray-400 focus:bg-gray-400"
+                      >
+                        <div className="flex items-center justify-center text-white h-8 w-8 bg-gray-900 dark:bg-white rounded-full dark:text-gray-900">{x.fromUserId}</div>
+
+                        <div className="ml-2 text-sm font-semibold text-gray-800 dark:text-white">{x.parentName[0].Student.name}'s parent</div>
+                      </button>
+                    );
+                  })}
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="flex flex-col flex-auto h-full p-6">
-            <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full p-4">
-              <div className="flex flex-col h-full overflow-x-auto mb-4">
+          <div className="flex h-full p-12 w-full ">
+            <div className="flex flex-col flex-auto flex-shrink-0 rounded-2xl bg-gray-100 h-full w-full p-4 justify-center dark:bg-gray-500">
+              <div className="flex flex-col h-full w-full overflow-x-auto mb-4">
                 <div className="flex flex-col h-full">
                   <div className="grid grid-cols-12 gap-y-2">
-                    {allChat.map((x, i) => {
+                    {allChat?.map((x, i) => {
                       if (x.fromUserId != teacherId || x.toUserId == teacherId) {
                         return (
                           <div key={i} className="col-start-1 col-end-8 p-3 rounded-lg">
                             <div className="flex flex-row items-center">
-                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">{x.fromUserId}</div>
+                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 flex-shrink-0  text-white dark:text-white">{x.fromUserId}</div>
                               <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                 <div>{x.message}</div>
                               </div>
@@ -143,7 +143,7 @@ export default function ChatRoom(params) {
                         return (
                           <div key={i} className="col-start-6 col-end-13 p-3 rounded-lg">
                             <div className="flex items-center justify-start flex-row-reverse">
-                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-indigo-500 flex-shrink-0">{x.fromUserId}</div>
+                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 text-white dark:text-white flex-shrink-0">{x.fromUserId}</div>
                               <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
                                 <div>{x.message}</div>
                               </div>
@@ -166,15 +166,11 @@ export default function ChatRoom(params) {
                 <div className="flex-grow ml-4">
                   <div className="relative w-full">
                     <input onChange={dataValue} value={message.message} name="message" type="text" className="flex w-full border rounded-xl focus:outline-none focus:border-indigo-300 pl-4 h-10" />
-                    <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                      </svg>
-                    </button>
+                    <button className="absolute flex items-center justify-center h-full w-12 right-0 top-0 text-gray-400 hover:text-gray-600"></button>
                   </div>
                 </div>
                 <div className="ml-4">
-                  <button onClick={handleNewMessage} className="flex items-center justify-center bg-indigo-500 hover:bg-indigo-600 rounded-xl text-white px-4 py-1 flex-shrink-0">
+                  <button onClick={handleNewMessage} className="flex items-center justify-center bg-gray-900 hover:bg-gray-800 rounded-xl text-white px-4 py-1 flex-shrink-0 dark:text-white">
                     <span>Send</span>
                     <span className="ml-2">
                       <svg className="w-4 h-4 transform rotate-45 -mt-px" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

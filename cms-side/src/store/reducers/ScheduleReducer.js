@@ -1,7 +1,8 @@
-import { FETCH_SCHEDULE } from "../action/ActionTypes";
+import { FETCH_SCHEDULE, FETCH_SCHEDULE_BYID } from "../action/ActionTypes";
 
 const initialState = {
   schedules: [],
+  schedule: [],
 };
 
 function scheduleReducer(state = initialState, action) {
@@ -11,11 +12,11 @@ function scheduleReducer(state = initialState, action) {
         ...state,
         schedules: action.payload,
       };
-    // case FETCH_CLASS_BYID:
-    //   return {
-    //     ...state,
-    //     class: action.payload,
-    //   };
+    case FETCH_SCHEDULE_BYID:
+      return {
+        ...state,
+        schedule: action.payload,
+      };
 
     default:
       return state;

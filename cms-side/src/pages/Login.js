@@ -1,15 +1,15 @@
-import { Link } from 'react-router-dom';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const baseUrl = 'http://localhost:3000';
+const baseUrl = "https://issa.rhazzid.site";
 
 export default function Login(props) {
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
-    NIP: '',
-    password: '',
+    NIP: "",
+    password: "",
   });
 
   const changeInputHandler = (event) => {
@@ -26,9 +26,9 @@ export default function Login(props) {
   const submitForm = (e) => {
     e.preventDefault();
     fetch(`${baseUrl}/teachers/login`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
 
       body: JSON.stringify(form),
@@ -49,9 +49,9 @@ export default function Login(props) {
         //   showConfirmButton: false,
         //   timer: 1500,
         // });
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('ClassId', data.ClassId);
-        localStorage.setItem('TeacherId', data.id);
+        localStorage.setItem("access_token", data.access_token);
+        localStorage.setItem("ClassId", data.ClassId);
+        localStorage.setItem("TeacherId", data.id);
         navigate(`/`);
       })
       .catch((error) => {
@@ -64,7 +64,7 @@ export default function Login(props) {
       });
   };
   return (
-    <section className="h-screen bg-gradient-to-r from-gray-900 ">
+    <section className="h-screen bg-gray-900 opacity-100 ">
       <div className="px-6 h-full text-gray-800">
         <div className="flex xl:justify-center lg:justify-between justify-center items-center flex-wrap h-full g-6">
           <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-6/12 lg:w-6/12 md:w-9/12 mb-12 md:mb-[5rem]">
@@ -76,7 +76,7 @@ export default function Login(props) {
               <div className="flex flex-row items-center justify-center lg:justify-start"></div>
 
               <div className="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5">
-                <p className="text-center font-semibold mx-4 mb-0">With</p>
+                <p className="text-center text-white font-semibold mx-4 mb-0">With</p>
               </div>
 
               {/* <!-- Email input --> */}
@@ -115,7 +115,7 @@ export default function Login(props) {
 
               <div className="text-center lg:text-left">
                 <button
-                  className="inline-flex items-center   border-bg-gray-900 focus:outline-none bg-gray-900 text-white focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 "
+                  className="inline-flex items-center   border-bg-gray-900 focus:outline-none bg-white text-black focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-gray-400 h-10 "
                   type="submit"
                 >
                   <p className="text-center ">SIGN IN</p>

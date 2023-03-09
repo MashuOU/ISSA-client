@@ -21,7 +21,6 @@ export default function History(params) {
   }, []);
 
   const [query, setQuery] = useState({
-    pageIndex: 1,
     createdBy: "",
   });
 
@@ -37,7 +36,12 @@ export default function History(params) {
   };
 
   const submitQuery = (e) => {
-    // dispatch(studentsFetch(query));
+    e.preventDefault();
+    dispatch(historiesFetch(query));
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
   };
 
   return (
@@ -58,14 +62,14 @@ export default function History(params) {
               <p className="dark:text-white font-Comfortaa font-semibold text-[1.3rem] text-center mt-6">HISTORY</p>
             </div>
           </div>
-          <div className="flex items-center justify-end pb-4 bg-white dark:bg-gray-900 ml-6 mr-6 mb-14">
-            <div className="flex justify-end">
+          <div className="flex items-center justify-end pb-4 bg-white dark:bg-gray-900 ml-6 mr-[18rem] mb-14">
+            <div className="flex justify-end ">
               <input
                 onChange={changeInputHandler}
                 value={query.createdBy}
                 type="text"
-                name="name"
-                placeholder="Type here"
+                name="createdBy"
+                placeholder="Search By Name"
                 className="input input-bordered  max-w-xs block p-2 pl-10 text-sm text-gray-900 border border-gray-900 rounded-lg w-80 dark:bg-gray-700 focus:ring-blue-500 focus:border-blue-500  dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 h-10"
               />
             </div>

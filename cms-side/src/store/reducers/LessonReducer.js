@@ -2,7 +2,7 @@ import { FETCH_LESSON, FETCH_LESSON_BYID } from "../action/ActionTypes";
 
 const initialState = {
   lessons: [],
-  lesson: [],
+  lesson: {},
 };
 
 function lessonReducer(state = initialState, action) {

@@ -6,7 +6,7 @@ export default function TableLesson(props) {
   const { data } = props;
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  console.log(data);
+  // console.log(data);
 
   const handleLessonById = (id) => {
     dispatch(lessonsById(id)).then(() => {

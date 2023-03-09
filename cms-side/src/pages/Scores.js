@@ -17,7 +17,7 @@ export default function Scores(props) {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
-    }, 1000);
+    }, 2000);
     dispatch(studentById(studentId));
   }, []);
 

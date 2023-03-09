@@ -1,16 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { studentById, studentsFetch } from "../store/action/ActionCreator";
-
 export default function ModalAttendances(props) {
   const { data, id } = props;
 
   const myModal = id;
-  // console.log(data, "ini data");
-
-  const day = data.map((el) => {
-    console.log(new Date(el.updatedAt).toLocaleString("id-ID", { weekday: "long" }));
-  });
 
   return (
     <>

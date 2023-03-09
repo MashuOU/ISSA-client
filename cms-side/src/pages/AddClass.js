@@ -44,7 +44,7 @@ export default function AddClass(props) {
 
     setForm(newForm);
   };
-  console.log(form);
+  // console.log(form);
 
   const handleCancel = () => {
     dispatch(

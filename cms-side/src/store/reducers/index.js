@@ -5,6 +5,7 @@ import lessonReducer from "./LessonReducer";
 import scheduleReducer from "./ScheduleReducer";
 import studentReducer from "./StudentReducer";
 import teacherReducer from "./TeacherReducer";
+import transactionReducer from "./TransactionReducer";
 
 const rootReducer = combineReducers({
   students: studentReducer,
@@ -13,6 +14,8 @@ const rootReducer = combineReducers({
   teachers: teacherReducer,
   lessons: lessonReducer,
   histories: historyReducer,
+  schedules: scheduleReducer,
+  transactions: transactionReducer,
 });
 
 export default rootReducer;

@@ -7,7 +7,6 @@ export default function TableClass(props) {
   const dispatch = useDispatch();
 
   const handleDetail = (id) => {
-    // console.log(id, "!!!!!");
     dispatch(classesById(id));
   };
 
@@ -15,7 +14,6 @@ export default function TableClass(props) {
     dispatch(classDelete(id));
   };
 
-  // console.log(classes);
   return (
     <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
       <td className="w-4 p-4">{index + 1}</td>

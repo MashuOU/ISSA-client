@@ -1,32 +1,63 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
-import { scheduleFetch } from "../store/action/ActionCreator";
+import { scheduleById, scheduleDelete, scheduleFetch } from "../store/action/ActionCreator";
+import { useNavigate } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
 
 export default function Item(props) {
-  const { day } = props;
+  const { day, data } = props;
+  const navigate = useNavigate();
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
-  const schedules = useSelector((state) => state.schedules.schedules);
+  // const schedules = useSelector((state) => state.schedules.schedules);
 
-  // console.log(schedules.values());
-  useEffect(() => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-    dispatch(scheduleFetch());
-  }, []);
+  // // console.log(schedules.values());
+  // useEffect(() => {
+  //   setLoading(true);
+  //   setTimeout(() => {
+  //     setLoading(false);
+  //   }, 1000);
+  //   dispatch(scheduleFetch());
+  // }, []);
 
-  const check = schedules.filter((el) => el.day == day);
-  // console.log(check);
+  const check = data?.filter((el) => el.day == day);
+  console.log(check);
+
+  const handleLessonById = (id) => {
+    console.log(id);
+    dispatch(scheduleById(id));
+    navigate("/formSchedule");
+  };
+
+  const handleDeleteSchedule = (id) => {
+    dispatch(scheduleDelete(id));
+  };
 
   return (
     <>
-      {check.map((el) => {
-        return <li className="text-black dark:text-white">{el.Lesson.name}</li>;
-      })}
+      {data &&
+        Array.isArray(data) &&
+        check?.map((el) => {
+          return (
+            <>
+              <div className="flex justify-between">
+                <div>
+                  <li className="text-black dark:text-white">{el.Lesson?.name}</li>
+                </div>
+                <div className="flex justify-between">
+                  <p onClick={() => handleLessonById(el.id)} className="text-[#4c4cdf]  ml-3 hover:cursor-pointer">
+                    edit
+                  </p>
+                  <p onClick={() => handleDeleteSchedule(el.id)} className="text-[red]  ml-3 hover:cursor-pointer">
+                    delete
+                  </p>
+                </div>
+              </div>
+            </>
+          );
+        })}
     </>
   );
 }

@@ -54,7 +54,7 @@ export default function AddStudent(props) {
 
     setForm(newForm);
   };
-  console.log(form, "ini form");
+  // console.log(form, "ini form");
 
   const handleCancel = () => {
     dispatch(
