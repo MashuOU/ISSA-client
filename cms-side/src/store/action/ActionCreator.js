@@ -2,8 +2,8 @@ import { FETCH_CLASS, FETCH_STUDENT, FETCH_STUDENT_BYID, FETCH_CLASS_BYID, FETCH
 
 // import Swal from "sweetalert2";
 
-// let baseUrl = "https://issa.rhazzid.site";
-let baseUrl = "http://localhost:3001";
+let baseUrl = "https://issa.rhazzid.site";
+// let baseUrl = "http://localhost:3001";
 
 // STUDENT ONLY //
 

@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <>
-      <div className={` ${open ? "w-72" : "w-20 "} h-screen bg-gray-900 p-5  pt-8 relative duration-300 dark:bg-gray-700 dark:text-gray-400`}>
+      <div className={` ${open ? "w-72" : "w-20 "} min-h-screen bg-gray-900 p-5  pt-8 relative duration-300 dark:bg-gray-700 dark:text-gray-400`}>
         <img
           src="https://res.cloudinary.com/dslzpyibe/image/upload/v1677950995/assets/control_jdqubc.png"
           className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
