@@ -1,6 +1,6 @@
-import { useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { studentById, studentDelete } from "../store/action/ActionCreator";
+import { useDispatch } from 'react-redux';
+import { Link, useParams } from 'react-router-dom';
+import { studentById, studentDelete } from '../store/action/ActionCreator';
 
 export default function TableStudent(props) {
   const { data, index, transactions } = props;
@@ -64,22 +64,22 @@ export default function TableStudent(props) {
           )}
         </td>
         <td className="px-6 py-4 justify-center">
-          {dateNow == resultDate && resultStatus == "Hadir" && (
+          {dateNow == resultDate && resultStatus == 'Hadir' && (
             <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-green-500 mr-2"></div>
             </div>
           )}
-          {dateNow == resultDate && resultStatus == "Sakit" && (
+          {dateNow == resultDate && resultStatus == 'Sakit' && (
             <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-yellow-500 mr-2"></div>
             </div>
           )}
-          {dateNow == resultDate && resultStatus == "Izin" && (
+          {dateNow == resultDate && resultStatus == 'Izin' && (
             <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-blue-500 mr-2"></div>
             </div>
           )}
-          {dateNow == resultDate && resultStatus == "Alfa" && (
+          {dateNow == resultDate && resultStatus == 'Alfa' && (
             <div className="flex justify-center">
               <div className="h-2.5 w-2.5 rounded-full bg-red-600 mr-2"></div>
             </div>
