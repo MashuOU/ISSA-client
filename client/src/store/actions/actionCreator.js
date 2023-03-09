@@ -1,109 +1,74 @@
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from 'react-router-dom';
 // const navigate = useNavigate()
 
+import { LOADING, COUNTER_INCREMENTER, WRITE_PRODUCTS, WRITE_PRODUCT, WRITE_PRODUCT_FAILED, WRITE_PRODUCTS_BY_TYPE, WRITE_PRODUCTS_BY_TYPE_FAILED, WRITE_CATEGORIES, WRITE_CATEGORIES_FAILED, WRITE_LESSON } from './actionTypes';
 
-import {
-  LOADING,
-  COUNTER_INCREMENTER,
-  WRITE_PRODUCTS,
-  WRITE_PRODUCT,
-  WRITE_PRODUCT_FAILED,
-
-  WRITE_PRODUCTS_BY_TYPE,
-  WRITE_PRODUCTS_BY_TYPE_FAILED,
-
-  WRITE_CATEGORIES,
-  WRITE_CATEGORIES_FAILED,
-
-  WRITE_LESSON
-
-} from "./actionTypes"
-
-
-
-import { FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from "./actionTypes"
-import axios from 'axios'
-
+import { FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FETCH_CLASS_SCHEDULE, FETCH_ACTIVIY, FETCH_SPP, FETCH_STATISTIC } from './actionTypes';
+import axios from 'axios';
 
 // DEVELOPING PURPOSES'
-  localStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk" )
-
+localStorage.setItem('access_token', 'eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk');
 
 // export const conterIncremented = (payload) => {
 //   return { type: COUNTER_INCREMENTER, payload }
 // }
 
-
 export function loading() {
-  return { type: LOADING }
+  return { type: LOADING };
 }
 
-
 export function writeProduct(payload) {
-  return { type: WRITE_PRODUCTS, payload }
+  return { type: WRITE_PRODUCTS, payload };
 }
 
 export function writeProductById(payload) {
-  return { type: WRITE_PRODUCT, payload }
+  return { type: WRITE_PRODUCT, payload };
 }
 export function writeProductsByType(payload) {
-  return { type: WRITE_PRODUCTS_BY_TYPE, payload }
+  return { type: WRITE_PRODUCTS_BY_TYPE, payload };
 }
 
-
-
 export function writeProductFailed(payload) {
-  return { type: WRITE_PRODUCT_FAILED, payload }
+  return { type: WRITE_PRODUCT_FAILED, payload };
 }
 
 export function writeTodayLesson(payload) {
-  return { type: WRITE_LESSON, payload }
+  return { type: WRITE_LESSON, payload };
 }
 
-const baseUrl = "http://localhost:3000"
+const baseUrl = 'http://localhost:3000';
 // const baseUrl = "https://react-server.macnesa.com"
-
-
-
-
-
-
-
 
 // FUNCTIONS /////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////
 
-
 export function act_login(data) {
   return async (dispatch) => {
     try {
-      const request = await
-        fetch(baseUrl + `/users/login`,
-          {
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-          }
-        )
-      let respon = await request.json()
+      const request = await fetch(baseUrl + `/users/login`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      let respon = await request.json();
 
-      if (!request.ok) throw respon
+      if (!request.ok) throw respon;
 
-      // localStorage.setItem("myToken", respon.access_token)
+      localStorage.setItem('access_token', respon.access_token);
+      localStorage.setItem('userId', respon.id);
+      localStorage.setItem('teacherId', respon.teacherId);
 
       console.log(respon.access_token);
 
-      return true
+      return true;
     } catch (error) {
       console.log(error);
-      throw error
+      throw error;
     }
-  }
+  };
 }
-
-
 
 // export function getProducts() {
 //   return async (dispatch) => {
@@ -132,9 +97,6 @@ export function act_login(data) {
 //   }
 // }
 
-
-
-
 // export function getProductById() {
 //   return async (dispatch) => {
 //     try {
@@ -159,8 +121,6 @@ export function act_login(data) {
 //   }
 // }
 
-
-
 // export function getCategories() {
 //   return async (dispatch) => {
 //     try {
@@ -172,7 +132,7 @@ export function act_login(data) {
 //             headers: {
 //               // access_token: localStorage.getItem("myToken")
 //               access_token: "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMQ.W74YwqIO02NKtjBYp9CKZbnkgNMcwQDip2t7QAWPNKk"
-              
+
 //             },
 //           }
 //         )
@@ -187,15 +147,10 @@ export function act_login(data) {
 //   }
 // }
 
-
-
-
-
 // export function getByType(type) {
 //   return async (dispatch) => {
 //     try {
 //       dispatch(loading())
-
 
 //       const request = await
 //         fetch(baseUrl + `/customer/types`,
@@ -225,228 +180,205 @@ export function act_login(data) {
 //         // console.log(foundObj);
 //       }
 
-
 //     } catch (error) {
 //       dispatch(writeProductFailed(error))
 //     }
 //   }
 // }
 
-
-
-
-
-
-
-
-
-
-
-
 // ////////////////////////
 
 //! redux
 export const insert_Schedule_redux = (payload) => {
-    return {
-        type: FETCH_SCHEDULE,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_SCHEDULE,
+    payload: payload,
+  };
+};
 
 export const insert_Classmate_redux = (payload) => {
-    return {
-        type: FETCH_CLASSMATE,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_CLASSMATE,
+    payload: payload,
+  };
+};
 
 export const insert_StudentDetail_redux = (payload) => {
-    return {
-        type: FETCH_STUDENT_DETAIL,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_STUDENT_DETAIL,
+    payload: payload,
+  };
+};
 
 export const insert_ClassSchedule_redux = (payload) => {
-    return {
-        type: FETCH_CLASS_SCHEDULE,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_CLASS_SCHEDULE,
+    payload: payload,
+  };
+};
 
 export const insert_Activity_redux = (payload) => {
-    return {
-        type: FETCH_ACTIVIY,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_ACTIVIY,
+    payload: payload,
+  };
+};
 
 export const insert_SPP_redux = (payload) => {
-    return {
-        type: FETCH_SPP,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_SPP,
+    payload: payload,
+  };
+};
 
 export const insert_Statistic_redux = (payload) => {
-    return {
-        type: FETCH_STATISTIC,
-        payload: payload,
-    }
-}
+  return {
+    type: FETCH_STATISTIC,
+    payload: payload,
+  };
+};
 
 // handle login | logout
 export const handleLogin = (dataLogin) => {
-    return async (dispatch, getState) => {
-        try {
-            // let query = `?`
-            let { data } = await axios({
-                url: baseUrl + `/users/login`,
-                method: `POST`,
-                data: {
-                    NIM: dataLogin.NIM,
-                    password: dataLogin.password
-                }
-            })
-            localStorage.access_token = data.access_token
-        } catch (error) {
-            console.error(
-                "There has been a problem with your fetch operation:",
-                error
-            );
-        }
+  return async (dispatch, getState) => {
+    try {
+      // let query = `?`
+      let { data } = await axios({
+        url: baseUrl + `/users/login`,
+        method: `POST`,
+        data: {
+          NIM: dataLogin.NIM,
+          password: dataLogin.password,
+        },
+      });
+      localStorage.access_token = data.access_token;
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
     }
-}
-
-
-
-
-
-
+  };
+};
 
 //! fetching API
 
 // jadwal pelajaran kelas per hari nya
 export const fetchScheduleLesson = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let query = `?day=${day}`
-            let { data } = await axios({
-                url: baseUrl + `/public/lesson` + query,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_Schedule_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let query = `?day=${day}`;
+      let { data } = await axios({
+        url: baseUrl + `/public/lesson` + query,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_Schedule_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 // teman2 satu kelas
 export const fetchClassmate = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let { data } = await axios({
-                url: baseUrl + `/public/classmate`,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_Classmate_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        url: baseUrl + `/public/classmate`,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_Classmate_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 // detail siswa (nama, nilai, kelas dll)
 export const fetchStudentDetail = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            dispatch(loading())
-            let { data } = await axios({
-                url: baseUrl + `/public/detail`,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_StudentDetail_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      dispatch(loading());
+      let { data } = await axios({
+        url: baseUrl + `/public/detail`,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_StudentDetail_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 // jadwal 1 minggu per kelas
 export const fetchClassSchedule = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let { data } = await axios({
-                url: baseUrl + `/public/schedule`,
-                headers: { access_token: localStorage.access_token }
-            })
-            console.log(data, "melech");
-            dispatch(insert_ClassSchedule_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        url: baseUrl + `/public/schedule`,
+        headers: { access_token: localStorage.access_token },
+      });
+      console.log(data, 'melech');
+      dispatch(insert_ClassSchedule_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
-// aktifitas satu sekolah 
+// aktifitas satu sekolah
 export const fetchActivity = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let { data } = await axios({
-                url: baseUrl + `/public/activity`,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_Activity_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        url: baseUrl + `/public/activity`,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_Activity_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
-// history table pembayaran SPP 
+// history table pembayaran SPP
 export const fetchSPP = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let { data } = await axios({
-                url: baseUrl + `/public/transaction`,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_SPP_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        url: baseUrl + `/public/transaction`,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_SPP_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
-// history table pembayaran SPP 
+// history table pembayaran SPP
 export const fetchStatistic = (day) => {
-    return async (dispatch, getState) => {
-        try {
-            let { data } = await axios({
-                url: baseUrl + `/public/statistic`,
-                headers: { access_token: localStorage.access_token }
-            })
-            dispatch(insert_Statistic_redux(data))
-        } catch (error) {
-            console.log(error);
-        }
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        url: baseUrl + `/public/statistic`,
+        headers: { access_token: localStorage.access_token },
+      });
+      dispatch(insert_Statistic_redux(data));
+    } catch (error) {
+      console.log(error);
     }
-}
+  };
+};
 
 export function snap() {
   return async (dispatch, getState) => {
     try {
-       
       // /generate-midtrans/:id
-      
+
       let { data: payment_token } = await axios({
-        method: "post",
+        method: 'post',
         url: baseUrl + `/users/generate-midtrans/1`,
-        headers: { access_token: localStorage.access_token }
-    })
-      
-      
+        headers: { access_token: localStorage.access_token },
+      });
+
       // const { payment_token } = await this.getPaymentToken()
       // const  payment_token  = '78218382163721312836'
       // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
@@ -459,23 +391,19 @@ export function snap() {
         },
         onPending: function (result) {
           /* You may add your own implementation here */
-          console.log("wating your payment!", result);
+          console.log('wating your payment!', result);
         },
         onError: function (result) {
           /* You may add your own implementation here */
-          console.log("payment failed!", result);
+          console.log('payment failed!', result);
         },
         onClose: function () {
           /* You may add your own implementation here */
           console.log('you closed the popup without finishing the payment');
-        }
-      })
-  
+        },
+      });
     } catch (error) {
       console.log(error);
     }
-  }
-   
-  
+  };
 }
- 
