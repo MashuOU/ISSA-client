@@ -7,9 +7,9 @@ import { FETCH_STATUS, FETCH_SCHEDULE, FETCH_CLASSMATE, FETCH_STUDENT_DETAIL, FE
 import axios from 'axios';
 console.log(localStorage.getItem('access_token'));
 
-// DEVELOPING PURPOSES' 
+// DEVELOPING PURPOSES'
 //   localStorage.setItem('access_token', "eyJhbGciOiJIUzI1NiJ9.MDIwMzIwMjMwMw.KonkCxKvwN64cDI51mdvjWs2OcebdJUylynmQ17kaPo" )
-   
+
 // export const conterIncremented = (payload) => {
 //   return { type: COUNTER_INCREMENTER, payload }
 // }
@@ -36,10 +36,10 @@ export function writeProductFailed(payload) {
 export function writeTodayLesson(payload) {
   return { type: WRITE_LESSON, payload };
 }
- 
-const baseUrl = "https://issa.rhazzid.site" 
-// const baseUrl = "http://13.213.63.194" 
-// const baseUrl = 'http://localhost:3000'; 
+
+// const baseUrl = "https://issa.rhazzid.site"
+// const baseUrl = "http://13.213.63.194"
+const baseUrl = 'http://localhost:3000';
 
 // FUNCTIONS /////////////////////////////////////////////////////////
 // ////////////////////////////////////////////////////////
@@ -71,7 +71,6 @@ export function act_login(data) {
     }
   };
 }
-
 
 // ////////////////////////
 
@@ -131,7 +130,6 @@ export const insert_status_redux = (payload) => {
     payload: payload,
   };
 };
-
 
 // handle login | logout
 export const handleLogin = (dataLogin) => {
@@ -263,22 +261,19 @@ export const fetchStatistic = (day) => {
   };
 };
 
-
-
 export function snap(id) {
   return async (dispatch, getState) => {
-    try { 
-
+    try {
       let { data } = await axios({
         method: 'post',
-        url: baseUrl + `/users/generate-midtrans/`+ id,
+        url: baseUrl + `/users/generate-midtrans/` + id,
         headers: { access_token: localStorage.access_token },
       });
-      
+
       window.snap.pay(data.token, {
-        onSuccess: function (result) { 
+        onSuccess: function (result) {
           console.log(result);
-        }, 
+        },
       });
     } catch (error) {
       console.log(error);
@@ -286,20 +281,18 @@ export function snap(id) {
   };
 }
 
-
 export function getPaymentStatus() {
-  return async(dispatch) => {
+  return async (dispatch) => {
     try {
       let { data } = await axios({
         method: 'get',
         url: baseUrl + `/public/transaction`,
         headers: { access_token: localStorage.access_token },
       });
-      
+
       dispatch(insert_status_redux(data));
-      
     } catch (error) {
       console.log(error);
     }
-  }
+  };
 }

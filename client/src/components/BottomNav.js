@@ -22,7 +22,7 @@ export default function BottomNav(props) {
 
   const joinRoom = () => {
     socket.emit('join:room', room);
-    console.log('masuk ', room);
+    console.log('masuk cukk >>>', room);
     go('/chat');
   };
 
