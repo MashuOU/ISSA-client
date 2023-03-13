@@ -239,7 +239,6 @@ export const fetchSPP = (day) => {
         url: baseUrl + `/public/transaction`,
         headers: { access_token: localStorage.access_token },
       });
-      console.log(data, 'data spppp');
       dispatch(insert_SPP_redux(data));
     } catch (error) {
       console.log(error);
@@ -279,7 +278,6 @@ export function getPaymentStatus() {
 }
 
 export function snap(id) {
-  console.log(id, 'idddddd');
   return async (dispatch, getState) => {
     try {
       let { data } = await axios({
@@ -291,6 +289,7 @@ export function snap(id) {
       window.snap.pay(data.transactionToken, {
         onSuccess: function (result) {
           console.log(result);
+          dispatch(fetchSPP());
         },
       });
     } catch (error) {

@@ -7,23 +7,20 @@ import { fetchSPP } from '../store/actions/actionCreator';
 export default function PaymentPage() {
   const dispatch = useDispatch();
 
-  const {
-    student: { SPP, studentDetail },
-  } = useSelector((state) => state);
+  // const {
+  //   student: { SPP, studentDetail },
+  // } = useSelector((state) => state);
+  const SPP = useSelector((state) => state.student.SPP);
+  const studentDetail = useSelector((state) => state.student.studentDetail);
 
   useEffect(() => {
     dispatch(fetchSPP());
   }, []);
 
-  if (Object.keys(SPP).length) {
+  if (SPP.status == false) {
     return (
       <div className="  pl-4 pt-10 border-black">
         <h5 class="text-xl mb-6 font-semibold tracking-tight   text-gray-900 dark:text-white"> Pembayaran SPP </h5>
-
-        {/* https://midtrans.com/assets/img/midtrans-logoo.jpg?v=1676436294
-        
-        */}
-        {/* https://midtrans.com/assets/img/midtrans-logoo.jpg?v=1676436294 */}
 
         <ol class="space-y-4 w-72">
           <li>
