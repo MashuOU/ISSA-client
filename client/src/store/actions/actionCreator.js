@@ -239,6 +239,7 @@ export const fetchSPP = (day) => {
         url: baseUrl + `/public/transaction`,
         headers: { access_token: localStorage.access_token },
       });
+      console.log(data, 'data spppp');
       dispatch(insert_SPP_redux(data));
     } catch (error) {
       console.log(error);
@@ -261,26 +262,6 @@ export const fetchStatistic = (day) => {
   };
 };
 
-export function snap(id) {
-  return async (dispatch, getState) => {
-    try {
-      let { data } = await axios({
-        method: 'post',
-        url: baseUrl + `/users/generate-midtrans/` + id,
-        headers: { access_token: localStorage.access_token },
-      });
-
-      window.snap.pay(data.token, {
-        onSuccess: function (result) {
-          console.log(result);
-        },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-}
-
 export function getPaymentStatus() {
   return async (dispatch) => {
     try {
@@ -291,6 +272,27 @@ export function getPaymentStatus() {
       });
 
       dispatch(insert_status_redux(data));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+}
+
+export function snap(id) {
+  console.log(id, 'idddddd');
+  return async (dispatch, getState) => {
+    try {
+      let { data } = await axios({
+        method: 'post',
+        url: baseUrl + `/users/generate-midtrans/` + id,
+        headers: { access_token: localStorage.access_token },
+      });
+
+      window.snap.pay(data.transactionToken, {
+        onSuccess: function (result) {
+          console.log(result);
+        },
+      });
     } catch (error) {
       console.log(error);
     }
