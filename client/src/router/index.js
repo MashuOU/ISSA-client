@@ -1,42 +1,72 @@
-import { createBrowserRouter } from "react-router-dom"
+import { createBrowserRouter, redirect } from "react-router-dom"
+import AttendancePage from "../pages/Attendance"
 import Chat from "../pages/Chat"
 
 import Container from "../pages/Container" 
 import Home from "../pages/Home"  
+import LessonDetail from "../pages/LessonDetail"
+import LessonsList from "../pages/LessonsList"
 import LoginPage from "../pages/Login"
-import ReactChat from "../pages/React-chat"
+import ClientChat from "../pages/Chat-client"  
+import TotalNilai from "../pages/TotalNilai"
+import EventPage from "../pages/Event"
+import PaymentPage from "../pages/PaymentPage"
+import NotFound from "../pages/NotFound"
 
+  
 const router = createBrowserRouter(
   [
     {
       path: "/",
       element: <Container />,
+      loader: () => {
+        if(!localStorage.getItem('access_token')) {
+          return redirect('/login')
+        }
+        return null
+      },
       children: [
         {
           path: "",
           element: <Home />,
+        }, 
+        {
+          path: "attendance",
+          element: <AttendancePage />,
         },
         {
-          path: "chat",
-          element: <Chat />,
+          path: "total",
+          element: <TotalNilai />,
+        }, 
+        {
+          path: "lesson",
+          element: <LessonsList />,
         },
         {
-          path: "react-chat",
-          element: <ReactChat />,
+          path: "lesson/:id",
+          element: <LessonDetail />
         },
-        // {
-        //   path: "kid",
-        //   element: <KidPage />,
-        // },
-        // {
-        //   path: "detail/:slug",
-        //   element: <Detail />
-        // }
+        {
+          path: "event",
+          element: <EventPage />
+        },
+        {
+          path: "payment",
+          element: <PaymentPage />
+        }
       ]
+    },
+    {
+      path: "/chat",
+      element: <ClientChat />,
     },
     {
       path: "/login",
       element: <LoginPage />,
+    },
+    {
+      path: "*",
+      element: <NotFound />,
     },
   ]
 )

@@ -1,16 +1,76 @@
 // import { dropdo } from "flowbite"
 import { Collapse } from "flowbite"
 import { Carousel } from "flowbite"
-
 import { Navbar, Dropdown } from "flowbite-react"
+import { useEffect, useRef, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
+
+import ScrollReveal from 'scrollreveal';
 
 
-export default function Name() {
+
+export default function Name(props) {
+  const navigate = useNavigate()
+  const { name, NIM, imgUrl, Attendances } = props.data
+
+
+  const [todayStatus, setTodayStatus] = useState()
+
+  useEffect(() => {
+    if (Attendances?.length) {
+      const today = new Date().toISOString().slice(0, 10);
+      const findToday = Attendances.filter((each) => {
+        const createdAtDate = each.createdAt.slice(0, 10);
+        return createdAtDate === today;
+      });
+      if (findToday.length) {
+        // console.log(findToday, 'melech');
+        setTodayStatus(findToday[0].status)
+      }
+    }
+  }, []);
+
+
+  console.log(todayStatus, "testinr");
+
+
+  // tailwind
   // set the target element that will be collapsed or expanded (eg. navbar menu)
   const $targetEl = document.getElementById('user-dropdown');
   // optionally set a trigger element (eg. a button, hamburger icon)
   const $triggerEl = document.getElementById('user-menu-button');
   const collapse = new Collapse($targetEl, $triggerEl);
+
+
+  const coba = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null)
+  ]
+  // const cobadua = useRef(null)
+
+  useEffect(() => {
+
+    coba.forEach(each => {
+
+      ScrollReveal().reveal(each.current,
+        {
+          distance: '20px',
+          origin: 'bottom',
+          opacity: 0,
+          delay: 1000,
+          duration: 2000
+        }
+      );
+
+    })
+
+  }, [])
+
+
 
   return (
     <>
@@ -27,29 +87,61 @@ export default function Name() {
         </div>
 
       </div> */}
-      <div className="grid max-w-screen-xl mx-auto border border-red-400 " >
+      <div className="grid child:font-satu  max-w-screen-xl mx-auto  border-white " >
 
 
-        <section class="bg-white dark:bg-gray-900">
+        <section class=" px-4  border-red-800 ">
 
 
-          <div class="grid max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
+          <div ref={coba[3]} style={{backgroundImage: "url(https://i.pinimg.com/originals/e1/f8/55/e1f8554dd0f4e79613cceb8cd006161d.jpg)"}} class="grid border border-black rounded-xl bg-gray-900 max-w-screen-xl px-4 py-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12">
 
-            <div class="hidden lg:mt-0 lg:col-span-5 lg:flex  justify-center items-center">
-              <Avatar imgUrl="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRmKLXSarFSMsiSY7umUqr9wKJ_Tpx_h_zOTv_yn1JxwogDfI6JL9Rw_B5yGUjuiVY6G_Q&usqp=CAU" />
+            <div ref={coba[2]} class="hidden lg:mt-0 lg:col-span-5 lg:flex  justify-center items-center">
+              <Avatar imgUrl={imgUrl} />
             </div>
 
-            <div class="mr-auto place-self-center lg:col-span-7">
-              <h1 class="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">Michael Ustynovych - Repa </h1>
-              <p class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400">3247923749823742472398</p>
+            <div class="mr-auto  place-self-center lg:col-span-7">
+              <h1 ref={coba[0]} class="max-w-2xl  mb-1 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white"> {name} </h1>
+              <p ref={coba[1]} class="max-w-2xl mb-2 font-light text-gray-500 lg:mb-6 md:text-lg lg:text-xl dark:text-gray-400"> {NIM} </p>
               {/* <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400"> Active </p> */}
-              <a href="#" class="inline-flex mr-3  items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+              {/* <a  href="#" class="inline-flex mr-3  items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
                 Present
-              </a>
-              <a href="#" class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                Usty's Scores
-                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-              </a>
+              </a> */}
+
+              <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span> {todayStatus} </span>
+
+
+              {/* {todayStatus == "Hadir" &&
+                (
+                  <span ref={coba[2]} class="flex text-green-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-green-400 rounded-full mr-1.5 flex-shrink-0"></span> {todayStatus} </span>
+                )
+              }
+
+              {todayStatus == "Alfa" &&
+                (
+                  <span ref={coba[2]} class="flex text-red-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-red-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              }
+
+              {todayStatus == "Izin" &&
+                (
+                  <span ref={coba[2]} class="flex text-yellow-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-yellow-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              }
+
+              {todayStatus == "Sakit" &&
+                (
+                  <span ref={coba[2]} class="flex text-blue-400 items-center text-sm font-medium  "><span class="flex w-2.5 h-2.5 bg-blue-400 rounded-full mr-1.5 flex-shrink-0"></span>{todayStatus}</span>
+                )
+              } */}
+
+
+              {/* <Link to="/lesson">
+                <a href="#" class="inline-flex items-center justify-center px-3 py-2 font-medium text-sedang text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
+                  Usty's Scores
+                  <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                </a>
+              </Link> */}
+
             </div>
           </div>
         </section>
@@ -81,23 +173,7 @@ export default function Name() {
       </div> */}
 
 
-        <div id="toast-notification" class="w-full mx-auto max-w-xs p-4 m-3 border border-red-800 text-gray-900 bg-white rounded-lg shadow dark:bg-gray-800 dark:text-gray-300" role="alert">
 
-          <div class="flex items-center">
-            <div class="relative inline-block shrink-0">
-              <img class="w-12 h-12 rounded-full" src="https://i.servimg.com/u/f42/19/69/61/77/201918.jpg" alt="Jese Leos image" />
-              <span class="absolute bottom-0 right-0 inline-flex items-center justify-center w-6 h-6 bg-blue-600 rounded-full">
-                <svg aria-hidden="true" class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 13V5a2 2 0 00-2-2H4a2 2 0 00-2 2v8a2 2 0 002 2h3l3 3 3-3h3a2 2 0 002-2zM5 7a1 1 0 011-1h8a1 1 0 110 2H6a1 1 0 01-1-1zm1 3a1 1 0 100 2h3a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
-                <span class="sr-only">Message icon</span>
-              </span>
-            </div>
-            <div class="ml-3 text-sm font-normal">
-              <div class="text-sm font-semibold text-gray-900 dark:text-white">Bonnie Green</div>
-              <div class="text-sm font-normal">I just wanna make it</div>
-              <span class="text-xs font-medium text-blue-600 dark:text-blue-500">a few seconds ago</span>
-            </div>
-          </div>
-        </div>
 
 
         {/* carosel */}
@@ -148,14 +224,7 @@ export default function Name() {
 
 
         {/* list */}
-        <ul class="w-48 text-sm font-medium mx-auto text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-          <a href="#" aria-current="true" class="block w-full px-4 py-2 text-white bg-blue-700 border-b border-gray-200 rounded-t-lg cursor-pointer dark:bg-gray-800 dark:border-gray-600">
-            Today
-          </a>
-          <li class="w-full px-4 py-2 border-b border-gray-200 rounded-t-lg dark:border-gray-600">IPA</li>
-          <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">PENJASKES</li>
-          <li class="w-full px-4 py-2 border-b border-gray-200 dark:border-gray-600">MTK</li>
-        </ul>
+
 
       </div>
 
