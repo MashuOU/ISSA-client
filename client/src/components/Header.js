@@ -64,13 +64,13 @@ export default function Header(props) {
     <>
       <nav
         style={{ boxShadow: "", backgroundColor: "" }}
-        class="bg-white w-[90%]  mx-auto mt-4 z-[10000]  border-red-800  sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900"
+        class="bg-white w-[90%]  mx-auto  z-[10000]  border-red-800  sm:block  px-2 sm:px-4 py-2.5 rounded-xl dark:bg-gray-900"
       >
         <div class="container flex flex-wrap items-center  border-white justify-between mx-auto">
           <a
             href="#"
             style={{}}
-            class="flex items-center  border-black ml-2 flex justify-center "
+            class=" items-center  border-black ml-2 flex justify-center "
           >
             {/* <img src="https://flowbite.com/docs/images/logo.svg" class="h-6 mr-3 sm:h-9" alt="Flowbite Logo" /> */}
             <img

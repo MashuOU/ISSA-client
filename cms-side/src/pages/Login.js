@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const baseUrl = "https://issa.rhazzid.site";
+// const baseUrl = "https://issa.rhazzid.site";
+const baseUrl = "http://localhost:3000";
 
 export default function Login(props) {
   const navigate = useNavigate();
