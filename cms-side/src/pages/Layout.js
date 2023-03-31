@@ -5,7 +5,9 @@ import Sidebar from "../components/Sidebar";
 export default function Layout() {
   return (
     <div className="flex bg-white dark:bg-gray-900">
-      <Sidebar />
+      <div className="flex">
+        <Sidebar />
+      </div>
       <Outlet />
 
       {/* <aside class="fixed">
