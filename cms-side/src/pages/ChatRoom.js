@@ -1,27 +1,28 @@
-import { useState, useEffect } from "react";
-import axios, { all } from "axios";
-import socket from "../config/socket";
+import { useState, useEffect } from 'react';
+import axios, { all } from 'axios';
+import socket from '../config/socket';
 
-const baseUrl = "https://issa.rhazzid.site";
+// const baseUrl = "https://issa.rhazzid.site";
+const baseUrl = 'http://localhost:3000';
 
 // let teacher = { id: 1, NIP: '1800011221', name: 'Sumiyati' };
 
 export default function ChatRoom(params) {
   const [parents, setParents] = useState([]);
   const [allChat, setAllChat] = useState([]);
-  const [message, setMessage] = useState("");
-  const [room, setJoinRoom] = useState("");
-  const [user, setUser] = useState({ fromUserId: null });
+  const [message, setMessage] = useState('');
+  const [room, setJoinRoom] = useState('');
+  const [user, setUser] = useState({});
   const teacherId = localStorage.TeacherId;
 
   const listParents = async () => {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}`, {
         headers: {
-          access_token: "eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8",
+          access_token: localStorage.access_token,
         },
       });
-      console.log(data, "data parents");
+      console.log(data, 'data parents');
       setParents(data);
     } catch (err) {
       console.log(err);
@@ -36,10 +37,10 @@ export default function ChatRoom(params) {
     try {
       const { data } = await axios.get(`${baseUrl}/chatTeacher/${teacherId}/${user.fromUserId}`, {
         headers: {
-          access_token: "eyJhbGciOiJIUzI1NiJ9.MTgwMDAxMTIyMg.B_KmQAO_n_2O1NSjhq1wqNjns2hHOggKbfoTkM9qhC8",
+          access_token: localStorage.access_token,
         },
       });
-      console.log(data, "dataaaa");
+      // console.log(data, 'dataaaa');
       setAllChat(data);
       setJoinRoom(data[0].roomId);
     } catch (err) {
@@ -61,26 +62,33 @@ export default function ChatRoom(params) {
   };
 
   const joinRoom = (detail) => {
-    console.log(detail, "detailll");
-    setUser(detail);
-    socket.emit("join:room", room);
+    // console.log(detail, 'detailll');
+    // setUser(detail);
+    console.log('masuk ', room);
+    socket.emit('join:room', room);
   };
+
+  useEffect(() => {
+    joinRoom();
+  }, [user]);
+
+  console.log(user, 'userrr');
   const handleNewMessage = async (event) => {
     event.preventDefault();
     // const dataMsg = { from: teacher.id, to: user.id, message: message.message };
-    setMessage({ message: "" });
+    setMessage({ message: '' });
     try {
       // const { data } = await axios.post(`${baseUrl}/chats`, dataMsg);
       // gaperlu karena, uda dihandle sama socket
-      socket.emit("chat:msg", { msg: message, room: room, from: teacherId, to: user.fromUserId });
+      socket.emit('chat:msg', { msg: message, room: room, from: teacherId, to: user.fromUserId });
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    socket.on("resp:msg", (data) => {
-      console.log(data, "<<<<< nich");
+    socket.on('resp:msg', (data) => {
+      console.log(data, '<<<<< nich');
       setAllChat(data);
     });
   }, [message]);
@@ -102,16 +110,21 @@ export default function ChatRoom(params) {
                 </div>
                 <div>
                   {parents?.map((x, i) => {
+                    console.log(x, 'xxx');
                     return (
                       <button
                         key={i}
                         onClick={(e) => {
                           e.preventDefault();
-                          joinRoom(x);
+                          // joinRoom(x);
+                          setUser(x);
+                          setJoinRoom(x.roomId);
                         }}
                         className="flex flex-row items-center rounded-xl p-2 hover:bg-gray-400 active:bg-gray-400 focus:bg-gray-400"
                       >
-                        <div className="flex items-center justify-center text-white h-8 w-8 bg-gray-900 dark:bg-white rounded-full dark:text-gray-900">{x.fromUserId}</div>
+                        <div className="flex items-center justify-center text-white h-8 w-8 bg-gray-900 dark:bg-white rounded-full dark:text-gray-900">
+                          <span className="material-symbols-outlined">person</span>
+                        </div>
 
                         <div className="ml-2 text-sm font-semibold text-gray-800 dark:text-white">{x.parentName[0].Student.name}'s parent</div>
                       </button>
@@ -132,7 +145,9 @@ export default function ChatRoom(params) {
                         return (
                           <div key={i} className="col-start-1 col-end-8 p-3 rounded-lg">
                             <div className="flex flex-row items-center">
-                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 flex-shrink-0  text-white dark:text-white">{x.fromUserId}</div>
+                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 flex-shrink-0  text-white dark:text-white">
+                                <span className="material-symbols-outlined">person</span>
+                              </div>
                               <div className="relative ml-3 text-sm bg-white py-2 px-4 shadow rounded-xl">
                                 <div>{x.message}</div>
                               </div>
@@ -143,7 +158,9 @@ export default function ChatRoom(params) {
                         return (
                           <div key={i} className="col-start-6 col-end-13 p-3 rounded-lg">
                             <div className="flex items-center justify-start flex-row-reverse">
-                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 text-white dark:text-white flex-shrink-0">{x.fromUserId}</div>
+                              <div className="flex items-center justify-center h-10 w-10 rounded-full bg-gray-900 text-white dark:text-white flex-shrink-0">
+                                <span className="material-symbols-outlined">account_circle</span>
+                              </div>
                               <div className="relative mr-3 text-sm bg-indigo-100 py-2 px-4 shadow rounded-xl">
                                 <div>{x.message}</div>
                               </div>

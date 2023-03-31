@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import TableScores from "../components/TableScores";
-import { lessonsFetch, studentById } from "../store/action/ActionCreator";
+import { studentById } from "../store/action/ActionCreator";
 import ClipLoader from "react-spinners/ClipLoader";
+import { useTable } from "react-table";
 
 export default function Scores(props) {
   const [loading, setLoading] = useState(false);

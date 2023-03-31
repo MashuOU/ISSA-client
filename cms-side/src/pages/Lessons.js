@@ -32,9 +32,15 @@ export default function Lessons(props) {
       )}
       {!loading && (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg ml-6 mr-6 mt-[4rem] w-full md:w-full sm:[50%]">
-          <div className="ml-4 mb-10">
-            <p className="font-Comfortaa font-semibold text-[2rem] dark:text-white text-center mb-[4rem]">LESSONS</p>
+          <div className="flex items-center justify-center pb-4 bg-white dark:bg-gray-900 ml-6 mr-6">
+            <div className="grow-0 shrink-1 md:shrink-0 basis-auto xl:w-4/12 lg:w-4/12 md:w-7/12 mb-12 md:mb-[5rem] ">
+              <div className="w-[70%] mask mask-squircle mx-auto">
+                <img src="https://res.cloudinary.com/dslzpyibe/image/upload/v1678369517/assets%20finalproject/undraw_Books_re_8gea_igp8f8.png" />
+              </div>
+              <p className="dark:text-white font-Comfortaa font-semibold text-[1.3rem] text-center mt-6">LESSONS</p>
+            </div>
           </div>
+
           <div className="flex justify-center mb-10">
             <Link to="/formLesson">
               <button

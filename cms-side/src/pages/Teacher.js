@@ -36,7 +36,7 @@ export default function Teacher(props) {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-between pb-4 bg-white dark:bg-gray-900 ml-[6.5rem] mr-6">
+          <div className="flex items-center justify-end pb-4 bg-white dark:bg-gray-900 mr-[20rem]">
             <div className="ml-[4rem]">
               <Link to="/newAdmin">
                 <button
@@ -52,10 +52,10 @@ export default function Teacher(props) {
           <table className="w-[80%] text-l text-left text-gray-500 dark:text-gray-400 mt-6 mx-auto">
             <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 text-center">
               <tr>
-                <th scope="col" className="px-12 py-3">
+                <th scope="col" className="px-6 py-3">
                   No
                 </th>
-                <th scope="col" className="px-12 py-3">
+                <th scope="col" className="px-6 py-3">
                   Name
                 </th>
               </tr>
