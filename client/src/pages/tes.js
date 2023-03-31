@@ -5,8 +5,8 @@ import socket from '../config/socket';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-const baseUrl = 'http://localhost:3000';
-// const baseUrl = "https://issa.rhazzid.site";
+// const baseUrl = 'http://localhost:3000';
+const baseUrl = 'https://issa.rhazzid.site';
 
 export default function Chat() {
   const {
@@ -14,7 +14,7 @@ export default function Chat() {
   } = useSelector((state) => state);
 
   const [userId, setUserId] = useState(localStorage.userId);
-  const [room, setJoinRoom] = useState(``);
+  const [room, setJoinRoom] = useState('');
   const [allChat, setAllChat] = useState([]);
   const [message, setMessage] = useState('');
   // console.log(message, 'ini messagee');
@@ -42,14 +42,14 @@ export default function Chat() {
     getAllChat();
   }, [userId]);
 
-  // const joinRoom = () => {
-  //   socket.emit('join:room', room);
-  //   console.log('masuk suuu', room);
-  // };
+  const joinRoom = () => {
+    socket.emit('join:room', room);
+    console.log('masuk ', room);
+  };
 
-  // useEffect(() => {
-  //   joinRoom();
-  // }, [userId]);
+  useEffect(() => {
+    joinRoom();
+  }, [userId]);
 
   useEffect(() => {
     socket.on('resp:msg', (data) => {
